@@ -10,18 +10,189 @@ header{
     display: flex;
     justify-content: space-between;
     border: 2px solid red;
+    align-items: center;
+}
+.headerLogo{
+    border: 1px solid black;
+    width: 8%;
+    height: auto;
 }
 .headerLogo img{
     border: 2px solid red;
-    max-width: 30%;
+    width: 100%;
 }
 .headerNav{
     border: 2px solid red;
     
 }
-.headerNav > ul{
+.headerNav ul{
     display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.headerNav ul li{
+    justify-content: space-between;
 }
 .headerCheckoutbutton{
     border: 2px solid red;
+}
+.slider{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 80vh;
+}
+.sliderTitle{
+
+}
+.sliderDescription{
+
+}
+.sliderCheckoutbutton{
+
+}
+.sliderImage{
+    position: absolute;
+    z-index: -1;
+    border: 2px solid red;
+    width: 100%;
+    height: 80vh;
+}
+.sliderImage img{
+    width: 100%;
+    height: 100%;
+}
+.featured{
+    background-color: hsl(0, 0%, 87%);
+    display:flex;
+    flex-direction: column;
+    border: 2px solid red;
+    height: 60vh;
+    padding: 5% 15%;
+}
+.featuredTitle{
+    align-self: center;
+}
+.featuredDescription{
+    align-self: center;
+    text-align: center;
+}
+.featuredElements{
+    display: flex;
+
+
+}
+.featuredElementsElement{
+    display: flex;
+    flex-direction: column;
+
+}
+.featuredElementsElementImg{
+    width: 10rem;
+    height: 10rem;
+    border: 2px solid red
+}
+.featuredElementsElementImg img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.details{
+    display: flex;
+    padding: 5% 15%;
+}
+.detailsColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    border: 2px solid red;
+}
+.detailsColumnElement{
+    display: flex;
+    border: 2px solid blue;
+}
+.detailsColumnElementIcon{
+    width: 8rem;
+    border: 2px solid black;
+}
+.detailsColumnElementText{
+    display:flex;
+    flex-direction: column;
+}
+.detailsImage{
+    width: 100%;
+}
+.team{
+    display: flex;
+    flex-direction: column;
+}
+.teamTitle{
+    align-self: center;
+}
+.teamDescription{
+    align-self: center;
+    text-align: center;
+}
+.teamElements{
+    display: flex;
+}
+.teamElementsElement{
+    display: flex;
+    flex-direction: column;
+}
+.contact{
+
+}
+.contactMap{
+
+}
+.contactCard{
+    padding: 5% 15%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    border: 2px solid red;
+}
+.contactCardTitle{
+    text-align: left;
+}
+.contactCardElement{
+    display: flex;
+}
+.contactCardElementImage{
+    width: 8rem;
+    border: 2px solid black;
+}
+.contactCardElementImage img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.contactCardElementInfo{
+    text-align: left;
+}
+.contactCardButton{
+    align-self: center;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+
+}
+.footerSocials{
+    display: flex;
+}
+.footerSocialsElement{
+    gap: 2rem;
+}
+.footerMenu{
+    align-self: center;
+}
+.footerMenu ul{
+    display:flex;
+    justify-content: center;
+    gap: 2rem;
+}
+.footerCopyright{
+    align-self: center;
 }
