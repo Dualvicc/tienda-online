@@ -11,7 +11,7 @@ header{
     justify-content: space-between;
     border: 2px solid red;
     align-items: center;
-}
+    background-color: hsl(0, 0%, 87%);}
 .headerLogo{
     border: 1px solid black;
     width: 8%;
@@ -79,7 +79,8 @@ header{
 }
 .featuredElements{
     display: flex;
-
+    padding: 5%;
+    justify-content:space-evenly;
 
 }
 .featuredElementsElement{
@@ -100,31 +101,55 @@ header{
 .details{
     display: flex;
     padding: 5% 15%;
+    justify-content: space-between;
+
 }
 .detailsColumn{
     display: flex;
     flex-direction: column;
     gap: 5vh;
-    border: 2px solid red;
+    width: 33%;
 }
+.detailsColumn img{
+    width:100%;
+    object-fit: cover;
+}
+
 .detailsColumnElement{
     display: flex;
-    border: 2px solid blue;
+    
 }
 .detailsColumnElementIcon{
-    width: 8rem;
-    border: 2px solid black;
+    width: 4rem;
+    
 }
 .detailsColumnElementText{
     display:flex;
     flex-direction: column;
+    text-align: left;
 }
-.detailsImage{
-    width: 100%;
+.detailsColumnElement.last{
+    display:flex;
+    flex-direction: row-reverse;
 }
+.detailsColumnElementText.last {
+    text-align: right;
+}
+.detailsColumnElementText p{
+    
+}
+
 .team{
     display: flex;
     flex-direction: column;
+    align-items: center;
+
+}
+.teamContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10%;
 }
 .teamTitle{
     align-self: center;
@@ -135,11 +160,31 @@ header{
 }
 .teamElements{
     display: flex;
+    justify-content: space-between;
+    padding: 10% 20%;
 }
 .teamElementsElement{
     display: flex;
     flex-direction: column;
+    width: 18%;
+    
 }
+.teamElementsElementImage{
+    width: 100%;
+}
+.teamElementsElementImage img{
+    width: 140%;
+    height: 30vh;
+    object-fit: cover;
+}
+.teamElementsElementName{
+    text-align: center;
+}
+.teamElementsElementPosition{
+    text-align: center;
+    
+}
+
 .contact{
 
 }
@@ -177,13 +222,24 @@ header{
 footer{
     display: flex;
     flex-direction: column;
-
+  
 }
 .footerSocials{
     display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 5% 20%;
 }
 .footerSocialsElement{
+    width: 100%;  
     gap: 2rem;
+}
+.footerSocialsElementImg{
+    width: 100%;
+}
+.footerSocialsElementImg img{
+    width: 100%;
+    height: 10vh;
 }
 .footerMenu{
     align-self: center;
