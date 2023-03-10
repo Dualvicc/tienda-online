@@ -1,69 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Poppins:wght@300;500;600&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Golos text';
+    text-decoration: none;
+    color: hsl(210, 7%, 59%);
+}
+body{
+    position: relative;
 }
 header{
     display: flex;
     justify-content: space-between;
-    border: 2px solid red;
     align-items: center;
-    background-color: hsl(0, 0%, 87%);}
-.headerLogo{
-    border: 1px solid black;
-    width: 8%;
-    height: auto;
-}
-.headerLogo img{
-    border: 2px solid red;
+    padding: 1rem 20% 1rem 20%;
+    background-color:#e8ecef;
+    z-index: 99;
+    position: fixed;
     width: 100%;
 }
+.header.active{
+    background-color: white;
+    -webkit-box-shadow: 0px 3px 27px -3px hsla(0, 0%, 0%, 0.75);
+    -moz-box-shadow: 0px 3px 27px -3px hsla(0, 0%, 0%, 0.75);
+    box-shadow: 0px 3px 27px -3px hsla(0, 0%, 0%, 0.75);
+}
+.headerLogo{
+    min-width: 15%;
+    max-width: 15%;
+}
+.headerLogo img{
+    width: 100%;
+    object-fit: cover;
+}
 .headerNav{
-    border: 2px solid red;
+    min-width: 50%;
+    max-width: 50%;
     
 }
 .headerNav ul{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     gap: 2rem;
 }
 .headerNav ul li{
-    justify-content: space-between;
+    
+}
+.headerNav ul li a{
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+.headerNav ul li a:hover{
+    opacity: 0.9;
+    color: hsl(0, 0%, 0%);
+
 }
 .headerCheckoutbutton{
-    border: 2px solid red;
+    min-width: 15%;
+    max-width: 15%;
+}
+.headerCheckoutbutton button{
+    width: 100%;
+    background-color: #ff6622;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    padding: 1rem 3rem;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.headerCheckoutbutton button:hover{
+    transition: all;
 }
 .slider{
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 80vh;
+    height: 100vh;
+    gap:2rem;
 }
 .sliderTitle{
-
+    text-align: center;
+    z-index: 2;
+    padding:  10% 5% 0 5%;
+}
+.sliderTitle h1{
+    color: hsl(0, 0%, 24%);
+    font-size: 7rem;
+    font-weight: 600;
+    letter-spacing: -3px;
 }
 .sliderDescription{
-
+    text-align: center;
+    z-index: 2;
+    width: 50%;
+    align-items: center;
+}
+.sliderDescription p{
+    font-size: 2.5rem;
+    font-weight: 400;
 }
 .sliderCheckoutbutton{
 
+    align-items: center;
+    z-index: 2;
 }
 .sliderImage{
     position: absolute;
     z-index: -1;
-    border: 2px solid red;
     width: 100%;
-    height: 80vh;
+    height: 100vh;
 }
 .sliderImage img{
-    width: 100%;
     height: 100%;
+    width: 100%;
 }
 .featured{
-    background-color: hsl(0, 0%, 87%);
+    background-color:rgb(245, 243, 243);
     display:flex;
     flex-direction: column;
     border: 2px solid red;
@@ -143,7 +200,7 @@ header{
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background-color:rgb(245, 243, 243);
 }
 .teamContent{
     display: flex;
@@ -222,7 +279,7 @@ header{
 footer{
     display: flex;
     flex-direction: column;
-  
+    background-color:rgb(245, 243, 243);
 }
 .footerSocials{
     display: flex;
