@@ -169,14 +169,29 @@ header{
     line-height: 30px;
 }
 .featuredDescription::after{
-
+    content: '';
+    background-color: hsl(0, 12%, 93%);
+    width: 82px;
+    height: 6px;
+    display: block;
+    margin: 2rem auto;
 }
 .featuredElements{
     display: flex;
     justify-content:space-around;
 }
+.featuredElementsElement:not(:last-child)::after {
+    content: url(../assets/icons/greater-than.svg);
+    width: 30px;
+    opacity: 0.3;
+    height: 63px;
+    position: absolute;
+    top:100px;
+    right: -45px;
+}
 .featuredElementsElement{
     display: flex;
+    position: relative;
     flex-direction: column;
     width: 30%;
     align-items: center;
@@ -242,9 +257,6 @@ header{
     flex-direction: column;
     text-align: left;
 }
-.detailsColumnElementTextTitle{
-
-}
 .detailsColumnElementTextTitle h4{
     font-weight: 600;
     font-size: 1.2rem;
@@ -274,7 +286,7 @@ header{
     align-items: center;
     height: 80vh;
     background-color:hsl(0, 9%, 96%);
-    justify-content: space-around;
+    justify-content: center;
 }
 .teamContent{
     display: flex;
@@ -299,18 +311,26 @@ header{
     font-weight: 300;
     line-height: 30px;
 }
+.teamDescription::after{
+    content: '';
+    background-color: hsl(0, 12%, 93%);
+    width: 82px;
+    height: 6px;
+    display: block;
+    margin: 2rem auto;
+}
 .teamElements{
     display: flex;
     justify-content: space-between;
     width: 60%;
+    margin-top: 2rem;
 }
 .teamElementsElement{
     display: flex;
     flex-direction: column;
-    width: 22%;
-    border: 2px solid green;
+    width: 23%;
     background-color: white;
-    gap: 0.3rem;
+    gap: 0.5rem;
 }
 .teamElementsElementImage{
     width: 100%;
@@ -325,64 +345,110 @@ header{
 }
 .teamElementsElementPosition{
     text-align: center;
-    
+    padding-bottom: 1rem;
 }
 
 .contact{
-    background-color:hsl(0, 9%, 96%);
+    height:60vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
 }
 .contactMap{
-
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
 }
 .contactCard{
-    padding: 5% 15%;
+    background-color: hsl(0, 0%, 100%);
     display: flex;
+    width: 30%;
+    height: 40vh;
     flex-direction: column;
+    z-index: 2;
+    position: relative;
     align-self: center;
-    border: 2px solid red;
 }
 .contactCardTitle{
     text-align: left;
+    margin: 2rem 0 0 2rem;
+}
+.contactCardTitle h2{
+    color:hsl(0, 0%, 0%);
+    font-weight: 600s;
 }
 .contactCardElement{
     display: flex;
+    gap: 1rem;
+    margin: 2rem 0 0 2rem;
+    align-items: center;
 }
 .contactCardElementImage{
-    width: 8rem;
-    border: 2px solid black;
+    width: 1.5rem;
 }
 .contactCardElementImage img{
     object-fit: contain;
     width: 100%;
     height: 100%;
+    opacity: 0.3;
 }
 .contactCardElementInfo{
     text-align: left;
 }
-.contactCardButton{
-    align-self: center;
+.contactCardElementInfo p{
+    opacity: 0.7;
+}
+.contactCardButton button{
+    width: 100%;
+    background-color: hsl(209, 100%, 50%);
+    border: none;
+    color: white;
+    padding: 1.1rem 0rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.5s linear;
+    width: 80%;
+    margin: 8%;
+}
+.contactCardButton button:hover{
+    
+    background-color: hsl(204, 15%, 26%);
 }
 footer{
     display: flex;
     flex-direction: column;
-    background-color:rgb(245, 243, 243);
+    height: 25vh;
+    background-color:hsl(0, 0%, 100%);
+    gap: 1rem;
 }
 .footerSocials{
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    padding: 5% 20%;
+    gap: 0.5rem;
+    padding: 2% 20%;
+}
+.footerSocials::after{
+    content: '';
+    position: absolute;
+    background-color: hsl(0, 12%, 93%);
+    width: 60%;
+    height: 1px;
+    margin-top: 80px;
 }
 .footerSocialsElement{
-    width: 100%;  
-    gap: 2rem;
+    width: 3.5rem;  
+    filter: invert(0.4) sepia(1) saturate(7) hue-rotate(175deg);
+    opacity: 0.5;
 }
 .footerSocialsElementImg{
-    width: 100%;
+    width: 2rem;
+
 }
 .footerSocialsElementImg img{
     width: 100%;
     height: 10vh;
+    
 }
 .footerMenu{
     align-self: center;
@@ -390,8 +456,26 @@ footer{
 .footerMenu ul{
     display:flex;
     justify-content: center;
-    gap: 2rem;
+
+}
+.footerMenu ul li a{
+    font-weight: 300;
+    color:  hsl(209, 100%, 80%);
+    transition: all 0.3s ease;
+}
+.footerMenu ul li a:hover{
+    opacity: 0.9;
+    color: hsl(0, 0%, 0%);
+}
+.footerMenu ul li:not(:last-child)::after{
+    content: '\2022';
+    filter: invert(0.4) sepia(1) saturate(7) hue-rotate(175deg);
+    opacity: 0.5;
+    padding: 0 13px;
+    line-height: 15px;
 }
 .footerCopyright{
     align-self: center;
+    opacity: 0.5;
+    font-weight: 300;
 }
