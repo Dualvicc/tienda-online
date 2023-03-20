@@ -1,0 +1,64 @@
+footer{
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+    background-color:$secondary-background-color;
+    gap: 1rem;
+}
+.footerSocials{
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 2% 20%;
+}
+.footerSocials::after{
+    content: '';
+    position: absolute;
+    background-color: hsl(0, 12%, 93%);
+    width: 60%;
+    height: 1px;
+    margin-top: 80px;
+}
+.footerSocialsElement{
+    width: 3.5rem;  
+    filter: invert(0.4) sepia(1) saturate(7) hue-rotate(175deg);
+    opacity: 0.5;
+}
+.footerSocialsElementImg{
+    width: 2rem;
+
+}
+.footerSocialsElementImg img{
+    width: 100%;
+    height: 10vh;
+    
+}
+.footerMenu{
+    align-self: center;
+}
+.footerMenu ul{
+    display:flex;
+    justify-content: center;
+
+}
+.footerMenu ul li a{
+    font-weight: 300;
+    color:  hsl(209, 100%, 80%);
+    transition: all 0.3s ease;
+}
+.footerMenu ul li a:hover{
+    opacity: 0.9;
+    color: hsl(0, 0%, 0%);
+}
+.footerMenu ul li:not(:last-child)::after{
+    content: '\2022';
+    filter: invert(0.4) sepia(1) saturate(7) hue-rotate(175deg);
+    opacity: 0.5;
+    padding: 0 13px;
+    line-height: 15px;
+}
+.footerCopyright{
+    align-self: center;
+    opacity: 0.5;
+    font-weight: 300;
+}

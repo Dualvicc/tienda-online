@@ -1,0 +1,83 @@
+.featured{
+    background-color:$primary-background-color;
+    display:flex;
+    flex-direction: column;
+    height: 80vh;
+    padding: 5% 15%;
+    gap: 1rem;
+    align-items: center;
+}
+.featuredTitle{
+    text-align: center;
+}
+.featuredTitle h2{
+    color: $text-color;
+    font-size: 3rem;
+    font-weight: 600;
+}
+.featuredDescription{
+    text-align: center;
+    width: 50%;
+    margin-bottom: 5%;
+}
+.featuredDescription p{
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 30px;
+}
+.featuredDescription::after{
+    content: '';
+    background-color: hsl(0, 12%, 93%);
+    width: 82px;
+    height: 6px;
+    display: block;
+    margin: 2rem auto;
+}
+.featuredElements{
+    display: flex;
+    justify-content:space-around;
+}
+.featuredElementsElement:not(:last-child)::after {
+    content: url(../assets/icons/greater-than.svg);
+    width: 30px;
+    opacity: 0.3;
+    height: 63px;
+    position: absolute;
+    top:100px;
+    right: -45px;
+}
+.featuredElementsElement{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+    gap:0.5rem;
+}
+.featuredElementsElementImg{
+    width: 10rem;
+    height: 10rem;
+    margin-bottom: 2rem;
+}
+.featuredElementsElementImg img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.featuredElementsElementTitle{
+    text-align: center;
+}
+.featuredElementsElementTitle h3{
+    color: $text-color;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+.featuredElementsElementDescription{
+    text-align: center;
+}
+.featuredElementsElementDescription p{
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 30px;
+    text-align: center;
+}

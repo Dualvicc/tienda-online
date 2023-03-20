@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Poppins:wght@300;500;600&display=swap');
+
+h1, h2, h3, h4, h5, h6, a, p{
+    color: hsl(0, 0%, 100%);
+}
+
+h1, h2, h3, h4 {
+    font-family: $font-stack;
+}
+
+h5, h6 {
+    font-family: $font-stack;
+}
+
+a, td, th, p, button, span, label, select, input, textarea, li{
+    font-family: $font-stack;
+}
+
+h1 {
+    color: $text-color;
+    font-size: 5rem;
+    font-weight: 600;
+    letter-spacing: -3px;
+}
+
+h2 {
+    color: $text-color;
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+h3 {
+    color: $text-color;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+h4 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: hsl(0, 0%, 0%);
+}
+p {
+    font-size: 1.7rem;
+    font-weight: 300;
+    line-height: 40px;
+    color: $secondary-text-color; 
+}
