@@ -23,6 +23,7 @@
         <meta name="keywords"    content="curso, online, react, desarrollo, front, online, ">
         <link href="./assets/icons/react-logo.svg" rel="icon" type="image/x-icon" />
         <link href="./styles/app.css" rel="stylesheet"/>
+        <script type="module" src="./js/app.js"></script>
 </head>
 <body>
     <header class="header" id="header">
@@ -55,7 +56,7 @@
             </ul>
         </div>
         <div class="headerCheckoutbutton">
-            <button type="button">Apúntate !</button>
+            <button type="button" class="checkoutButton">Apúntate !</button>
         </div>
     </header>
     <section class="slider" id="product">
@@ -68,7 +69,7 @@
             </p>
         </div>
         <div class="sliderCheckoutbutton">
-            <button type="button">
+            <button type="button" class="checkoutButton">
                 Empieza ya!
                 <img src="" alt="">
             </button>
@@ -469,7 +470,7 @@
             <p>Copyright ©Pedruscos. Perez. All rights reserved</p>
         </div>
     </footer>
-    <div class="modal">
+    <div class="modal" id="modal">
             <div class="productCarrousel">
                 <div class="productCarrouselImage">
                     <img src="">
