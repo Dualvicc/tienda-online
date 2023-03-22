@@ -58,6 +58,7 @@
     object-fit: contain;
     width: 100%;
     height: 100%;
+    @include translateYInScreen(1s,3s);
 }
 .sliderBackground{
     position: absolute;

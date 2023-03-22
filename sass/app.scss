@@ -1,15 +1,17 @@
 @charset "utf-8";
 
 @import "helpers/variables";
+@import "helpers/mixins";
 @import "layout/master";
 @import "base/normalize";
 @import "base/contents";
 @import "base/typography";
 @import "layout/header";
+@import "layout/footer";
 @import "components/slider";
 @import "components/featured";
 @import "components/faqs";
 @import "components/details";
 @import "components/team";
 @import "components/contact";
-@import "layout/footer";
+
