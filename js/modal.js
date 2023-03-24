@@ -1,11 +1,10 @@
 export default (() => {
-    const checkoutButtons = document.querySelectorAll(".checkoutButton")
-    console.log(checkoutButtons);
-    checkoutButtons.forEach(checkoutButton => {
-        checkoutButton.addEventListener("click",()=>{
-            const modal = document.getElementById("modal");
+    const modalButtons = document.querySelectorAll(".modalButton")
+    const modal = document.getElementById("modal");
+   
+    modalButtons.forEach(modalButton => {
+        modalButton.addEventListener("click",()=>{
             modal.classList.toggle("active"); 
-            console.log("hola");
         })
     })
 })();
