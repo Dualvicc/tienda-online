@@ -11,19 +11,29 @@
     position: absolute;
 }
 .contactCard{
-    background-color: $secondary-background-color;
-    display: flex;
     width: 30%;
-    height: 40vh;
+    height: 50vh;
     flex-direction: column;
     z-index: 2;
     position: relative;
     align-self: center;
     justify-content: space-around;
 }
+.contactCard.active .contactCardFront{
+    transform: perspective(1000px) rotateY(180deg);
+}
+.contactCardFront{
+    position: absolute;
+    width: 100%;  
+    height: 100%;
+    background: $secondary-background-color;
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: 1s;
+}
 .contactCardTitle{
     text-align: left;
-    margin: 3rem 0 0 2rem;
+    margin: 2rem 0 0 2rem;
 }
 .contactCardTitle h2{
     color:hsl(0, 0%, 0%);
@@ -65,4 +75,68 @@
 .contactCardButton button:hover{
     
     background-color: $hover-color;
+}
+.contactCardBack{
+    position: absolute;
+    top: 0;   
+    left: 0;
+    width: 100%;  height: 100%;
+    background: $secondary-background-color;
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(-180deg);
+    display: flex;
+    justify-content: center;
+    transition: 1s;
+}
+.contactCard.active .contactCardBack{
+    transform: perspective(1000px) rotateY(0deg);
+}
+.contactForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.contactFormUserdata{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+}
+.userName{
+    height: 3rem;
+}
+.userName input{
+    padding:0.5rem 1rem;
+    width: 100%;
+    height: 100%;
+}
+.userEmail{
+    height: 3rem;
+}
+.userEmail input{
+    padding:0.5rem 1rem;
+    width: 100%;
+    height: 100%;
+}
+.contactFormSubject{
+    height: 3rem;
+    width: 100%;
+}
+.contactFormSubject input{
+    padding: 0.5rem 1rem;
+    width: 100%;
+    height: 100%;
+}
+.contactFormMessage{
+    width: 100%;
+    height: 20%;
+}
+.contactFormMessage textarea{
+    padding:0.5rem 1rem;
+    width: 100%;
+    height: 100%;
+    text-align: start;
+
 }

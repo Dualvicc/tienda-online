@@ -938,6 +938,7 @@ footer {
   width: 23%;
   background-color: white;
   gap: 0.5rem;
+  position: relative;
 }
 
 .teamElementsElementImage {
@@ -959,6 +960,77 @@ footer {
   padding-bottom: 1rem;
 }
 
+.teamElementsElementSocials {
+  align-items: center;
+  background-color: hsla(212, 7%, 59%, 0.7);
+  border-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 2rem;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  transition: all 0.5s ease-in-out;
+}
+
+.teamElementsElementSocials.active {
+  background-color: hsl(208, 13%, 25%);
+  height: max-content;
+  padding-bottom: 0.5rem;
+}
+
+.teamElementsElementSocials.active svg {
+  fill: hsl(210, 7%, 59%);
+  margin: 0.1rem 0;
+  width: 1.3rem;
+}
+
+.hamburgerButton {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 2rem;
+  justify-content: center;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  width: 2rem;
+}
+
+.hamburgerButton span {
+  background-color: #fff;
+  display: block;
+  height: 2px;
+  margin: 0.1rem auto;
+  transition: all 0.3s ease-in-out;
+  width: 50%;
+}
+
+.hamburgerButton.active {
+  position: relative;
+}
+
+.hamburgerButton.active span:first-of-type {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.hamburgerButton.active span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.hamburgerButton.active span:last-of-type {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+.teamElementsElementSocial svg {
+  cursor: pointer;
+}
+
+.teamElementsElementSocial svg:hover {
+  fill: #fff;
+}
+
 .contact {
   height: 60vh;
   position: relative;
@@ -974,10 +1046,8 @@ footer {
 }
 
 .contactCard {
-  background-color: hsl(0, 0%, 100%);
-  display: flex;
   width: 30%;
-  height: 40vh;
+  height: 50vh;
   flex-direction: column;
   z-index: 2;
   position: relative;
@@ -985,9 +1055,23 @@ footer {
   justify-content: space-around;
 }
 
+.contactCard.active .contactCardFront {
+  transform: perspective(1000px) rotateY(180deg);
+}
+
+.contactCardFront {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: hsl(0, 0%, 100%);
+  backface-visibility: hidden;
+  transform: perspective(1000px) rotateY(0deg);
+  transition: 1s;
+}
+
 .contactCardTitle {
   text-align: left;
-  margin: 3rem 0 0 2rem;
+  margin: 2rem 0 0 2rem;
 }
 
 .contactCardTitle h2 {
@@ -1036,6 +1120,99 @@ footer {
 
 .contactCardButton button:hover {
   background-color: hsl(204, 15%, 26%);
+}
+
+.contactCardBack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(0, 0%, 100%);
+  backface-visibility: hidden;
+  transform: perspective(1000px) rotateY(-180deg);
+  display: flex;
+  justify-content: center;
+  transition: 1s;
+}
+
+.contactCard.active .contactCardBack {
+  transform: perspective(1000px) rotateY(0deg);
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.contactFormUserdata {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 2rem;
+}
+
+.userName {
+  height: 3rem;
+}
+
+.userName input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.userEmail {
+  height: 3rem;
+}
+
+.userEmail input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.contactFormSubject {
+  height: 3rem;
+  width: 100%;
+}
+
+.contactFormSubject input {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.contactFormMessage {
+  width: 100%;
+  height: 20%;
+}
+
+.contactFormMessage textarea {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  height: 100%;
+  text-align: start;
+}
+
+.modal {
+  background-color: hsla(0, 0%, 100%, 0.8);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  opacity: 0;
+  top: 0;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  z-index: -1;
+}
+
+.modal.active {
+  opacity: 1;
+  z-index: 2000;
 }
 
 /*# sourceMappingURL=app.css.map */
