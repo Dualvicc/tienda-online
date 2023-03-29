@@ -1,16 +1,70 @@
 .modal{
+    display:none;
+    width: 100%;
+}
+.modal.active{
+    display:flex;
+    z-index: 1;
+    position:absolute;
+    top:0;
+}
+.modalBackground{
     background-color: hsla(0, 0%, 100%, 0.8);
     height: 100vh;
-    position: fixed;
-    left: 0;
-    opacity: 0;
-    top: 0;
+    opacity: 0.8;
+    z-index: 1;
     transition: all 0.2s ease-in-out;
     width: 100%;
-    z-index: -1;
+    position: relative;
 }
 
 .modal.active{
     opacity: 1;
     z-index: 2000;
+}
+.modalCard{
+    position:absolute;
+    background-color: $secondary-background-color;
+    width: 50%;
+    z-index: 1000;
+    top: 15%;
+    bottom: 10%;
+    right: 25%;
+    height: 70%;
+    display: flex;
+    overflow: hidden;
+}
+.modalCard .closeButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.modalCard .closeButton button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    opacity: 0.5;
+    transition: 0.5s;
+}
+.modalCard .closeButton button:hover{
+    opacity: 1;
+
+}
+.productCarrousel{
+    min-width: 45%;
+    background-color: $primary-background-color;
+}
+.productCarrouselImg{
+    width: 100%;
+}
+.productCarrouselImg img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+.productInfo{
+    min-width: 95%;
 }

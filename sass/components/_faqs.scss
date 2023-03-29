@@ -33,13 +33,12 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-
+    padding-bottom: 5%;
 }
 .faqElement{
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
 }
 .faqElementTitle{
     text-align: left;
@@ -57,6 +56,7 @@
 }
 .faqElementTitleIcon button{
     border: none;
+    cursor: pointer;
     background-color:$primary-background-color;
 }
 .faqElementTitleIcon img{
@@ -73,4 +73,13 @@
 }
 .faqElementAnswer{
     text-align: left;
+    display: none;
+}
+.faqElementAnswer p{
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 30px;
+}
+.faqElementAnswer.active{
+    display: block;
 }

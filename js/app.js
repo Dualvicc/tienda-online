@@ -1,4 +1,5 @@
 import './flip-element.js';
 import './modal.js';
-import './social-network.js';
+import './hamburger-button.js';
 import './swipeable-element.js';
+import './acordeon.js';

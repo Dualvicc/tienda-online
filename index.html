@@ -144,8 +144,8 @@
                 <div class="faqElementTitle">
                     <h4>How do I order?</h4>
                     <div class="faqElementTitleIcon">
-                        <button>
-                            <img src="./assets/icons/minus.svg">
+                        <button class="faqElementButton">
+                            <img src="./assets/icons/plus.svg">
                         </button> 
                     </div>  
                 </div>
@@ -157,40 +157,40 @@
                 <div class="faqElementTitle">
                     <h4>How can I make the payment?</h4>
                     <div class="faqElementTitleIcon">
-                        <button>
+                        <button class="faqElementButton">
                             <img src="./assets/icons/plus.svg">
                         </button> 
                     </div>  
                 </div>
                 <div class="faqElementAnswer">
-                    <p></p>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam laboriosam eligendi rem placeat, assumenda praesentium facere labore? Animi soluta obcaecati ut laborum quae aspernatur iure consequuntur distinctio cumque, ullam incidunt?</p>
                 </div>
             </div>
             <div class="faqElement">
                 <div class="faqElementTitle">
                     <h4>How much time does it take to receive the order?</h4>
                     <div class="faqElementTitleIcon">
-                        <button>
+                        <button class="faqElementButton">
                             <img src="./assets/icons/plus.svg">
                         </button> 
                     </div>   
                         
                 </div>
                 <div class="faqElementAnswer">
-                    <p></p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore nihil sunt, ea voluptatum culpa in. Dolorum alias qui minus quibusdam excepturi quas est omnis laborum ducimus vitae. Iste, expedita harum.</p>
                 </div>
             </div>
             <div class="faqElement">
                 <div class="faqElementTitle">
                     <h4>Can I resell the products?</h4>
                     <div class="faqElementTitleIcon">
-                        <button>
+                        <button class="faqElementButton">
                             <img src="./assets/icons/plus.svg">
                         </button>      
                     </div>  
                 </div>
                 <div class="faqElementAnswer">
-                    <p></p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id officia quidem inventore voluptatibus mollitia quaerat quibusdam repellat tempora obcaecati similique consectetur ea omnis qui tempore, porro saepe. Quisquam, laboriosam repudiandae!</p>
                 </div>
             </div>
         </div>
@@ -460,8 +460,8 @@
                     </div>
 
                 </div>
-                <div class="contactCardButton">
-                    <button type="button">CONTACT US</button>
+                <div class="contactCardButton flipButton">
+                    <button  type="button">CONTACT US</button>
                 </div>
             </div>
             <div class="contactCardBack">
@@ -478,10 +478,13 @@
                         <input type="text" class="formSubject" placeholder="Subject" required>
                     </div>
                     <div class="contactFormMessage">
-                        <textarea id="message" name="message" placeholder="message"></textarea>
+                        <textarea id="message" name="message" placeholder="Message"></textarea>
                     </div>
-                    <div class="contactCardButton">
+                    <div class="messageButton">
                         <button type="button">SEND MESSAGE</button>
+                    </div>
+                    <div class="flipButton closeButton">
+                        <button>x</button>
                     </div>
 
                 </div>
@@ -567,11 +570,14 @@
             <p>Copyright ©Pedruscos. Perez. All rights reserved</p>
         </div>
     </footer>
-    <div class="modal modalButton" id="modal">
+    <div class="modal" id="modal">
         <div class="modalCard">
+            <div class="closeButton">
+                <button>x</button>
+            </div>
             <div class="productCarrousel">
                 <div class="productCarrouselImage">
-                    <img src="">
+                    <img src="./assets/images/react-slider-removebg-preview.webp">
                 </div>
                 <div class="productCarrouselImage">
                     <img src="">
@@ -656,6 +662,8 @@
 
             </div>
         </div>
+        <div class="modalBackground  modalButton">
+
         </div>
           
     </div>

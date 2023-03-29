@@ -539,6 +539,11 @@ footer {
   font-weight: 300;
 }
 
+.footerCopyright p {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
 .slider {
   display: flex;
   flex-direction: column;
@@ -636,7 +641,7 @@ footer {
 }
 
 .featured {
-  background-color: hsl(0, 9%, 96%);
+  background-color: hsl(0, 0%, 100%);
   display: flex;
   flex-direction: column;
   height: 80vh;
@@ -774,6 +779,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 3rem;
+  padding-bottom: 5%;
 }
 
 .faqElement {
@@ -801,6 +807,7 @@ footer {
 
 .faqElementTitleIcon button {
   border: none;
+  cursor: pointer;
   background-color: hsl(0, 9%, 96%);
 }
 
@@ -820,6 +827,17 @@ footer {
 
 .faqElementAnswer {
   text-align: left;
+  display: none;
+}
+
+.faqElementAnswer p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 30px;
+}
+
+.faqElementAnswer.active {
+  display: block;
 }
 
 .details {
@@ -1076,7 +1094,8 @@ footer {
 
 .contactCardTitle h2 {
   color: hsl(0, 0%, 0%);
-  font-weight: 600s;
+  font-weight: 600;
+  font-size: 2rem;
 }
 
 .contactCardElement {
@@ -1103,6 +1122,7 @@ footer {
 
 .contactCardElementInfo p {
   opacity: 0.7;
+  font-size: 1.2rem;
 }
 
 .contactCardButton button {
@@ -1115,7 +1135,7 @@ footer {
   font-weight: 500;
   transition: all 0.5s linear;
   width: 80%;
-  margin: 8%;
+  margin: 8% 8% 10% 8%;
 }
 
 .contactCardButton button:hover {
@@ -1124,16 +1144,14 @@ footer {
 
 .contactCardBack {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
   background: hsl(0, 0%, 100%);
   backface-visibility: hidden;
   transform: perspective(1000px) rotateY(-180deg);
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   transition: 1s;
+  padding-top: 4rem;
 }
 
 .contactCard.active .contactCardBack {
@@ -1146,6 +1164,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  width: 80%;
 }
 
 .contactFormUserdata {
@@ -1188,31 +1207,130 @@ footer {
 
 .contactFormMessage {
   width: 100%;
-  height: 20%;
+  height: 1000%;
 }
 
 .contactFormMessage textarea {
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem;
   width: 100%;
   height: 100%;
   text-align: start;
+  resize: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.closeButton button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.messageButton {
+  width: 100%;
+}
+
+.messageButton button {
+  background-color: hsl(209, 100%, 50%);
+  border: none;
+  color: white;
+  width: 100%;
+  padding: 1.1rem 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+  transition: all 0.5s linear;
+  margin-bottom: 2rem;
+}
+
+.messageButton button:hover {
+  background-color: hsl(204, 15%, 26%);
 }
 
 .modal {
+  display: none;
+  width: 100%;
+}
+
+.modal.active {
+  display: flex;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
+
+.modalBackground {
   background-color: hsla(0, 0%, 100%, 0.8);
   height: 100vh;
-  position: fixed;
-  left: 0;
-  opacity: 0;
-  top: 0;
+  opacity: 0.8;
+  z-index: 1;
   transition: all 0.2s ease-in-out;
   width: 100%;
-  z-index: -1;
+  position: relative;
 }
 
 .modal.active {
   opacity: 1;
   z-index: 2000;
+}
+
+.modalCard {
+  position: absolute;
+  background-color: hsl(0, 0%, 100%);
+  width: 50%;
+  z-index: 1000;
+  top: 15%;
+  bottom: 10%;
+  right: 25%;
+  height: 70%;
+  display: flex;
+  overflow: hidden;
+}
+
+.modalCard .closeButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.modalCard .closeButton button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  opacity: 0.5;
+  transition: 0.5s;
+}
+
+.modalCard .closeButton button:hover {
+  opacity: 1;
+}
+
+.productCarrousel {
+  min-width: 45%;
+  background-color: hsl(0, 9%, 96%);
+}
+
+.productCarrouselImg {
+  width: 100%;
+}
+
+.productCarrouselImg img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.productInfo {
+  min-width: 95%;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -37,7 +37,8 @@
 }
 .contactCardTitle h2{
     color:hsl(0, 0%, 0%);
-    font-weight: 600s;
+    font-weight: 600;
+    font-size: 2rem;
 }
 .contactCardElement{
     display: flex;
@@ -59,6 +60,7 @@
 }
 .contactCardElementInfo p{
     opacity: 0.7;
+    font-size: 1.2rem;
 }
 .contactCardButton button{
     width: 100%;
@@ -70,7 +72,7 @@
     font-weight: 500;
     transition: all 0.5s linear;
     width: 80%;
-    margin: 8%;
+    margin: 8% 8% 10% 8%;
 }
 .contactCardButton button:hover{
     
@@ -78,15 +80,14 @@
 }
 .contactCardBack{
     position: absolute;
-    top: 0;   
-    left: 0;
-    width: 100%;  height: 100%;
+    width: 100%;
     background: $secondary-background-color;
     backface-visibility: hidden;
     transform: perspective(1000px) rotateY(-180deg);
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     transition: 1s;
+    padding-top: 4rem;
 }
 .contactCard.active .contactCardBack{
     transform: perspective(1000px) rotateY(0deg);
@@ -97,6 +98,7 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    width: 80%;
 }
 .contactFormUserdata{
     display: flex;
@@ -131,12 +133,43 @@
 }
 .contactFormMessage{
     width: 100%;
-    height: 20%;
+    height: 1000%;
 }
 .contactFormMessage textarea{
-    padding:0.5rem 1rem;
+    padding: 1.5rem 1rem;
     width: 100%;
     height: 100%;
     text-align: start;
+    resize: none;
+}
+.closeButton{
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+.closeButton button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+.messageButton{
+    width: 100%;
+}
+.messageButton button{
+    background-color: $primary-color;
+    border: none;
+    color: white;
+    width: 100%;
+    padding: 1.1rem 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.5s linear;
+    margin-bottom: 2rem;
 
+}
+.messageButton button:hover{  
+    background-color: $hover-color;
 }
