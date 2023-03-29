@@ -1,0 +1,49 @@
+.details{
+    background-color: white;
+    display: flex;
+    padding: 5% 15%;
+    height: 80vh;
+    justify-content: space-between;
+
+}
+.detailsColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    width: 30%;
+    justify-content: space-around;
+}
+.detailsColumn img{
+    width:100%;
+    object-fit: cover;
+}
+
+.detailsColumnElement{
+    display: flex;
+    gap: 1rem;
+}
+.detailsColumnElementIcon{
+    width: 3rem;
+    filter: invert(0.4) sepia(1) saturate(4) hue-rotate(175deg);
+}
+.detailsColumnElementText{
+    display:flex;
+    flex-direction: column;
+    text-align: left;
+}
+.detailsColumnElementTextTitle h4{
+    font-weight: 600;
+    font-size: 1.2rem;
+    color:black;
+}
+.detailsColumnElementTextDescription p{
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+.detailsColumnElement.last{
+    display:flex;
+    flex-direction: row-reverse;
+}
+.detailsColumnElementText.last {
+    text-align: right;
+}
