@@ -68,3 +68,6 @@
 .productInfo{
     min-width: 95%;
 }
+.productInfo.active{
+    transform: translateX(-50%);
+}
