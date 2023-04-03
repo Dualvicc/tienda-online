@@ -1,6 +1,6 @@
 export default (() => {
     const swipeButton = document.querySelectorAll('.swipeButton');
-    const modalProduct = document.querySelectorAll('.modalProduct');
+    const modalProduct = document.querySelector('.modalProduct');
     swipeButton.forEach((button) => {
         button.addEventListener('click', () => {
             modalProduct.classList.toggle('active');
