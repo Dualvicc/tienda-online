@@ -52,16 +52,37 @@
 }
 .faqElementTitleIcon{
     width: 1rem;
+    height: 1rem;
     justify-content: end;
+    position: relative;
 }
-.faqElementTitleIcon button{
-    border: none;
-    cursor: pointer;
-    background-color:$primary-background-color;
-}
-.faqElementTitleIcon img{
+.faqElementTitleIcon::after{
+    content: "";
     width: 100%;
-    object-fit: contain;
+    height: 2px;
+    background-color: hsl(0, 0%, 0%);
+    position: absolute;
+    top: 45%;
+
+}
+.faqElementTitleIcon::before{
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: hsl(0, 0%, 0%);
+    position: absolute;
+    top: 45%;
+    transform: rotate(90deg);
+    transition: 0.3s;
+}
+.faqElementTitleIcon.active::before{
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: hsl(0, 0%, 0%);
+    position: absolute;
+    top: 45%;
+    transform: rotate(0deg);
 }
 .faqElementTitle::after{
     content: '';
