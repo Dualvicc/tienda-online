@@ -1,0 +1,51 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+.plusMinusButton{
+    display:flex;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    height: 2rem;
+}
+.minus{
+    width: 30%;
+    height: 100%;
+
+}
+.minus button{
+    width: 100%;
+    border: none;
+    height: 100%;
+    color: black;
+    background-color: $secondary-color;
+}
+.minus button:hover{
+
+}
+.input{
+    width: 40%;
+    height: 100%;
+}
+.input input{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+.plus{
+    width: 30%;
+    height: 100%;
+
+}
+.plus button{
+    border:none;
+    width: 100%;
+    color: black;
+    height: 100%;
+    background-color: $primary-color;
+}
+.plus button:hover{
+    border:none;
+}
