@@ -279,6 +279,13 @@
     justify-content: center;
     gap: 2rem;
 }
+.formUserEmail{
+    display: flex;
+    flex-direction: column;
+}
+.inputLimit{
+    text-align: end;
+}
 .productForm input{
     padding: 1rem 0.5rem;
     text-align: left;

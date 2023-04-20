@@ -6,3 +6,4 @@ import './acordeon.js';
 import './plusminusbutton.js';
 import './tabs.js';
 import './notification.js';
+import './char-limit.js';
