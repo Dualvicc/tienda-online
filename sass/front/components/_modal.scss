@@ -279,6 +279,7 @@
     justify-content: center;
     gap: 2rem;
 }
+
 .formUserEmail{
     display: flex;
     flex-direction: column;
@@ -300,11 +301,18 @@
 .productForm div:has(input){
     width: 90%;
 }
+.invalid input{
+    border: 1px solid red;
+}
 .formUserArea{
     width:100%;
     display: flex;
     justify-content: center;
     gap: 2rem;
+}
+.errorMessage{
+    color: red;
+    font-size: 0.8rem;
 }
 .payButton{
     width: 90%;

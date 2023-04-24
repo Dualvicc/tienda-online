@@ -456,14 +456,14 @@
                 <div class="contactForm">
                     <div class="contactFormUserdata">
                         <div class="userName">
-                            <input type="text" class="userName" placeholder="Name" required>
+                            <input type="text" class="userName" placeholder="Name">
                         </div>
                         <div class="userEmail">
-                            <input type="email" class="userEmail" placeholder="Email adress" required>
+                            <input type="email" class="userEmail" placeholder="Email adress">
                         </div>
                     </div>
                     <div class="contactFormSubject">
-                        <input type="text" class="formSubject" placeholder="Subject" required>
+                        <input type="text" class="formSubject" placeholder="Subject">
                     </div>
                     <div class="contactFormMessage">
                         <textarea id="message" name="message" placeholder="Message"></textarea>
@@ -613,7 +613,7 @@
                                         <button class="amountButton minusButton">-</button>
                                     </div>
                                     <div class="input" >
-                                        <input id="productAmount" type="number" value="1" required>
+                                        <input id="productAmount" type="number" value="1">
                                     </div>
                                     <div class="plus" >
                                         <button id="plusButton" class="amountButton plusButton">+</button>
@@ -675,7 +675,7 @@
                                 <button class="amountButton minusButton">-</button>
                             </div>
                             <div class="input" >
-                                <input id="productAmount" type="number" value="1" required>
+                                <input id="productAmount" type="number" value="1">
                             </div>
                             <div class="plus" >
                                 <button id="plusButton" class="amountButton plusButton">+</button>
@@ -688,39 +688,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="productForm">
+                
+                <form action=""class= "productForm">
                     <div class="formGobackbutton swipeButton">
-                        <button>Go back</button>
+                        <button type="button">Go back</button>
                     </div>
                     <div class="formUserName">
                         <div class="firstName">
-                            <input type="text" placeholder="First name" required>
+                            <input type="text" placeholder="First name" data-validate="onlyletters">
                         </div>
                         <div class="lastName">
-                            <input type="text" placeholder="Last name" required>
+                            <input type="text" placeholder="Last name" data-validate="onlyletters">
                         </div>
                     </div>
                     <div class="formUserEmail">
                         <div class="inputLimit">
                         </div>
-                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="E-mail adress" required>
+                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="E-mail adress" data-validate="email">
                     </div>
                     <div class="formUserAddress1">
                         <div class="inputLimit"></div>
-                        <input type="text" name="" id="" maxlength="40" class="inputLimited" placeholder="Address Line 1" required>
+                        <input type="text" name="" id="" maxlength="40" class="inputLimited" placeholder="Address Line 1">
                     </div>
-                    <div class="formUserAddress2">
+                    <div class="formUserTelephone">
                         <div class="inputLimit"></div>
-                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="Address Line 2" required>
+                        <input type="number" name="" id="" maxlength="20" class="inputLimited" placeholder="Phone number" data-validate="telephone">
                     </div>
                     <div class="formUserArea">
                         <div class="state">
                             <div class="inputLimit"></div>
-                            <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="State" required>
+                            <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="Pais">
                         </div>
                         <div class="zipCode">
                             <div class="inputLimit"></div>
-                            <input type="number" name="" id="" maxlength="20" class="inputLimited" placeholder="Zip Code" required>
+                            <input type="number" name="" id="" maxlength="20" class="inputLimited" placeholder="Codigo Postal" data-validate="onlynumbers">
                         </div>
                     </div>
                     <div class="formCountryoption">
@@ -729,14 +730,14 @@
                     <div class="payButton">
                         <button>FINNISH PURCHASE</button>
                     </div>
-                </div>  
+                </form> 
             </div>
     
         </div>
     </div>
     <div class="notification" id="notification">
         <div class="notificationTitle">
-            <h4>Mi Carrito 🛒</h4>
+            <h4></h4>
         </div>
         <div class="notificationProduct">
         

@@ -13,6 +13,14 @@
 .notification.active{
     display: flex;
 }
+.notification.error{
+    background-color: $secondary-color;
+    opacity: 0.9;
+}
+.notification.ok{
+    background-color: $primary-color;
+    opacity: 0.9;
+}
 .notification.discard{
     background-color: $secondary-color;
     opacity: 0.9;
