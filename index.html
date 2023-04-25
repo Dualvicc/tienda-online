@@ -23,66 +23,15 @@
         <meta name="keywords"    content="curso, online, react, desarrollo, front, online, ">
         <link href="./assets/icons/react-logo.svg" rel="icon" type="image/x-icon" />
         <link href="./styles/app.css" rel="stylesheet"/>
-        <script type="module" src="./js/app.js"></script>
+        <script type="module" src="./src/index.js"></script>
 </head>
 <body>
     <header class="header" id="header">
-        <div class="headerLogo">
-            <img src="./assets/images/logo-3.webp" />
-        </div>
-        <div class="headerNav">
-            <ul>
-                <li>
-                    <a href="#header">Home</a>
-                </li>
-                <li>
-                    <a href="#product">Product</a>
-                </li>
-                <li>
-                    <a href="#featured">Features</a>
-                </li>
-                <li>
-                    <a href="#details">Details</a>
-                </li>
-                <li>
-                    <a href="#team">Team</a>
-                </li>
-                <li>
-                    <a href="#contact">Contact</a>
-                </li>
-                <li>
-                    <a href="#social">Social</a>
-                </li>
-            </ul>
-        </div>
-        <div class="headerCheckoutbutton">
-            <button type="button" class="checkoutButton modalButton">Apúntate !</button>
-        </div>
+        <logo-component></logo-component>
+        <menu-component></menu-component>
+        <modal-button-component></modal-button-component>
     </header>
-    <section class="slider" id="product">
-        <div class="sliderTitle">
-            <h1>The future of tech is here</h1>
-        </div>
-        <div class="sliderDescription">
-            <p>Holisticly incentivize revolutionary collaboration and idea sharing before cost effective users. Actual focused services before highly efficient human capital.
-
-            </p>
-        </div>
-        <div class="sliderCheckoutbutton">
-            <button type="button" class="checkoutButton modalButton">
-                Empieza ya!
-                <img src="" alt="">
-            </button>
-        </div>
-        <div class="sliderBackground">
-            <img src="./assets/images/slider-background.webp" alt="">
-
-        </div>
-        <div class="sliderImage">
-            <img src="./assets/images/react-slider-removebg-preview.webp">
-        </div>
-
-    </section>
+    <slider-component></slider-component>
 
     <section class="featured" id="featured">
         <div class="featuredTitle">
