@@ -31,7 +31,6 @@ class FlipCard extends HTMLElement {
             background-color: hsl(0, 0%, 100%);
             z-index: 2;
             position: relative;
-            align-items: center;
         }
         .contactCard.active .contactCardFront{
             transform: perspective(1000px) rotateY(180deg);

@@ -3,6 +3,7 @@ import './menu.js';
 import './modal-button.js';
 import './slider.js';
 import './featured.js';
+import './faq-element.js';
 import './faqs.js';
 import './details.js';
 import './team.js';
