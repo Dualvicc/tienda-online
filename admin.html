@@ -16,86 +16,14 @@
         <meta name="description" content="Venta de cursos de desarrollo front-end">
         <meta name="keywords"    content="curso, online, react, desarrollo, front, online, ">
         <link href="./assets/icons/react-logo.svg" rel="icon" type="image/x-icon" />
-        <link href="./styles/app.css" rel="stylesheet"/>
-        <script type="module" src="./js/app.js"></script>
+        <link href="./styles/admin/normalize.css" rel="stylesheet"/>
+        <script type="module" src="./admin-components/index.js"></script>
 </head>
 <body>
-    <div class="header" id="header">
-        <div class="headerLogo">
-            <h2>Detectib</h2>
-        </div>
-        <div class="headerTitle">
-            <h2>Clientes</h2>
-        </div>
-        <div class="headerMenu">
-            <div class="hamburgerButton">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-    <div class="searchbar">
-        <div class="filter">
-            <svg></svg>
-        </div>
-    </div>
+    <header-component></header-component>
+    <searchbar-component></searchbar-component>
     <div class="main">
-        <div class="log">
-            <div class="logElement">
-                <div class="elementHeader">
-                    <div class="editButton"></div>
-                    <div class="deleteButton"></div>
-                </div>
-                <div class="elementContent">
-                    <div class="elementContentEmail"></div>
-                    <div class="elementContentUser"></div>
-                </div>
-            </div>
-            <div class="logElement">
-                <div class="elementHeader">
-                    <div class="editButton"></div>
-                    <div class="deleteButton"></div>
-                </div>
-                <div class="elementContent">
-                    <div class="elementContentEmail"></div>
-                    <div class="elementContentUser"></div>
-                </div>
-            </div>
-        </div>
-        <div class="area">
-            <div class="bar">
-                <div class="tabs">
-                    <div class="tabMain"></div>
-                    <div class="tabUpload"></div>
-                </div>
-                <div class="barButtons">
-                    <div class="cleanButton"></div>
-                    <div class="saveButton"></div>
-                </div>
-            </div>
-            <div class="register form">
-                <div class="user">
-                    <div class="formUserName">
-                        <input type="text" placeholder="Username" required>
-                    </div>
-                    <div class="formEmail">
-                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="E-mail adress" required>
-                    </div>
-                </div>
-                <div class="password">
-                    <div class="formPassword">
-                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="E-mail adress" required>
-                    </div>
-                    <div class="formPassword">
-                        <input type="text" name="" id="" maxlength="20" class="inputLimited" placeholder="E-mail adress" required>
-                    </div>
-                </div>
-                
-
-            </div>
-
-        </div>
+        <tabla-component></tabla-component>
+        <form-component></form-component>
     </div>
-
 </body>
