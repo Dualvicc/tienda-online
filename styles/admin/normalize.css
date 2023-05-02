@@ -12,10 +12,14 @@
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
   }
-  body {
-    margin: 0;
-  }
   
+  /* Sections
+     ========================================================================== */
+  
+  /**
+   * Remove the margin in all browsers.
+   */
+   
   /**
    * Render the `main` element consistently in IE.
    */
@@ -187,7 +191,7 @@
   [type="button"],
   [type="reset"],
   [type="submit"] {
-    --webkit-appearance: button;
+    -webkit-appearance: button;
   }
   
   /**
@@ -279,7 +283,7 @@
    */
   
   [type="search"] {
-    --webkit-appearance: textfield; /* 1 */
+    -webkit-appearance: textfield; /* 1 */
     outline-offset: -2px; /* 2 */
   }
   
@@ -361,4 +365,13 @@ th {
 ol, ul {
     list-style: none;
     padding-left: 0;
+}
+body{
+  display: flex;
+  margin: none;
+  flex-direction: column;
+  background-color: hsl(226, 63%, 45%);
+  flex-direction: column;
+  padding:  0 8%;
+  height: 100vh;
 }
