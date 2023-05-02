@@ -3,10 +3,12 @@ class Modal extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
-        this.render();
+        const width = this.attributes.getNamedItem('width').value;
+        const height = this.attributes.getNamedItem('height').value;
+        this.render(width,height);
     }
 
-    render() {
+    render(width, height) {
 
         this.shadow.innerHTML = 
         `
@@ -25,7 +27,7 @@ class Modal extends HTMLElement {
             -webkit-text-size-adjust: 100%;
         }
         .modal{
-            display:none;
+            display: none;
             width: 100%;
             height: 100vh;
             position: fixed;
@@ -53,14 +55,14 @@ class Modal extends HTMLElement {
         .modalCard{
             position: absolute;
             background-color: hsl(0, 0%, 100%);
-            width: 50%;
+            width: ${width};
             z-index: 1000;
-            top: 15%;
-            bottom: 10%;
-            right: 25%;
-            height: 70%;
-            display: flex;
+            height: ${height};
+            margin: auto;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
             overflow: hidden; 
+
         }
         .modalCard .closeButton{
             position: absolute;
@@ -82,7 +84,7 @@ class Modal extends HTMLElement {
             color: hsl(0, 0%, 0%);
         }
         </style>
-        <div class="modal active" id="modal">
+        <div class="modal" id="modal">
             <div class="modalBackground modalButton">
             </div>
             <div class="modalCard">
@@ -93,6 +95,18 @@ class Modal extends HTMLElement {
             </div>
         </div>
         `;
+        const modalButtons = this.shadow.querySelectorAll(".modalButton")
+        const modal = this.shadow.querySelector("#modal");
+        console.log(modal);
+       
+        modalButtons.forEach(modalButton => {
+            modalButton.addEventListener("click",()=>{
+                modal.classList.toggle("active"); 
+            })
+        })
+        document.addEventListener("openModal",()=>{
+            modal.classList.toggle("active");
+        });
     }
 }
 

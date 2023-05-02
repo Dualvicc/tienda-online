@@ -5,6 +5,8 @@ class ModalButton extends HTMLElement {
         this.shadow = this.attachShadow({mode: 'open'});
         this.render();
     }
+    connectedCallback() {
+    }
 
     render() {
 
@@ -44,6 +46,14 @@ class ModalButton extends HTMLElement {
             <button type="button" class="checkoutButton modalButton">Apúntate !</button>
         </div>
         `;
+        const openModal = new CustomEvent("openModal");
+        const modalButtons = this.shadow.querySelectorAll(".modalButton");
+       
+        modalButtons.forEach(modalButton => {
+            modalButton.addEventListener("click",()=>{
+                document.dispatchEvent(openModal); 
+            })
+        })
     }
 }
 
