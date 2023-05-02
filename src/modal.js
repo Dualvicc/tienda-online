@@ -89,8 +89,7 @@ class Modal extends HTMLElement {
                 <div class="closeButton modalButton">
                     <button>x</button>
                 </div>
-                <slot name="left"></slot>
-                <slot name="right"></slot>
+                <slot name="composition"></slot>
             </div>
         </div>
         `;

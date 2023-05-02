@@ -13,6 +13,7 @@ import './flip-card.js';
 import './contact.js';
 import './footer.js';
 import './modal.js';
+import './modal-composition.js';
 import './modal-image.js';
 import './modal-product.js';
 import './form.js';

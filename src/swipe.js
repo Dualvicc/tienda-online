@@ -28,11 +28,10 @@ class Swipe extends HTMLElement {
             width: 110%;
             display: flex;
             height: 100%;
+            left: 45%;
             transition: 0.3s;
             background-color:  hsl(0, 0%, 100%);
             position: absolute;
-            left: 45%;
-            overflow: hidden;
         }
         .modalProduct.active{
             transform: translateX(-50%);

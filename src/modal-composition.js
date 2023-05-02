@@ -1,4 +1,5 @@
-class Image extends HTMLElement {
+
+class ModalComposition extends HTMLElement {
 
     constructor() {
         super();
@@ -24,34 +25,37 @@ class Image extends HTMLElement {
             line-height: 1.15;
             -webkit-text-size-adjust: 100%;
         }
-        .modalCarrousel{
-            width: 45%;
+        .composition{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            overflow: hidden;
+            background-color: hsl(0, 9%, 96%)
+        }
+        .45%{
+            min-width: 45%;
+            max-width: 45%;
             height: 100%;
             z-index: 2000;
-            position: absolute;
         }
-        .modalCarrouselImage{
-            width: 100%;
+        .55%{
+            min-width: 55%;
+            max-width: 55%;
             height: 100%;
-            object-fit: cover;
-        }
-        .modalCarrouselImage img{
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
+            z-index: 2000;
+            left: 45%;
         }
         </style>
-        <div class="modalCarrousel">
-                <div class="modalCarrouselImage">
-                    <img src="./assets/images/atomic-model-logo.webp">
-                </div>
-                <div class="modalCarrouselImage">
-                </div>
-                <div class="modalCarrouselImage">
-                </div>
+        <div class="composition">
+            <div class="45%">
+                <slot name="left"></slot>
+            </div>
+            <div class="55%">
+                <slot name="right"></slot>
+            </div>
         </div>
         `;
     }
 }
 
-customElements.define('image-component', Image);
+customElements.define('modal-composition-component', ModalComposition);

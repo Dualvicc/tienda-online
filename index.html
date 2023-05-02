@@ -47,16 +47,18 @@
     </contact-component>
     <footer-component></footer-component>
     <modal-component>
-        <image-component slot="left"></image-component>
-        <swipeable-component slot="right">
-            <product-info-component slot="visible">
-                <product-title-component slot="Top"></product-title-component>
-                <tabs-component slot="Mid"></tabs-component>
-                <plus-minus-button-component slot="Bottom"></plus-minus-button-component>
-                <swipe-button-component slot="Swipe"></swipe-button-component>
-            </product-info-component>
-            <form-component slot="hidden"></form-component>
-        </swipeable-component>
+        <modal-composition-component slot="composition">
+            <image-component slot="left"></image-component>
+            <swipeable-component slot="right">
+                <product-info-component slot="visible">
+                    <product-title-component slot="Top"></product-title-component>
+                    <tabs-component slot="Mid"></tabs-component>
+                    <plus-minus-button-component slot="Bottom"></plus-minus-button-component>
+                    <swipe-button-component slot="Swipe"></swipe-button-component>
+                </product-info-component>
+                <form-component slot="hidden"></form-component>
+            </swipeable-component>
+        </modal-composition-component>
     </modal-component>
     <notification-component></notification-component>
 </body>
