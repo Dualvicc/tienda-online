@@ -22,8 +22,8 @@
 <body>
     <header-component></header-component>
     <searchbar-component></searchbar-component>
-    <div class="main">
-        <tabla-component></tabla-component>
-        <form-component></form-component>
-    </div>
+    <content-component>
+        <tabla-component slot="tabla"></tabla-component>
+        <form-component slot="form"></form-component>
+    </content-component>
 </body>

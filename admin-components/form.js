@@ -24,7 +24,7 @@ class Form extends HTMLElement {
             -webkit-text-size-adjust: 100%;
         }
         .area{
-            width: 55rem;
+            width: 100%;
             height: 100%;
         }
         .bar{

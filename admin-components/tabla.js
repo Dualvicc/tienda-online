@@ -27,7 +27,9 @@ class Tabla extends HTMLElement {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
-            width: 40rem;
+            width: 100%;
+            
+            margin: 0;
         }
         .tablaElement{
             height: 12vh;

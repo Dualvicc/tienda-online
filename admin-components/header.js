@@ -23,29 +23,18 @@ class Header extends HTMLElement {
             line-height: 1.15;
             -webkit-text-size-adjust: 100%;
         }
-        body{
-            display:flex;
-            flex-direction: column;
-            background-color: hsl(226, 63%, 45%);
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-            padding:  0 8%;
-        }
         .header{
             display: flex;
             justify-content: space-between;
             width: 100%;
-            background-color: hsl(226, 63%, 45%);
             height: 10vh;
             margin-bottom: 2rem;
         }
         .headerLogo{
-            width:15%;
+            width: 15%;
             display: flex;
             justify-content: left;
             align-items: center;
-            ;
         }
         h2{
             color:white;
@@ -56,6 +45,7 @@ class Header extends HTMLElement {
             display: flex;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
         .headerMenu{
             width: 5%;

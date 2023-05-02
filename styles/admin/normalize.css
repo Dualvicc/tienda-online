@@ -367,14 +367,11 @@ ol, ul {
     padding-left: 0;
 }
 body{
-  display:flex;
+  display: flex;
+  margin: none;
   flex-direction: column;
   background-color: hsl(226, 63%, 45%);
   flex-direction: column;
   padding:  0 8%;
-}
-.main{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
+  height: 100vh;
 }
