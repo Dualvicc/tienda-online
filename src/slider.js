@@ -112,7 +112,10 @@ class Slider extends HTMLElement {
             </p>
         </div>
         <div class="sliderCheckoutbutton">
-            <modal-button-component></modal-button-component>
+            <button type="button" class="checkoutButton modalButton">
+                Empieza ya!
+                <img src="" alt="">
+            </button>
         </div>
         <div class="sliderBackground">
             <img src="./assets/images/slider-background.webp" alt="">
