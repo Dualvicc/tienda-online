@@ -42,26 +42,35 @@ class Form extends HTMLElement {
             justify-content: center;
             align-items: center;
         }
-        .tabMain{
-            background-color: hsl(207, 85%, 69%);
+        .tab{
             width: 100%;
             height: 100%;
             display: flex;
             justify-content:center;
             align-items: center;
         }
-        .tabMain h3{
+        .tab.active{
+            background-color: hsl(207, 85%, 69%);
+        }
+        .tab:hover{
+            background-color: grey;
+            opacity: 0.5;
+        }
+        .tab:hover h3{
+            color: white;
+        }
+        .tab.active h3{
             color: white;
             font-size: 1.2rem;
         }
-        .tabUpload{
+        .tab{
             width: 100%;
             height: 100%;
             display: flex;
             justify-content:center;
             align-items: center;
         }
-        .tabUpload h3{
+        .tab h3{
             color: grey;
             font-size: 1.2rem;
         }
@@ -71,6 +80,12 @@ class Form extends HTMLElement {
         }
         .cleanButton{
         }
+        .cleanButton:hover svg{
+            filter: none;
+        }
+        .saveButton:hover svg{
+            filter: none;
+        }
         svg{
             object-fit: contain;
             height: 100%;
@@ -79,10 +94,13 @@ class Form extends HTMLElement {
         }
         .register{
             width: 100%;
-            display: flex;
             flex-direction: column;
             justify-content: space-between;
             height: 60%;
+            display: none;
+        }
+        .register.active{
+            display: flex;
         }
         .row{
             display:flex;
@@ -116,14 +134,21 @@ class Form extends HTMLElement {
             color: white;
             font-weight: bold;
         }
+        .tabContent{
+            display:none;
+        }
+        .tabContent.active{
+            display:flex;
+        }
+
         </style>
         <div class="area">
             <div class="bar">
                 <div class="tabs">
-                    <div class="tabMain">
+                    <div class="tab active" data-tab="principal">
                         <h3>Principal</h3>
                     </div>
-                    <div class="tabUpload">
+                    <div class="tab" data-tab="upload">
                         <h3>Imágenes</h3>
                     </div>
                 </div>
@@ -136,18 +161,18 @@ class Form extends HTMLElement {
                     </div>
                 </div>
             </div>
-            <div class="register form">
+            <div class="register form tabContent active" data-tab="principal">
                 <div class="row">
                     <div class="formInput">
                         <div class="label">Nombre</div>
                         <div class="input">
-                            <input type="text"  required>
+                            <input class="nameInput" type="text"  required>
                         </div>
                     </div>
                     <div class="formInput">
                         <div class="label">Email</div>
                         <div class="input">
-                            <input type="text"  required>
+                            <input class="emailInput" type="text"  required>
                         </div>
                     </div>
                 </div>
@@ -156,19 +181,61 @@ class Form extends HTMLElement {
                         <div class="label">Contraseña
                         </div>
                         <div class="input">
-                            <input type="text" required>
+                            <input class="passwordInput" type="text" required>
                         </div>
                     </div>
                     <div class="formInput">
                         <div class="label">Confirme contraseña</div>
                         <div class="input">
-                            <input type="text" required>
+                            <input class ="confirmPasswordInput" type="text" required>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="tabContent imageUpload" data-tab="upload">
+                <input type="file" class="">
+            </div>
         </div>
         `;
+        const name = this.shadow.querySelector('.nameInput');
+        const email = this.shadow.querySelector('.emailInput');
+        const password = this.shadow.querySelector('.passwordInput');
+        const confirmPassword = this.shadow.querySelector('.confirmPasswordInput');
+        document.addEventListener('editTable', (event=>{
+            name.value = event.detail.name;
+            email.value = event.detail.email;
+        }));
+        const cleanButton = this.shadow.querySelector('.cleanButton');
+        cleanButton.addEventListener('click',() =>{
+            name.value = "";
+            email.value = "";
+            password.value = "";
+            confirmPassword.value = "";
+        });
+        const tabs = this.shadow.querySelectorAll(".tab");
+        const tabContents = this.shadow.querySelectorAll(".tabContent");
+    
+        tabs.forEach(tab => {
+            tab.addEventListener("click",()=>{
+
+                const tabDataset = tab.dataset.tab;
+
+                tabs.forEach(tab =>{
+                    tab.classList.remove("active");
+                })
+
+                tab.classList.add("active");
+
+                tabContents.forEach(tabContent => {
+                    if(tabContent.classList.contains("active")){
+                        tabContent.classList.remove("active");
+                    }
+                    if(tabContent.dataset.tab === tabDataset){
+                        tabContent.classList.add("active");
+                    }
+                })
+            })
+        })
     }
 }
 

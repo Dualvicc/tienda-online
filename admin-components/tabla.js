@@ -135,6 +135,21 @@ class Tabla extends HTMLElement {
                document.dispatchEvent(openModal);
             })
         })
+
+        const editButtons = this.shadow.querySelectorAll('.editButton')
+        editButtons.forEach(button => {
+            button.addEventListener('click',() => {
+                console.log(button);
+                const name = button.closest('.tablaElement').querySelector('.elementContentUser').querySelector('p').innerHTML;
+                const email = button.closest('.tablaElement').querySelector('.elementContentEmail').querySelector('p').innerHTML;
+                document.dispatchEvent(new CustomEvent('editTable',  {
+                    detail: {
+                      name: name,
+                      email: email
+                    }
+                }))
+            });
+        });
     }
 }
 
