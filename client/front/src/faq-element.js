@@ -25,7 +25,7 @@ class FaqElement extends HTMLElement {
             -webkit-text-size-adjust: 100%;
         }
         .faqsFaq{
-            width: 60%;
+            width: 100%;
             display: flex;
             flex-direction: column;
             gap: 3rem;
@@ -37,6 +37,7 @@ class FaqElement extends HTMLElement {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            border: 2px solid red;
         }
         .faqElementTitle{   
             width: 100%;
@@ -87,7 +88,7 @@ class FaqElement extends HTMLElement {
             content: '';
             position: absolute;
             background-color: hsl(0, 12%, 93%);
-            width: 70%;
+            width: 50%;
             height: 1px;
             margin-top: 2rem;
         }

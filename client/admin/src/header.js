@@ -31,7 +31,7 @@ class Header extends HTMLElement {
             margin-bottom: 2rem;
         }
         .headerLogo{
-            width: 15%;
+            width: 10%;
             display: flex;
             justify-content: left;
             align-items: center;
@@ -41,34 +41,53 @@ class Header extends HTMLElement {
             font-size: 3rem;
         }
         .headerTitle{
-            width:15%;
+            width: 15%;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
         }
         .headerMenu{
-            width: 5%;
+            width: 10%;
             display: flex;
             justify-content: flex-end;
         }
-        .hamburgerButton{
-            width: 100%;
-            height: 100%;
+        .hamburgerButton {
+            cursor: pointer;
             display: flex;
             flex-direction: column;
+            height: 100%;
+            gap: 0.8rem;
             justify-content: center;
-            align-items: center;
-            gap: 0.6rem;
+            right: 0;
+            transition: all 0.3s ease-in-out;
+            width:50%;
         }
+          
         .hamburgerButton span {
             background-color: #fff;
-            height: 5%;
-            margin: 0.1rem auto;
+            display: block;
             transition: all 0.3s ease-in-out;
             width: 100%;
-            align-items: end;
+            height: 4px;
         }
+        
+        .hamburgerButton.active{
+            position: relative;
+        }
+        
+        .hamburgerButton.active span:first-of-type {
+            transform: translateY(26px) rotate(45deg);
+        }
+          
+        .hamburgerButton.active span:nth-of-type(2) {
+            opacity: 0;
+        }   
+          
+        .hamburgerButton.active span:last-of-type {
+            transform: translateY(-5px) rotate(-45deg);
+        }
+        
         </style>
             <div class="header" id="header">
                 <div class="headerLogo">
@@ -86,6 +105,17 @@ class Header extends HTMLElement {
                 </div>
             </div>
         `;
+        const hamburgerButton = this.shadow.querySelector(".hamburgerButton")
+        hamburgerButton.addEventListener("click",()=>{
+            hamburgerButton.classList.toggle("active");
+            hamburgerButton.parentElement.classList.toggle("active");
+                
+                let svgs = hamburgerButton.querySelectorAll("svg");
+    
+                svgs.forEach(svg => {
+                    svg.classList.toggle("active");
+                });
+            });
     }
 }
 
