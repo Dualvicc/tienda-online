@@ -101,7 +101,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     }, {
         sequelize,
-        tableName: 'Companys',
+        tableName: 'Companies',
         timestamps: true,
         paranoid: true,
         indexes: [
