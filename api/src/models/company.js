@@ -88,17 +88,6 @@ module.exports = function(sequelize, DataTypes) {
         telephone: {
             type: DataTypes.STRING(255)
         },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
-        }
     }, {
         sequelize,
         tableName: 'Companies',
