@@ -1,32 +1,32 @@
 module.exports = function(sequelize, DataTypes) {
-    const SocialNetworks = sequelize.define('SocialNetworks', {
+    const SocialNetworksCompanies = sequelize.define('SocialNetworksCompanies', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        name: {
-            type: DataTypes.STRING(255),
+        companyId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: 'Por favor, rellena el campo "Nombre".'
+                    msg: 'Por favor, rellena el campo "companyId".'
                 }
             }
         },
-        baseUrl: {
-            type: DataTypes.STRING(255),
+        socialNetworkId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: 'Por favor, rellena el campo "Base URL".'
+                    msg: 'Por favor, rellena el campo "socialNetworkId".'
                 }
             }
         },
     }, {
         sequelize,
-        tableName: 'social_networks',
+        tableName: 'social_networks_companies',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -49,9 +49,9 @@ module.exports = function(sequelize, DataTypes) {
         ]
     });
 
-    SocialNetworks.associate = function(models) {
+    SocialNetworksCompanies.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
     };
 
-    return SocialNetworks;
+    return SocialNetworksCompanies;
 };

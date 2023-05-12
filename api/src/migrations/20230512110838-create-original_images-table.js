@@ -1,51 +1,53 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('companies', {
+    await queryInterface.createTable('original_images', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fiscalName: {
+      path: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      comercialName: {
+      entity: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      nif: {
+      entityKey: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      languageAlias: {
+        allowNull: false,
+        type: Sequelize.CHAR(2)
+      },
+      filename: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      comercialAddress: {
+      content: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      fiscalAddress: {
+      mimeType: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      postalCode: {
+      sizeBytes: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER.UNSIGNED
       },
-      email: {
-        unique: true,
+      widthPx: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER.UNSIGNED
       },
-      web: {
+      heightPx: {
         allowNull: false,
-        type: Sequelize.STRING
-      },
-      telephone: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER.UNSIGNED
       },
       createdAt: {
         allowNull: false,
@@ -62,6 +64,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('companies');
+    await queryInterface.dropTable('original_images');
   }
 };

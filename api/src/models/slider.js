@@ -15,6 +15,17 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
+        createdAt: {
+          type: DataTypes.DATE,
+          allowNull: false
+        },
+        updatedAt: {
+          type: DataTypes.DATE,
+          allowNull: false
+        },
+        deletedAt: {
+          type: DataTypes.DATE
+        }
     }, {
         sequelize,
         tableName: 'sliders',

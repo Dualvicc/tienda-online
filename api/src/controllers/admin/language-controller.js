@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Company = db.Company;
+const Language = db.Language;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    Company.create(req.body).then(data => {
+    Language.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    Company.findAndCountAll({
+    Language.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'fiscalName', 'comercialName', 'nif'],
+        attributes: ['id', 'language', 'alias'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    Company.findByPk(id).then(data => {
+    Language.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Company.update(req.body, {
+    Language.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Company.destroy({
+    Language.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {

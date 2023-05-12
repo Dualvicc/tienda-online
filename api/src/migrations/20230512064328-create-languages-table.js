@@ -4,32 +4,20 @@
 module.exports = {
 
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('social_networks_companies', {
+    await queryInterface.createTable('languages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      companyId: {
+      language: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'companies',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        type: Sequelize.STRING,
       },
-      socialNetworkId: {
+      alias: {
         allowNull: false,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'social_networks', 
-          key: 'id' 
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -46,6 +34,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('social_networks_companies');
+    await queryInterface.dropTable('languages');
   }
 };

@@ -1,32 +1,40 @@
 module.exports = function(sequelize, DataTypes) {
-    const SocialNetworks = sequelize.define('SocialNetworks', {
+    const Language = sequelize.define('Language', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true
         },
-        name: {
+        language: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: 'Por favor, rellena el campo "Nombre".'
+                    msg: 'Por favor, rellena el campo "Language".'
                 }
-            }
+            },
+            unique: {
+                args: true,
+                msg: 'Ya existe ese lenguaje.'
+            },
         },
-        baseUrl: {
+        alias: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
                 notNull: {
-                    msg: 'Por favor, rellena el campo "Base URL".'
+                    msg: 'Por favor, rellena el campo "Alias".'
                 }
-            }
-        },
+            },
+            unique: {
+                args: true,
+                msg: 'Ya existe ese alias.'
+            },
+        }
     }, {
         sequelize,
-        tableName: 'social_networks',
+        tableName: 'languages',
         timestamps: true,
         paranoid: true,
         indexes: [
@@ -49,9 +57,9 @@ module.exports = function(sequelize, DataTypes) {
         ]
     });
 
-    SocialNetworks.associate = function(models) {
+    Language.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
     };
 
-    return SocialNetworks;
+    return Language;
 };

@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Company = db.Company;
+const OriginalImage = db.OriginalImage;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    Company.create(req.body).then(data => {
+    OriginalImage.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    Company.findAndCountAll({
+    OriginalImage.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'fiscalName', 'comercialName', 'nif'],
+        attributes: ['id', 'path', 'entity', 'entityKey', 'languageAlias', 'filename', 'content', 'mimeType', 'sizeBytes', 'widthPX', 'heightPX'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    Company.findByPk(id).then(data => {
+    OriginalImage.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Company.update(req.body, {
+    OriginalImage.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Company.destroy({
+    OriginalImage.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {

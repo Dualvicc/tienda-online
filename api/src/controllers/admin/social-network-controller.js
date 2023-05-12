@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
 
     SocialNetwork.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'name', 'base_url'],
+        attributes: ['id', 'name', 'baseUrl'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]

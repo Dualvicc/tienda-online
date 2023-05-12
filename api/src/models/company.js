@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             primaryKey: true
         },
-        fiscal_name: {
+        fiscalName: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
-        comercial_name: {
+        comercialName: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
-        comercial_address: {
+        comercialAddress: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
@@ -42,7 +42,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
-        fiscal_address: {
+        fiscalAddress: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {
@@ -51,7 +51,7 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
-        postal_code: {
+        postalCode: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {

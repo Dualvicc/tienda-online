@@ -1,10 +1,8 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('social_networks', {
+    await queryInterface.createTable('payment_methods', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,9 +13,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      baseUrl: {
+      visible: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +33,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('social_networks');
+    await queryInterface.dropTable('payment_methods');
   }
 };
