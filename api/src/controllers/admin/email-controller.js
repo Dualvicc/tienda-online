@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Contact = db.Contact;
+const Email = db.Email;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    Contact.create(req.body).then(data => {
+    Email.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    Contact.findAndCountAll({
+    Email.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'name', 'email', 'subject', 'message', 'fingerprintId'],
+        attributes: ['id', 'subject', 'content', 'fingerprintId'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    Contact.findByPk(id).then(data => {
+    Email.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Contact.update(req.body, {
+    Email.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Contact.destroy({
+    Email.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {

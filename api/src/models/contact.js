@@ -44,7 +44,10 @@ module.exports = function(sequelize, DataTypes) {
                 msg: 'Por favor, rellena el campo "Mensaje".'
               }
             }
-        }
+        },
+        fingerprintId:{
+            type: DataTypes.INTEGER
+        },
     }, {
         sequelize,
         tableName: 'Contacts',
