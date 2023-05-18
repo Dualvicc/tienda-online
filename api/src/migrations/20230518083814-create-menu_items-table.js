@@ -1,28 +1,44 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('menu_items', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      menuId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      localeSeoId: {
+        type: Sequelize.INTEGER
+      },
+      localeSlugSeoId: {
+        type: Sequelize.INTEGER
+      },
+      parentId: {
+        type: Sequelize.INTEGER
+      },
       name: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
-        unique: true,
-        allowNull: false,
+      description: {
         type: Sequelize.STRING
       },
-      password: {
-        allowNull: false,
+      customUrl: {
         type: Sequelize.STRING
+      },
+      private: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN
+      },
+      order: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -39,6 +55,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('menu_items');
   }
 };

@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    const SocialNetworks = sequelize.define('SocialNetworks', {
+    const SocialNetwork = sequelize.define('SocialNetwork', {
         id: {
             autoIncrement: true,
             type: DataTypes.INTEGER,
@@ -49,9 +49,9 @@ module.exports = function(sequelize, DataTypes) {
         ]
     });
 
-    SocialNetworks.associate = function(models) {
+    SocialNetwork.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
     };
 
-    return SocialNetworks;
+    return SocialNetwork;
 };

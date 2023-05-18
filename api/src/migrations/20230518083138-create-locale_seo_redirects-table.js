@@ -1,27 +1,30 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('locale_seo_redirects', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
+      localeSeoId: {
+        type: Sequelize.INTEGER
+      },
+      language: {
         type: Sequelize.STRING
       },
-      email: {
-        unique: true,
-        allowNull: false,
+      group: {
         type: Sequelize.STRING
       },
-      password: {
-        allowNull: false,
+      key: {
+        type: Sequelize.STRING
+      },
+      subdomain: {
+        type: Sequelize.STRING
+      },
+      oldUrl: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -39,6 +42,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('locale_seo_redirects');
   }
 };

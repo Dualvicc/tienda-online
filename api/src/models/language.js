@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             primaryKey: true
         },
-        language: {
+        name: {
             type: DataTypes.STRING(255),
             allowNull: false,
             validate: {

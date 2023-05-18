@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
 
     ImageConfiguration.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'entity', 'directory', 'type', 'content', 'grid', 'contentAccepted', 'extensionConversion', 'widthPx', 'heightPx', 'quality'],
+        attributes: ['id', 'entity', 'name', 'mediaQuery', 'widthPx', 'heightPx'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]

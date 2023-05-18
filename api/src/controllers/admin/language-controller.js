@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
 
     Language.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'language', 'alias'],
+        attributes: ['id', 'name', 'alias'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]

@@ -26,7 +26,7 @@ exports.findAll = (req, res) => {
 
     Slider.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'visible'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]

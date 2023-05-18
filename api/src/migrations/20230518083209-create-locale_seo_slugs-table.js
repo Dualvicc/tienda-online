@@ -1,27 +1,45 @@
 'use strict';
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('users', {
+    await queryInterface.createTable('locale_seo_slugs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      language: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      email: {
-        unique: true,
+      relParent: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      password: {
+      slug: {
         allowNull: false,
+        type: Sequelize.STRING
+      },
+      key: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      localeSeoId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      parentSlug: {
+        type: Sequelize.STRING
+      },
+      title: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
+      description: {
+        type: Sequelize.STRING
+      },
+      keywords: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -39,6 +57,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('users');
+    await queryInterface.dropTable('locale_seo_slugs');
   }
 };

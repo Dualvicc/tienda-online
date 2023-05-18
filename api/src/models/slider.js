@@ -15,6 +15,9 @@ module.exports = function(sequelize, DataTypes) {
                 }
             }
         },
+        visible: {
+            type: DataTypes.BOOLEAN
+        },
         createdAt: {
           type: DataTypes.DATE,
           allowNull: false

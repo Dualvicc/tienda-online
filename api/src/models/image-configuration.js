@@ -1,69 +1,66 @@
 module.exports = function(sequelize, DataTypes) {
-    const ImageConfiguration = sequelize.define('ImageConfiguration', {
+  const ImageConfiguration = sequelize.define('ImageConfiguration', {
       id: {
-        autoIncrement: true,
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: DataTypes.INTEGER
       },
       entity: {
         type: DataTypes.STRING,
-        allowNull: false
-      },
-      directory: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      type: {
-        type: DataTypes.STRING
-      },
-      content: {
-        type: DataTypes.STRING
-      },
-      grid: {
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'Por favor, rellena el campo "Entidad".'
+            }
+        }
+    },
+    name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          isIn: [['desktop', 'mobile', 'preview']]
+            notNull: {
+                msg: 'Por favor, rellena el campo "Nombre".'
+            }
         }
-      },
-      contentAccepted: {
+    },
+    mediaQuery: {
         type: DataTypes.STRING,
-        allowNull: false
-      },
-      extensionConversion: {
-        type: DataTypes.STRING(4),
-        allowNull: false
-      },
+        allowNull: false,
+        validate: {
+            notNull: {
+                msg: 'Por favor, rellena el campo "Media Query".'
+            }
+        }
+    },
       widthPx: {
-        type: DataTypes.INTEGER.UNSIGNED
+          type: DataTypes.INTEGER
       },
       heightPx: {
-        type: DataTypes.INTEGER.UNSIGNED
-      },
-      quality: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        allowNull: false
+          type: DataTypes.INTEGER
       },
       createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
+          type: DataTypes.DATE,
+          allowNull: false
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false
+          type: DataTypes.DATE,
+          allowNull: false
       },
       deletedAt: {
-        type: DataTypes.DATE
+          type: DataTypes.DATE
       }
-    }, {
+  }, {
       sequelize,
       tableName: 'image_configurations',
       timestamps: true,
       paranoid: true,
       indexes: []
-    });
-  
-    return ImageConfiguration;
+  });
+
+  ImageConfiguration.associate = function(models) {
+      // Define las asociaciones con otros modelos aquí
   };
-  
+
+  return ImageConfiguration;
+};

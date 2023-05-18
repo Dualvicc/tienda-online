@@ -13,37 +13,19 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      directory: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      type: {
-        type: Sequelize.STRING
-      },
-      content: {
-        type: Sequelize.STRING
-      },
-      grid: {
+      mediaQuery: {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      contentAccepted: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      extensionConversion: {
-        allowNull: false,
-        type: Sequelize.STRING(4)
       },
       widthPx: {
-        type: Sequelize.INTEGER(4).UNSIGNED
+        type: Sequelize.INTEGER
       },
       heightPx: {
-        type: Sequelize.INTEGER(4).UNSIGNED
-      },
-      quality: {
-        allowNull: false,
-        type: Sequelize.INTEGER(3).UNSIGNED
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -63,3 +45,9 @@ module.exports = {
     await queryInterface.dropTable('image_configurations');
   }
 };
+
+
+
+
+
+
