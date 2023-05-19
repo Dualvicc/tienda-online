@@ -2,7 +2,7 @@ module.exports = (app, upload) => {
 
     const router = require("express").Router();
     // const authJwt  = require("../middlewares/auth-jwt.js");
-    const controller = require("../controllers/admin/client-controller.js");
+    const controller = require("../controllers/admin/sale-error-controller.js");
   
     app.use(function(req, res, next) {
         res.header(
@@ -18,6 +18,6 @@ module.exports = (app, upload) => {
     router.put("/:id", controller.update);  
     router.delete("/:id", controller.delete);
   
-    app.use('/api/admin/clientes', router);
+    app.use('/api/admin/sale-errors', router);
   };
     

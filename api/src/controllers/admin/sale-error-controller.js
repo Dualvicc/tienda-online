@@ -1,10 +1,10 @@
 const db = require("../../models");
-const OriginalImage = db.OriginalImage;
+const SaleError = db.SaleError;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    OriginalImage.create(req.body).then(data => {
+    SaleError.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    OriginalImage.findAndCountAll({
+    SaleError.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'path', 'entity', 'entityKey', 'languageAlias', 'filename', 'content', 'mimeType', 'sizeBytes', 'widthPX', 'heightPX'],
+        attributes: ['id', 'paymentMethodId', 'customerId', 'cartId', 'errorCode', 'errorMessage'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    OriginalImage.findByPk(id).then(data => {
+    SaleError.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    OriginalImage.update(req.body, {
+    SaleError.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    OriginalImage.destroy({
+    SaleError.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {

@@ -1,38 +1,21 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
-module.exports = {
 
+module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('clientes', {
+    await queryInterface.createTable('taxes', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        allowNull: false,
-        type: Sequelize.STRING,
-      },
-      telephone: {
-        allowNull: false,
-        type: Sequelize.CHAR(10),
-      },
-      email: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      poblation: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      postalCode: {
+      type: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      direction: {
+      current: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -49,6 +32,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('clientes');
+    await queryInterface.dropTable('taxes');
   }
 };

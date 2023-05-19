@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
         primaryKey: true
       },
-      clientId: {
+      customerId: {
         allowNull: false,
         type: DataTypes.INTEGER
       },
@@ -39,9 +39,9 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Fingerprint.associate = function(models) {
-      Fingerprint.belongsTo(models.Cliente, {
-        foreignKey: 'clientId',
-        as: 'cliente'
+      Fingerprint.belongsTo(models.Customer, {
+        foreignKey: 'customerId',
+        as: 'id'
       });
     };
   

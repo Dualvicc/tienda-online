@@ -1,50 +1,43 @@
 module.exports = function(sequelize, DataTypes) {
-    const OriginalImage = sequelize.define('OriginalImage', {
+    const Returns = sequelize.define('Returns', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: DataTypes.INTEGER
       },
-      path: {
-        allowNull: false,
-        type: DataTypes.STRING
-      },
-      entity: {
-        allowNull: false,
-        type: DataTypes.STRING
-      },
-      entityKey: {
-        allowNull: false,
+      saleId: {
         type: DataTypes.INTEGER
       },
-      languageAlias: {
-        allowNull: false,
-        type: DataTypes.CHAR(2)
+      customerId: {
+        type: DataTypes.INTEGER
       },
-      filename: {
+      paymentMethodId: {
+        type: DataTypes.INTEGER
+      },
+      reference: {
         allowNull: false,
         type: DataTypes.STRING
       },
-      content: {
+      totalPrice: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.DECIMAL(10, 2)
       },
-      mimeType: {
+      totalBasePrice: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.DECIMAL(10, 2)
       },
-      sizeBytes: {
+      totalTaxPrice: {
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED
+        type: DataTypes.DECIMAL(10, 2)
       },
-      widthPx: {
+      issueDate: {
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED
+        type: DataTypes.DATEONLY
       },
-      heightPx: {
+      issueTime: {
         allowNull: false,
-        type: DataTypes.INTEGER.UNSIGNED
+        type: DataTypes.TIME
       },
       createdAt: {
         allowNull: false,
@@ -59,16 +52,16 @@ module.exports = function(sequelize, DataTypes) {
       }
     }, {
       sequelize,
-      tableName: 'original_images',
+      tableName: 'returns',
       timestamps: true,
       paranoid: true,
       indexes: []
     });
   
-    OriginalImage.associate = function(models) {
+    Returns.associate = function(models) {
       // Define las asociaciones con otros modelos aquí
     };
   
-    return OriginalImage;
+    return Returns;
   };
   

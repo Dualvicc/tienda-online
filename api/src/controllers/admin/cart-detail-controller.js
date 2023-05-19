@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Cliente = db.Cliente;
+const CartDetail = db.CartDetail;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    Cliente.create(req.body).then(data => {
+    CartDetail.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    Cliente.findAndCountAll({
+    CartDetail.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'name', 'telephone', 'email', 'poblation', 'postalCode', 'direction'],
+        attributes: ['id', 'cartId', 'productId', 'productName', 'basePrice', 'taxPrice', 'unitOfMeasurement', 'quantity'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    Cliente.findByPk(id).then(data => {
+    CartDetail.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Cliente.update(req.body, {
+    CartDetail.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Cliente.destroy({
+    CartDetail.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {

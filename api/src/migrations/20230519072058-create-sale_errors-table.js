@@ -2,22 +2,31 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('taxes', {
+    await queryInterface.createTable('sale_errors', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      vatRate: {
+      paymentMethodId: {
         allowNull: false,
-        type: Sequelize.INTEGER(2),
-        unsigned: true
+        type: Sequelize.INTEGER
       },
-      valid: {
+      customerId: {
         allowNull: false,
-        type: Sequelize.BOOLEAN,
-        defaultValue: true
+        type: Sequelize.INTEGER
+      },
+      cartId: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      errorCode: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      errorMessage: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +43,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('taxes');
+    await queryInterface.dropTable('sale_errors');
   }
 };

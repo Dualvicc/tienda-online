@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('fingerprints', {
+    await queryInterface.createTable('sent_emails', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,8 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       customerId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
           model: 'customers',
           key: 'id'
@@ -19,14 +19,15 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      fingerprint: {
+      emailId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-          notNull: {
-            msg: 'Por favor, rellena el campo "Fingerprint".'
-          }
-        }
+        references: {
+          model: 'emails',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +44,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('fingerprints');
+    await queryInterface.dropTable('sent_emails');
   }
 };

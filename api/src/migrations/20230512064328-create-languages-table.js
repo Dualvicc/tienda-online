@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      language: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING,
       },

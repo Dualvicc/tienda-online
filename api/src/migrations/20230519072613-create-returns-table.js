@@ -2,52 +2,45 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('original_images', {
+    await queryInterface.createTable('returns', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      path: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      entity: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      entityKey: {
-        allowNull: false,
+      saleId: {
         type: Sequelize.INTEGER
       },
-      languageAlias: {
-        allowNull: false,
-        type: Sequelize.CHAR(2)
+      customerId: {
+        type: Sequelize.INTEGER
       },
-      filename: {
+      paymentMethodId: {
+        type: Sequelize.INTEGER
+      },
+      reference: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      content: {
+      totalPrice: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL(10, 2)
       },
-      mimeType: {
+      totalBasePrice: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.DECIMAL(10, 2)
       },
-      sizeBytes: {
+      totalTaxPrice: {
         allowNull: false,
-        type: Sequelize.INTEGER.UNSIGNED
+        type: Sequelize.DECIMAL(10, 2)
       },
-      widthPx: {
+      issueDate: {
         allowNull: false,
-        type: Sequelize.INTEGER.UNSIGNED
+        type: Sequelize.DATEONLY
       },
-      heightPx: {
+      issueTime: {
         allowNull: false,
-        type: Sequelize.INTEGER.UNSIGNED
+        type: Sequelize.TIME
       },
       createdAt: {
         allowNull: false,
@@ -64,6 +57,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('original_images');
+    await queryInterface.dropTable('returns');
   }
 };

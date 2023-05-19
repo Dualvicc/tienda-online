@@ -1,10 +1,10 @@
 const db = require("../../models");
-const Tax = db.Tax;
+const Return = db.Return;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
 
-    Tax.create(req.body).then(data => {
+    Return.create(req.body).then(data => {
 
         res.status(200).send(data);
 
@@ -24,9 +24,9 @@ exports.findAll = (req, res) => {
     let whereStatement = {};
     let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
 
-    Tax.findAndCountAll({
+    Return.findAndCountAll({
         where: condition, 
-        attributes: ['id', 'type', 'current'],
+        attributes: ['id', 'saleId', 'customerId', 'paymentMethodId', 'reference', 'totalPrice', 'totalBasePrice', 'totalTaxPrice', 'issueDate', 'issueTime'],
         limit: limit,
         offset: offset,
         order: [['createdAt', 'DESC']]
@@ -52,7 +52,7 @@ exports.findOne = (req, res) => {
 
     const id = req.params.id;
 
-    Tax.findByPk(id).then(data => {
+    Return.findByPk(id).then(data => {
 
         if (data) {
             res.status(200).send(data);
@@ -73,7 +73,7 @@ exports.update = (req, res) => {
 
     const id = req.params.id;
 
-    Tax.update(req.body, {
+    Return.update(req.body, {
         where: { id: id }
     }).then(num => {
         if (num == 1) {
@@ -96,7 +96,7 @@ exports.delete = (req, res) => {
 
     const id = req.params.id;
 
-    Tax.destroy({
+    Return.destroy({
         where: { id: id }
     }).then(num => {
         if (num == 1) {
