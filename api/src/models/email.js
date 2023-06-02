@@ -68,8 +68,8 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Email.associate = function(models) {
-      // Define las asociaciones con otros modelos aquí
-    };
+        Email.belongsTo(models.Fingerprint, {as: 'fingerprint', foreignKey: 'fingerprintId' });
+      };
   
     return Email;
   };

@@ -74,7 +74,7 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Employee.associate = function(models) {
-      Employee.belongsTo(models.Company, { foreignKey: 'companyId' });
+      Employee.belongsTo(models.Company, {as: 'company', foreignKey: 'companyId' });
     };
   
     return Employee;

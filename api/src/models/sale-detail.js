@@ -109,8 +109,8 @@ module.exports = function(sequelize, DataTypes) {
 
     SaleDetail.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
-        SaleDetail.belongsTo(models.Sale, { foreignKey: 'saleId' });
-        SaleDetail.belongsTo(models.Product, { foreignKey: 'productId' });
+        SaleDetail.belongsTo(models.Sale, {as:'sale', foreignKey: 'saleId' });
+        SaleDetail.belongsTo(models.Product, {as:'product', foreignKey: 'productId' });
     };
 
     return SaleDetail;

@@ -79,7 +79,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     LocaleSeoSlug.associate = function(models) {
-        LocaleSeoSlug.belongsTo(models.LocaleSeo, { foreignKey: 'localeSeoId' });
+        LocaleSeoSlug.belongsTo(models.LocaleSeo, {as:'localeSeoSlug', foreignKey: 'localeSeoId' });
     };
 
     return LocaleSeoSlug;

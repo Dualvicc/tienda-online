@@ -109,7 +109,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Image.associate = function(models) {
-      // Define las asociaciones con otros modelos aquí
+    Image.belongsTo(models.ImageConfiguration, {as:'imageConfiguration', foreignKey: 'imageConfigurationId' });
   };
 
   return Image;

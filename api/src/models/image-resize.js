@@ -8,7 +8,11 @@ module.exports = function(sequelize, DataTypes) {
         },
         imageConfigurationId: {
             type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false
+            allowNull: false,
+            references: {
+                model: 'ImageConfiguration',
+                key: 'id'
+              }
         },
         title: {
             type: DataTypes.STRING(150),
@@ -102,7 +106,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     ImageResize.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
+        ImageResize.belongsTo(models.ImageConfiguration, {as:'imageConfiguration', foreignKey: 'imageConfigurationId' });
     };
 
     return ImageResize;

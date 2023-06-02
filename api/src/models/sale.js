@@ -136,9 +136,9 @@ module.exports = function(sequelize, DataTypes) {
 
   Sale.associate = function(models) {
     // Define las asociaciones con otros modelos aquí
-    Sale.belongsTo(models.Cart, { foreignKey: 'cartId' });
-    Sale.belongsTo(models.Customer, { foreignKey: 'customerId' });
-    Sale.belongsTo(models.PaymentMethod, { foreignKey: 'paymentMethodId' });
+    Sale.belongsTo(models.Cart, {as:'cart', foreignKey: 'cartId' });
+    Sale.belongsTo(models.Customer, {as:'customer', foreignKey: 'customerId' });
+    Sale.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
   };
 
   return Sale;

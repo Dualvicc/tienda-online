@@ -69,9 +69,8 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Price.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
-        Price.belongsTo(models.Product, { foreignKey: 'productId' });
-        Price.belongsTo(models.Tax, { foreignKey: 'taxId' });
+        Price.belongsTo(models.Product, {as:'product', foreignKey: 'productId' });
+        Price.belongsTo(models.Tax, { as:'tax', foreignKey: 'taxId' });
     };
 
     return Price;

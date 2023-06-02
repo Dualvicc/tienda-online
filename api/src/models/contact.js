@@ -86,8 +86,8 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Contact.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
-    };
+        Contact.belongsTo(models.Fingerprint, { as: 'fingerprint', foreignKey: 'fingerprintId' });
+      };
 
     return Contact;
 };

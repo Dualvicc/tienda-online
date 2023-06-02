@@ -65,8 +65,8 @@ module.exports = function(sequelize, DataTypes) {
 
     SocialNetworksCompanies.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
-        SocialNetworksCompanies.belongsTo(models.Company, { foreignKey: 'companyId' });
-        SocialNetworksCompanies.belongsTo(models.SocialNetwork, { foreignKey: 'socialNetworkId' });
+        SocialNetworksCompanies.belongsTo(models.Company, {as:'company', foreignKey: 'companyId' });
+        SocialNetworksCompanies.belongsTo(models.SocialNetwork, {as:'socialNetwork', foreignKey: 'socialNetworkId' });
     };
 
     return SocialNetworksCompanies;

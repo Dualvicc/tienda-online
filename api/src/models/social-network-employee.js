@@ -84,8 +84,8 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     SocialNetworkEmployee.associate = function(models) {
-        SocialNetworkEmployee.belongsTo(models.SocialNetwork, { foreignKey: 'socialNetworkId' });
-        SocialNetworkEmployee.belongsTo(models.Employee, { foreignKey: 'employeeId' });
+        SocialNetworkEmployee.belongsTo(models.SocialNetwork, {as:'socialNetwork', foreignKey: 'socialNetworkId' });
+        SocialNetworkEmployee.belongsTo(models.Employee, {as:'employee', foreignKey: 'employeeId' });
     };
 
     return SocialNetworkEmployee;

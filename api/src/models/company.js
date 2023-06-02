@@ -114,8 +114,9 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Company.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
-    };
+        Company.hasMany(models.Product, {as: 'products', foreignKey: 'companyId'});
+        Company.hasMany(models.Cart, {as: 'carts', foreignKey: 'companyId'});
+      };
 
     return Company;
 };

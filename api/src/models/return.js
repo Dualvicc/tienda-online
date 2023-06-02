@@ -102,9 +102,9 @@ module.exports = function(sequelize, DataTypes) {
 
   Returns.associate = function(models) {
       // Define las asociaciones con otros modelos aquí
-      Returns.belongsTo(models.Sale, { foreignKey: 'saleId' });
-      Returns.belongsTo(models.Customer, { foreignKey: 'customerId' });
-      Returns.belongsTo(models.PaymentMethod, { foreignKey: 'paymentMethodId' });
+      Returns.belongsTo(models.Sale, {as:'sale', foreignKey: 'saleId' });
+      Returns.belongsTo(models.Customer, {as:'customer',  foreignKey: 'customerId' });
+      Returns.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
   };
 
   return Returns;

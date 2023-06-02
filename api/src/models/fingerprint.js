@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
         notNull: {
           msg: 'Por favor, rellena el campo "customerId".'
         }
+      },
+      references: {
+        model: 'Customer',
+        key: 'id'
       }
     },
     fingerprint: {
@@ -61,7 +65,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Fingerprint.associate = function(models) {
-    Fingerprint.belongsTo(models.Customer, { foreignKey: 'customerId' });
+    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' });
   };
 
   return Fingerprint;
