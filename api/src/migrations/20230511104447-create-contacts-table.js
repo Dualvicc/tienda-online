@@ -28,7 +28,11 @@ module.exports = {
         type: Sequelize.TEXT
       },
       fingerprintId:{
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Fingerprint',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

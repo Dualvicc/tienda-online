@@ -11,15 +11,27 @@ module.exports = {
       },
       paymentMethodId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'PaymentMethod',
+          key: 'id'
+        }
       },
       customerId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Customer',
+          key: 'id'
+        }
       },
       cartId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Cart',
+          key: 'id'
+        }
       },
       errorCode: {
         allowNull: false,

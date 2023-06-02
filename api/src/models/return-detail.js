@@ -7,10 +7,18 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         returnId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Return',
+                key: 'id'
+            }
         },
         productId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Product',
+                key: 'id'
+            }
         },
         productName: {
             allowNull: false,
@@ -73,11 +81,36 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'return_details',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" }
+                ]
+            },
+            {
+                name: "returndetails_returnId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "returnId" }
+                ]
+            },
+            {
+                name: "returndetails_productId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "productId" }
+                ]
+            }
+        ]
     });
 
     ReturnDetail.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
+        ReturnDetail.belongsTo(models.Return, { foreignKey: 'returnId' });
+        ReturnDetail.belongsTo(models.Product, { foreignKey: 'productId' });
     };
 
     return ReturnDetail;

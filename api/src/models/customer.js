@@ -88,7 +88,24 @@ module.exports = function(sequelize, DataTypes) {
       tableName: 'customers',
       timestamps: true,
       paranoid: true,
-      indexes: []
+      indexes: [
+        {
+        name: "PRIMARY",
+        unique: true,
+        using: "BTREE",
+        fields: [
+            { name: "id" },
+        ]
+    },
+    {
+      name: "email",
+      unique: true,
+      using: "BTREE",
+      fields: [
+          { name: "email" },
+      ]
+  },
+    ]
     });
   
     Customer.associate = function(models) {

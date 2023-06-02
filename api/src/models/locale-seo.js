@@ -94,8 +94,20 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'locale_seos',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" }
+                ]
+            }
+        ]
     });
+    LocaleSeo.associate = function(models) {
+        // Define las asociaciones con otros modelos aquí
+    };
 
     return LocaleSeo;
 };

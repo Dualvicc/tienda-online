@@ -46,7 +46,11 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         fingerprintId:{
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Fingerprint',
+                key: 'id'
+              }
         },
     }, {
         sequelize,
@@ -68,6 +72,14 @@ module.exports = function(sequelize, DataTypes) {
                 using: "BTREE",
                 fields: [
                     { name: "email" },
+                ]
+            },
+            {
+                name: "fingerprints_fingerprintId_foreingKey",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "fingerprintId" },
                 ]
             },
         ]

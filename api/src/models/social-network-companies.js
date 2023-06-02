@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
                 notNull: {
                     msg: 'Por favor, rellena el campo "companyId".'
                 }
+            },
+            references: {
+                model: 'Company',
+                key: 'id'
             }
         },
         socialNetworkId: {
@@ -22,8 +26,12 @@ module.exports = function(sequelize, DataTypes) {
                 notNull: {
                     msg: 'Por favor, rellena el campo "socialNetworkId".'
                 }
+            },
+            references: {
+                model: 'SocialNetwork',
+                key: 'id'
             }
-        },
+        }
     }, {
         sequelize,
         tableName: 'social_networks_companies',
@@ -39,18 +47,26 @@ module.exports = function(sequelize, DataTypes) {
                 ]
             },
             {
-                name: "email",
-                unique: true,
+                name: "companies_companyId_foreignKey",
                 using: "BTREE",
                 fields: [
-                    { name: "email" },
+                    { name: "companyId" },
                 ]
             },
+            {
+                name: "socialNetworks_socialNetworkId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "socialNetworkId" },
+                ]
+            }
         ]
     });
 
     SocialNetworksCompanies.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
+        SocialNetworksCompanies.belongsTo(models.Company, { foreignKey: 'companyId' });
+        SocialNetworksCompanies.belongsTo(models.SocialNetwork, { foreignKey: 'socialNetworkId' });
     };
 
     return SocialNetworksCompanies;

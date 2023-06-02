@@ -6,10 +6,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false,
             primaryKey: true
         },
-        imageOriginalId: {
-            type: DataTypes.INTEGER.UNSIGNED,
-            allowNull: false
-        },
         imageConfigurationId: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: false
@@ -85,7 +81,24 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'image_resizes',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+            name: "PRIMARY",
+            unique: true,
+            using: "BTREE",
+            fields: [
+                { name: "id" },
+            ]
+        },
+        {
+            name: "imageConfigurations_customerId_foreignKey",
+            unique: true,
+            using: "BTREE",
+            fields: [
+                { name: "imageConfigurationId" },
+            ]
+        },
+        ]
     });
 
     ImageResize.associate = function(models) {

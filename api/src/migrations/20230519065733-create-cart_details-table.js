@@ -11,11 +11,19 @@ module.exports = {
       },
       cartId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Cart',
+          key: 'id'
+        }
       },
       productId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'Product',
+          key: 'id'
+        }
       },
       productName: {
         type: Sequelize.STRING,

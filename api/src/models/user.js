@@ -41,8 +41,20 @@ module.exports = function(sequelize, DataTypes) {
                     msg: 'Por favor, rellena el campo "password".'
                 }
             }
-        }
-    }, {
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+          },
+          updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+          },
+          deletedAt: {
+            type: DataTypes.DATE
+          }
+        },
+     {
         sequelize,
         tableName: 'users',
         timestamps: true,

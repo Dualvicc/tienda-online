@@ -1,43 +1,52 @@
 module.exports = function(sequelize, DataTypes) {
-    const PaymentMethod = sequelize.define('PaymentMethod', {
+  const PaymentMethod = sequelize.define('PaymentMethod', {
       id: {
-        autoIncrement: true,
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true
+          autoIncrement: true,
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          primaryKey: true
       },
       name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notNull: {
-            msg: 'Por favor, rellena el campo "Nombre".'
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+              notNull: {
+                  msg: 'Por favor, rellena el campo "Nombre".'
+              }
           }
-        }
       },
       visible: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: true
       },
       createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
+          type: DataTypes.DATE,
+          allowNull: false
       },
       updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false
+          type: DataTypes.DATE,
+          allowNull: false
       },
       deletedAt: {
-        type: DataTypes.DATE
+          type: DataTypes.DATE
       }
-    }, {
+  }, {
       sequelize,
       tableName: 'payment_methods',
       timestamps: true,
       paranoid: true,
-      indexes: []
-    });
-  
-    return PaymentMethod;
-  };
+      indexes: [
+          {
+              name: "PRIMARY",
+              unique: true,
+              using: "BTREE",
+              fields: [
+                  { name: "id" }
+              ]
+          }
+      ]
+  });
+
+  return PaymentMethod;
+};

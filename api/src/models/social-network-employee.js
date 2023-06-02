@@ -13,6 +13,10 @@ module.exports = function(sequelize, DataTypes) {
                 notNull: {
                     msg: 'Por favor, rellena el campo "socialNetworkId".'
                 }
+            },
+            references: {
+                model: 'SocialNetwork',
+                key: 'id'
             }
         },
         employeeId: {
@@ -22,6 +26,10 @@ module.exports = function(sequelize, DataTypes) {
                 notNull: {
                     msg: 'Por favor, rellena el campo "employeeId".'
                 }
+            },
+            references: {
+                model: 'Employee',
+                key: 'id'
             }
         },
         user: {
@@ -49,7 +57,30 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'social_networks_employees',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" },
+                ]
+            },
+            {
+                name: "socialnetworks_socialNetworkId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "socialNetworkId" },
+                ]
+            },
+            {
+                name: "employees_employeeId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "employeeId" },
+                ]
+            }
+        ]
     });
 
     SocialNetworkEmployee.associate = function(models) {

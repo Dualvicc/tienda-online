@@ -110,12 +110,14 @@ class Header extends HTMLElement {
             hamburgerButton.classList.toggle("active");
             hamburgerButton.parentElement.classList.toggle("active");
                 
-                let svgs = hamburgerButton.querySelectorAll("svg");
-    
-                svgs.forEach(svg => {
-                    svg.classList.toggle("active");
-                });
+            let svgs = hamburgerButton.querySelectorAll("svg");
+
+            svgs.forEach(svg => {
+                svg.classList.toggle("active");
             });
+        });
+        
+
     }
 }
 

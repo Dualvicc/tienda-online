@@ -7,7 +7,11 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         localeSeoId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'LocaleSeo',
+                key: 'id'
+            }
         },
         language: {
             type: DataTypes.STRING
@@ -40,8 +44,29 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'locale_seo_redirects',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" }
+                ]
+            },
+            {
+                name: "localeSeos_localeSeoId_foreignKey",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "localeSeoId" }
+                ]
+            }
+        ]
     });
+
+    LocaleSeoRedirect.associate = function(models) {
+        LocaleSeoRedirect.belongsTo(models.LocaleSeo, { foreignKey: 'localeSeoId' });
+    };
 
     return LocaleSeoRedirect;
 };

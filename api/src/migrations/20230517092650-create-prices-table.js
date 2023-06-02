@@ -10,10 +10,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       productId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Product',
+          key: 'id'
+        }
       },
       taxId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Tax',
+          key: 'id'
+        }
       },
       basePrice: {
         type: Sequelize.DECIMAL

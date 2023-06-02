@@ -13,21 +13,17 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'customers',
+          model: 'Customer',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       emailId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'emails',
+          model: 'Email',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

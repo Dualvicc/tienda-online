@@ -7,7 +7,11 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         productCategoryId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'ProductCategory',
+                key: 'id'
+            }
         },
         name: {
             allowNull: false,
@@ -37,11 +41,30 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'products',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" }
+                ]
+            },
+            {
+                name: "productCategories_productCategoryId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "productCategoryId" }
+                ]
+            },
+        ]
     });
 
     Product.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
+        Product.belongsTo(models.ProductCategory, {
+            foreignKey: 'productCategoryId',
+            as: 'productCategory'
+        });
     };
 
     return Product;

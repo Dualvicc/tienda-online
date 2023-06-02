@@ -13,11 +13,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'customers',
+          model: 'Customer',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       fingerprint: {
         allowNull: false,

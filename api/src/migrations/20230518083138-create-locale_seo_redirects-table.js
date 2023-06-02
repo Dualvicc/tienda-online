@@ -10,7 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       localeSeoId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'LocaleSeo',
+          key: 'id'
+        }
       },
       language: {
         type: Sequelize.STRING

@@ -27,7 +27,11 @@ module.exports = {
       },
       localeSeoId: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'LocaleSeo',
+          key: 'id'
+        }
       },
       parentSlug: {
         type: Sequelize.STRING

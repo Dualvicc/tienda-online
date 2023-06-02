@@ -7,10 +7,18 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER
         },
         saleId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Sale',
+                key: 'id'
+            }
         },
         productId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Product',
+                key: 'id'
+            }
         },
         productName: {
             allowNull: false,
@@ -73,11 +81,36 @@ module.exports = function(sequelize, DataTypes) {
         tableName: 'sale_details',
         timestamps: true,
         paranoid: true,
-        indexes: []
+        indexes: [
+            {
+                name: "PRIMARY",
+                unique: true,
+                using: "BTREE",
+                fields: [
+                    { name: "id" }
+                ]
+            },
+            {
+                name: "sales_saleId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "saleId" }
+                ]
+            },
+            {
+                name: "products_productId_foreignKey",
+                using: "BTREE",
+                fields: [
+                    { name: "productId" }
+                ]
+            }
+        ]
     });
 
     SaleDetail.associate = function(models) {
         // Define las asociaciones con otros modelos aquí
+        SaleDetail.belongsTo(models.Sale, { foreignKey: 'saleId' });
+        SaleDetail.belongsTo(models.Product, { foreignKey: 'productId' });
     };
 
     return SaleDetail;

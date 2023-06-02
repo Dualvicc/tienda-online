@@ -40,8 +40,16 @@ module.exports = function(sequelize, DataTypes) {
     tableName: 'taxes',
     timestamps: true,
     paranoid: true,
-    indexes: []
+    indexes: [
+      {
+        name: 'PRIMARY',
+        unique: true,
+        using: 'BTREE',
+        fields: [{ name: 'id' }]
+      }
+    ]
   });
 
   return Tax;
 };
+

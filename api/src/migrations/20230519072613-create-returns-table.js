@@ -10,13 +10,25 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       saleId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Sale',
+          key: 'id'
+        }
       },
       customerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Customer',
+          key: 'id'
+        }
       },
       paymentMethodId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'PaymentMethod',
+          key: 'id'
+        }
       },
       reference: {
         allowNull: false,

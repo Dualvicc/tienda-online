@@ -10,7 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       returnId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Return',
+          key: 'id'
+        }
       },
       productId: {
         type: Sequelize.INTEGER

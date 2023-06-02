@@ -1,15 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
-
-module.exports = (sequelize, DataTypes) => {
-  class CartDetail extends Model {
-    static associate(models) {
-      // Define las asociaciones con otros modelos, si las hay
-    }
-  }
-
-  CartDetail.init(
-    {
+module.exports = function(sequelize, DataTypes) {
+  const CartDetail = sequelize.define('CartDetail', {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -80,9 +70,14 @@ module.exports = (sequelize, DataTypes) => {
       modelName: 'CartDetail',
       tableName: 'cart_details',
       timestamps: true,
-      paranoid: true
+      paranoid: true,
+      indexes: [],
     }
   );
 
+  Cart.associate = function(models) {
+    // Define las asociaciones con otros modelos aquí
+  };
+  
   return CartDetail;
 };
