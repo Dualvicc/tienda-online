@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -11,7 +11,11 @@ module.exports = {
       },
       imageConfigurationId: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+          model: 'ImageConfiguration',
+          key: 'id'
+        }
       },
       entityId: {
         type: Sequelize.INTEGER
@@ -58,10 +62,16 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('images', ['imageConfigurationId']));
+    })
+    .then(() => queryInterface.addIndex('images', ['imageConfigurationId'],{
+      name: 'image_imageConfigurationId_fk'
+    }))
+    .then(() => queryInterface.addIndex('images', ['entityId', 'entity'],{
+      name: 'image_entityId_entity_idx'
+    }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('images');
+    await queryInterface.dropTable('images')
   }
-};
+}

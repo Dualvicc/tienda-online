@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -10,6 +10,13 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      fingerprintId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Fingerprint',
+          key: 'id'
+        }
       },
       name: {
         allowNull: false,
@@ -27,13 +34,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      fingerprintId:{
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Fingerprint',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -45,10 +45,16 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('contacts', ['email'])).then(() => queryInterface.addIndex('contacts', ['fingerprintId']))
+    })
+    .then(() => queryInterface.addIndex('contacts', ['fingerprintId'],{
+      name: 'contacts_fingerprintId_index'
+    }))
+    .then(() => queryInterface.addIndex('contacts', ['email'],{
+      name: 'contact_email'
+    }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('contacts');
+    await queryInterface.dropTable('contacts')
   }
-};
+}

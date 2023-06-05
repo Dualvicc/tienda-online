@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Sale = sequelize.define(
     'Sale',
     {
@@ -82,68 +82,54 @@ module.exports = function(sequelize, DataTypes) {
             msg: 'Please provide a value for "issueTime".'
           }
         }
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
-    },
-    {
+    }, {
       sequelize,
       tableName: 'sales',
       timestamps: true,
       paranoid: true,
       indexes: [
         {
-          name: "PRIMARY",
+          name: 'PRIMARY',
           unique: true,
-          using: "BTREE",
+          using: 'BTREE',
           fields: [
-            { name: "id" }
+            { name: 'id' }
           ]
         },
         {
-          name: "carts_cartId_foreignkey",
-          using: "BTREE",
+          name: 'sale_cartId_fk',
+          using: 'BTREE',
           fields: [
-            { name: "cartId" }
+            { name: 'cartId' }
           ]
         },
         {
-          name: "customers_customerId_foreignkey",
-          using: "BTREE",
+          name: 'sale_customerId_fk',
+          using: 'BTREE',
           fields: [
-            { name: "customerId" }
+            { name: 'customerId' }
           ]
         },
         {
-          name: "paymentMethods_paymentMethodId_foreignkey",
-          using: "BTREE",
+          name: 'sale_paymentMethodId_fk',
+          using: 'BTREE',
           fields: [
-            { name: "paymentMethodId" }
+            { name: 'paymentMethodId' }
           ]
         }
       ]
     }
-  );
+  )
 
-  Sale.associate = function(models) {
-    Sale.hasOne(models.SaleDetail, {as:'saleDetail', foreignKey: 'saleId' });
-    Sale.hasOne(models.Return, {as:'return', foreignKey: 'saleId' });
-    Sale.belongsTo(models.Cart, {as:'cart', foreignKey: 'cartId' });
-    Sale.belongsTo(models.Customer, {as:'customer', foreignKey: 'customerId' });
-    Sale.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
-  };
+  Sale.associate = function (models) {
+    Sale.belongsTo(models.Cart, { as: 'cart', foreignKey: 'cartId' }),
+    Sale.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' }),
+    Sale.belongsTo(models.PaymentMethod, { as: 'paymentMethod', foreignKey: 'paymentMethodId' })
+    Sale.hasMany(models.SaleDetail, { as: 'details', foreignKey: 'saleId' })
+    Sale.hasMany(models.Return, { as: 'returns', foreignKey: 'saleId' })
+    Sale.belongsToMany(models.Product, { as: 'products', through: 'SaleDetail', foreignKey: 'saleId' })
+  }
 
-  return Sale;
-
-};
-
- 
+  return Sale
+}

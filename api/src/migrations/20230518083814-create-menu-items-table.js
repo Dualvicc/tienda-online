@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -24,10 +24,10 @@ module.exports = {
           key: 'id'
         }
       },
-      localeSeoSlugId: {
+      localeSlugSeoId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'LocaleSeoSlug',
+          model: 'LocaleSlugSeo',
           key: 'id'
         }
       },
@@ -63,10 +63,19 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('menu_items', ['menuId'])).then(() => queryInterface.addIndex('menu_items', ['localeSeoId'])).then(() => queryInterface.addIndex('menu_items', ['localeSlugId']));
+    })
+    .then(() => queryInterface.addIndex('menu_items', ['menuId'],{
+      name: 'menuItem_menuId_fk'
+    }))
+    .then(() => queryInterface.addIndex('menu_items', ['localeSeoId'],{
+      name: 'menuItem_localeSeoId_fk'
+    }))
+    .then(() => queryInterface.addIndex('menu_items', ['localeSlugSeoId'],{
+      name: 'menuItem_localeSlugSeoId_fk'
+    }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('menu_items');
+    await queryInterface.dropTable('menu_items')
   }
-};
+}

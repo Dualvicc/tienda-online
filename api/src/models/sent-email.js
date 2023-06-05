@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const SentEmail = sequelize.define('SentEmail', {
     id: {
       allowNull: false,
@@ -39,34 +39,33 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true,
     indexes: [
       {
-        name: "PRIMARY",
+        name: 'PRIMARY',
         unique: true,
-        using: "BTREE",
+        using: 'BTREE',
         fields: [
-          { name: "id" }
+          { name: 'id' }
         ]
       },
       {
-        name: "customers_customerId_foreignkey",
-        using: "BTREE",
+        name: 'sentEmail_customerId_fk',
+        using: 'BTREE',
         fields: [
-          { name: "customerId" }
+          { name: 'customerId' }
         ]
       },
       {
-        name: "emails_emailId_foreignkey",
-        using: "BTREE",
+        name: 'sentEmail_emailId_fk',
+        using: 'BTREE',
         fields: [
-          { name: "emailId" }
+          { name: 'emailId' }
         ]
       }
     ]
-  });
+  })
 
-  SentEmail.associate = function(models) {
-    SentEmail.belongsTo(models.Customer, {as:'customer', foreignKey: 'customerId' });
-    SentEmail.belongsTo(models.Email, {as:'email', foreignKey: 'emailId' });
-  };
+  SentEmail.associate = function (models) {
 
-  return SentEmail;
-};
+  }
+
+  return SentEmail
+}

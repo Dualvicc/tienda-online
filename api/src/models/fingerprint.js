@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Fingerprint = sequelize.define('Fingerprint', {
     id: {
       autoIncrement: true,
@@ -7,13 +7,8 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     customerId: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.INTEGER,
-      validate: {
-        notNull: {
-          msg: 'Por favor, rellena el campo "customerId".'
-        }
-      },
       references: {
         model: 'Customer',
         key: 'id'
@@ -35,29 +30,28 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true,
     indexes: [
       {
-        name: "PRIMARY",
+        name: 'PRIMARY',
         unique: true,
-        using: "BTREE",
+        using: 'BTREE',
         fields: [
-          { name: "id" },
+          { name: 'id' }
         ]
       },
       {
-        name: "customers_customerId_foreignKey",
-        unique: true,
-        using: "BTREE",
+        name: 'fingerprint_customerId_fk',
+        using: 'BTREE',
         fields: [
-          { name: "customerId" },
+          { name: 'customerId' }
         ]
-      },
+      }
     ]
-  });
+  })
 
-  Fingerprint.associate = function(models) {
-    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' });
-    Fingerprint.hasOne(models.Contact, {as: 'contact', foreignKey: 'fingerprintId'});
-    Fingerprint.hasMany(models.Cart, {as: 'cart', foreignKey: 'fingerprintId'});
-  };
+  Fingerprint.associate = function (models) {
+    Fingerprint.belongsTo(models.Customer, { as: 'customer', foreignKey: 'customerId' })
+    Fingerprint.hasMany(models.Cart, { as: 'carts', foreignKey: 'fingerprintId' })
+    Fingerprint.hasMany(models.Contact, { as: 'contacts', foreignKey: 'fingerprintId' })
+  }
 
-  return Fingerprint;
-};
+  return Fingerprint
+}

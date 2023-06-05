@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const CartDetail = sequelize.define('CartDetail', {
     id: {
       type: DataTypes.INTEGER,
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Carts',
+        model: 'Cart',
         key: 'id'
       }
     },
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Products',
+        model: 'Product',
         key: 'id'
       }
     },
@@ -63,35 +63,41 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     sequelize,
-    modelName: 'CartDetail',
-    tableName: 'cart_details',
+    tableName: 'carts',
     timestamps: true,
     paranoid: true,
     indexes: [
       {
-        name: 'cart_detail_id',
+        name: 'PRIMARY',
         unique: true,
         using: 'BTREE',
-        fields: [{name:'id'}]
+        fields: [
+          { name: 'id' }
+        ]
       },
       {
-        name: 'carts_cartId_foreignKey',
-        using: 'BTREE',
-        fields: [{name:'cartId'}]
-      },
-      {
-        name: 'products_productId_foreignKey',
+        name: 'cartDetail_cartId_fk',
+        unique: true,
         using: 'BTREE',
         fields: [
-          { name: 'productId'}]
+          { name: 'cartId' }
+        ]
+      },
+      {
+        name: 'cartDetail_productId_fk',
+        unique: true,
+        using: 'BTREE',
+        fields: [
+          { name: 'productId' }
+        ]
       }
     ]
-  });
+  })
 
-  CartDetail.associate = function(models) {
-    CartDetail.belongsTo(models.Cart, {as: 'cart', foreignKey: 'cartId' });
-    CartDetail.belongsTo(models.Product, {as:'product',  foreignKey: 'productId' });
-  };
+  CartDetail.associate = function (models) {
+    CartDetail.belongsTo(models.Cart, { as: 'cart', foreignKey: 'cartId' })
+    CartDetail.belongsTo(models.Product, { as: 'product', foreignKey: 'productId' })
+  }
 
-  return CartDetail;
-};
+  return CartDetail
+}

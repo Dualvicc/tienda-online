@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -51,10 +51,19 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('sale_errors', ['paymentMethodId'])).then(() => queryInterface.addIndex('sale_errors', ['customerId'])).then(() => queryInterface.addIndex('sale_errors', ['cartId']));
+    })
+    .then(() => queryInterface.addIndex('sale_errors', ['paymentMethodId'],{
+      name: 'saleError_paymentMethodId_fk'
+    }))
+    .then(() => queryInterface.addIndex('sale_errors', ['customerId'],{
+      name: 'saleError_customerId_fk'
+    }))
+    .then(() => queryInterface.addIndex('sale_errors', ['cartId'],{
+      name: 'saleError_cartId_fk'
+    }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('sale_errors');
+    await queryInterface.dropTable('sale_errors')
   }
-};
+}

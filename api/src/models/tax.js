@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   const Tax = sequelize.define('Tax', {
     id: {
       autoIncrement: true,
@@ -34,15 +34,16 @@ module.exports = function(sequelize, DataTypes) {
         name: 'PRIMARY',
         unique: true,
         using: 'BTREE',
-        fields: [{ name: 'id' }]
+        fields: [
+          { name: 'id' }
+        ]
       }
     ]
-  });
+  })
 
-  Tax.associate = function(models) {
-    Tax.hasOne(models.Price, { as:'price', foreignKey: 'taxId' });
-  };
+  Tax.associate = function (models) {
+    Tax.hasMany(models.Price, { as: 'prices', foreignKey: 'taxId' })
+  }
 
-  return Tax;
-};
-
+  return Tax
+}

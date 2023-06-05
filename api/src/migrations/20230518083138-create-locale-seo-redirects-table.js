@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -42,10 +42,13 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('locale_seo_redirects', ['localeSeoId']));
+    })
+    .then(() => queryInterface.addIndex('locale_seo_redirects', ['localeSeoId'],{
+      name: 'localeSeoRedirect_localeSeoId_fk'
+    }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('locale_seo_redirects');
+    await queryInterface.dropTable('locale_seo_redirects')
   }
-};
+}

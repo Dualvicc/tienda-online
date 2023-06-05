@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       comercialAddress: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.STRING
       },
       fiscalAddress: {
@@ -41,7 +41,6 @@ module.exports = {
         type: Sequelize.STRING
       },
       web: {
-        allowNull: false,
         type: Sequelize.STRING
       },
       telephone: {
@@ -58,10 +57,10 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    }).then(() => queryInterface.addIndex('companies', ['email']));
+    })
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('companies');
+    await queryInterface.dropTable('companies')
   }
-};
+}
