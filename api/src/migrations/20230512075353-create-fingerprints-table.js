@@ -20,11 +20,7 @@ module.exports = {
       fingerprint: {
         allowNull: false,
         type: Sequelize.STRING,
-        validate: {
-          notNull: {
-            msg: 'Por favor, rellena el campo "Fingerprint".'
-          }
-        }
+
       },
       createdAt: {
         allowNull: false,

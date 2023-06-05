@@ -54,11 +54,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Fingerprint.associate = function(models) {
-    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' }),
-    Fingerprint.hasOne(models.Contact, {as: 'contact', foreignKey: 'fingerprintId'}),
-    Fingerprint.hasMany(models.Cart, {as: 'cart', foreignKey: 'fingerprintId'}),
-    Fingerprint.hasMany(models.Email, {as: 'email', foreignKey: 'fingerprintId'})
-
+    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' });
+    Fingerprint.hasOne(models.Contact, {as: 'contact', foreignKey: 'fingerprintId'});
+    Fingerprint.hasMany(models.Cart, {as: 'cart', foreignKey: 'fingerprintId'});
   };
 
   return Fingerprint;
