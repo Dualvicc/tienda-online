@@ -27,17 +27,6 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Por favor, rellena el campo "Fingerprint".'
         }
       }
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    deletedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize,
@@ -65,7 +54,11 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Fingerprint.associate = function(models) {
-    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' });
+    Fingerprint.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId' }),
+    Fingerprint.hasOne(models.Contact, {as: 'contact', foreignKey: 'fingerprintId'}),
+    Fingerprint.hasMany(models.Cart, {as: 'cart', foreignKey: 'fingerprintId'}),
+    Fingerprint.hasMany(models.Email, {as: 'email', foreignKey: 'fingerprintId'})
+
   };
 
   return Fingerprint;

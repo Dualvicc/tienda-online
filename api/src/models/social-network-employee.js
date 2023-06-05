@@ -40,17 +40,6 @@ module.exports = function(sequelize, DataTypes) {
                     msg: 'Por favor, rellena el campo "user".'
                 }
             }
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,

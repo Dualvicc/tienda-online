@@ -15,21 +15,17 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'companies',
+          model: 'Company',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       socialNetworkId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'social_networks', 
+          model: 'SocialNetwork', 
           key: 'id' 
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
@@ -42,7 +38,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    });
+    }).then(() => queryInterface.addIndex('social_networks_companies', ['companyId'])).then(() => queryInterface.addIndex('social_networks_companies', ['socialNetworkId']));
   },
 
   down: async (queryInterface, Sequelize) => {

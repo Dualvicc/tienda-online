@@ -19,17 +19,6 @@ module.exports = function(sequelize, DataTypes) {
           type: DataTypes.BOOLEAN,
           allowNull: false,
           defaultValue: true
-      },
-      createdAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-      },
-      updatedAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-      },
-      deletedAt: {
-          type: DataTypes.DATE
       }
   }, {
       sequelize,
@@ -47,6 +36,13 @@ module.exports = function(sequelize, DataTypes) {
           }
       ]
   });
+  PaymentMethod.associate = function(models) {
+    PaymentMethod.hasMany(models.Return, {as:'return', foreignKey: 'paymentMethodId' });
+    PaymentMethod.hasMany(models.SaleError, {as:'saleError', foreignKey: 'paymentMethodId' });
+    PaymentMethod.hasMany(models.Sale, {as:'sale', foreignKey: 'paymentMethodId' });
+
+
+};
 
   return PaymentMethod;
 };

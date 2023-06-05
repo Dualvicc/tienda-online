@@ -23,24 +23,6 @@ module.exports = function(sequelize, DataTypes) {
             msg: 'Por favor, rellena el campo "content".'
           }
         }
-      },
-      fingerprintId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Fingerprint',
-          key: 'id'
-        }
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     }, {
       sequelize,
@@ -56,19 +38,13 @@ module.exports = function(sequelize, DataTypes) {
             { name: "id" },
           ]
         },
-        {
-          name: "fingerprints_fingerprintId_foreignKey",
-          unique: true,
-          using: "BTREE",
-          fields: [
-            { name: "fingerprintId" },
-          ]
-        },
+
       ]
     });
   
     Email.associate = function(models) {
-        Email.belongsTo(models.Fingerprint, {as: 'fingerprint', foreignKey: 'fingerprintId' });
+      Email.hasOne(models.SentEmail, {as:'sentEmail', foreignKey: 'emailId' });
+
       };
   
     return Email;

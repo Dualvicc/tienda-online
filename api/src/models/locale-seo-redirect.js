@@ -27,17 +27,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         oldUrl: {
             type: DataTypes.STRING
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,

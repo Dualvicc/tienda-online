@@ -42,17 +42,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         keywords: {
             type: DataTypes.STRING
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,
@@ -80,6 +69,7 @@ module.exports = function(sequelize, DataTypes) {
 
     LocaleSeoSlug.associate = function(models) {
         LocaleSeoSlug.belongsTo(models.LocaleSeo, {as:'localeSeoSlug', foreignKey: 'localeSeoId' });
+        LocaleSeoSlug.hasOne(models.MenuItem, {as:'menuItem', foreignKey: 'localeSeoSlugId' })
     };
 
     return LocaleSeoSlug;

@@ -23,17 +23,6 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Por favor, rellena el campo "Actual".'
         }
       }
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    deletedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize,
@@ -49,6 +38,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     ]
   });
+
+  Tax.associate = function(models) {
+    Tax.hasOne(models.Price, { as:'price', foreignKey: 'taxId' });
+  };
 
   return Tax;
 };

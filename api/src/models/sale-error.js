@@ -36,17 +36,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     errorMessage: {
       type: DataTypes.STRING
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    deletedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize,
@@ -87,7 +76,6 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   SaleError.associate = function(models) {
-    // Define las asociaciones con otros modelos aquí
     SaleError.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
     SaleError.belongsTo(models.Customer, {as:'customer', foreignKey: 'customerId' });
     SaleError.belongsTo(models.Cart, {as:'cart', foreignKey: 'cartId' });

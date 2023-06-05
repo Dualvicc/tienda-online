@@ -38,17 +38,6 @@ module.exports = function(sequelize, DataTypes) {
       },
       heightPx: {
         type: DataTypes.INTEGER
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     }, {
       sequelize,
@@ -68,7 +57,7 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     ImageConfiguration.associate = function(models) {
-      // Define las asociaciones con otros modelos aquí
+      ImageConfiguration.hasOne(models.Image, {as:'image', foreignKey: 'imageConfigurationId' });
     };
   
     return ImageConfiguration;

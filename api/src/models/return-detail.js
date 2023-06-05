@@ -64,17 +64,6 @@ module.exports = function(sequelize, DataTypes) {
                     msg: 'Por favor, rellena el campo "quantity".'
                 }
             }
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,
@@ -108,7 +97,6 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     ReturnDetail.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
         ReturnDetail.belongsTo(models.Return, {as:'return',  foreignKey: 'returnId' });
         ReturnDetail.belongsTo(models.Product, {as:'product',  foreignKey: 'productId' });
     };

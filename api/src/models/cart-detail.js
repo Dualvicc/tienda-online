@@ -60,17 +60,6 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'Por favor, ingresa la cantidad.'
         }
       }
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    deletedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize,

@@ -50,17 +50,6 @@ module.exports = function(sequelize, DataTypes) {
       issueTime: {
           allowNull: false,
           type: DataTypes.TIME
-      },
-      createdAt: {
-          allowNull: false,
-          type: DataTypes.DATE
-      },
-      updatedAt: {
-          allowNull: false,
-          type: DataTypes.DATE
-      },
-      deletedAt: {
-          type: DataTypes.DATE
       }
   }, {
       sequelize,
@@ -101,10 +90,10 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Returns.associate = function(models) {
-      // Define las asociaciones con otros modelos aquí
-      Returns.belongsTo(models.Sale, {as:'sale', foreignKey: 'saleId' });
-      Returns.belongsTo(models.Customer, {as:'customer',  foreignKey: 'customerId' });
-      Returns.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
+    Returns.hasOne(models.ReturnDetail, {as:'returndetail',  foreignKey: 'returnId' });
+    Returns.belongsTo(models.Sale, {as:'sale', foreignKey: 'saleId' });
+    Returns.belongsTo(models.Customer, {as:'customer',  foreignKey: 'customerId' });
+    Returns.belongsTo(models.PaymentMethod, {as:'paymentMethod', foreignKey: 'paymentMethodId' });
   };
 
   return Returns;

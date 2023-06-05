@@ -17,9 +17,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      fingerprintId: {
-        type: Sequelize.INTEGER
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -31,7 +28,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    });
+    })
   },
 
   down: async (queryInterface, Sequelize) => {

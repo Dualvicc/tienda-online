@@ -71,17 +71,6 @@ module.exports = function(sequelize, DataTypes) {
             msg: 'Por favor, rellena el campo "Dirección".'
           }
         }
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     }, {
       sequelize,
@@ -109,7 +98,12 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Customer.associate = function(models) {
-      Customer.hasMany(models.Cart, { foreignKey: 'customerId' });
+      Customer.hasMany(models.Cart, {as:'cart', foreignKey: 'customerId' })
+      Customer.hasOne(models.Fingerprint, {as: 'fingerprint', foreignKey: 'fingerprintId'});
+      Customer.hasMany(models.Return, {as:'return',  foreignKey: 'customerId' });
+      Customer.hasMany(models.SaleError, {as:'saleError', foreignKey: 'customerId' });
+      Customer.hasMany(models.Sale, {as:'sale', foreignKey: 'customerId' });
+      Customer.hasMany(models.SentEmail, {as:'sentEmail', foreignKey: 'customerId' });
     };
   
     return Customer;

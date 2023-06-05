@@ -24,17 +24,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         featured: {
             type: DataTypes.BOOLEAN
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,
@@ -61,10 +50,12 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Product.associate = function(models) {
-        Product.belongsTo(models.ProductCategory, {
-            foreignKey: 'productCategoryId',
-            as: 'productCategory'
-        });
+        Product.belongsTo(models.ProductCategory, {foreignKey: 'productCategoryId', as: 'productCategory'});
+        Product.hasMany(models.CartDetail, {as: 'cartDetails', foreignKey: 'productId'});
+        Product.hasMany(models.Price, {as:'price', foreignKey: 'productId' });
+        Product.hasMany(models.ReturnDetail, {as:'returnDetail',  foreignKey: 'productId' });
+        Product.hasMany(models.SaleDetail, {as:'saleDetail', foreignKey: 'productId' });
+
     };
 
     return Product;

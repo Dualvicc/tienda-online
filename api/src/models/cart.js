@@ -19,17 +19,6 @@ module.exports = function(sequelize, DataTypes) {
           model: 'Fingerprint',
           key: 'id'
         }
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     }, {
       sequelize,
@@ -65,9 +54,13 @@ module.exports = function(sequelize, DataTypes) {
     });
   
     Cart.associate = function(models) {
-        Cart.hasMany(models.CartDetail, {as: 'cartDetails', foreignKey: 'cartId'});
+        Cart.hasOne(models.CartDetail, {as: 'cartDetails', foreignKey: 'cartId'});
         Cart.belongsTo(models.Customer, {as: 'customer', foreignKey: 'customerId'});
         Cart.belongsTo(models.Fingerprint, {as: 'fingerprint', foreignKey: 'fingerprintId'});
+        Cart.hasOne(models. SaleError, {as:'saleError', foreignKey: 'cartId' });
+        Cart.hasOne(models.Sale, {as:'sale', foreignKey: 'cartId' });
+
+
       };
   
     return Cart;

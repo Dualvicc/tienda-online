@@ -36,17 +36,6 @@ module.exports = function(sequelize, DataTypes) {
           model: 'Company',
           key: 'id'
         }
-      },
-      createdAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: DataTypes.DATE
-      },
-      deletedAt: {
-        type: DataTypes.DATE
       }
     }, {
       sequelize,
@@ -75,6 +64,8 @@ module.exports = function(sequelize, DataTypes) {
   
     Employee.associate = function(models) {
       Employee.belongsTo(models.Company, {as: 'company', foreignKey: 'companyId' });
+      Employee.hasMany(models.SocialNetworkEmployee, {as:'socialNetworkEmployee', foreignKey: 'employeeId' });
+
     };
   
     return Employee;

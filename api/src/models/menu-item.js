@@ -48,17 +48,6 @@ module.exports = function(sequelize, DataTypes) {
         order: {
             type: DataTypes.INTEGER,
             defaultValue: 0
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,

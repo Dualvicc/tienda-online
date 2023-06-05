@@ -23,14 +23,6 @@ module.exports = function(sequelize, DataTypes) {
                   msg: 'Por favor, rellena el campo "Visible".'
               }
           }
-      },
-      createdAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-      },
-      updatedAt: {
-          type: DataTypes.DATE,
-          allowNull: false
       }
   }, {
       sequelize,
@@ -48,8 +40,9 @@ module.exports = function(sequelize, DataTypes) {
       ]
   });
 
-  ProductCategory.associate = function(models) {
-      // Define las asociaciones con otros modelos aquí
+  ProductCategory.associate = function(models) {   
+
+    ProductCategory.hasMany(models.Product, {foreignKey: 'productCategoryId', as: 'product'});
   };
 
   return ProductCategory;

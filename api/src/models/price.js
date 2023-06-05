@@ -25,17 +25,6 @@ module.exports = function(sequelize, DataTypes) {
         },
         current: {
             type: DataTypes.BOOLEAN
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,

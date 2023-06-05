@@ -42,7 +42,9 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     SocialNetwork.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
+        SocialNetwork.hasMany(models.SocialNetworksCompanies, {as:'socialNetworkCompanies', foreignKey: 'socialNetworkId' });
+        SocialNetwork.hasMany(models.SocialNetworkEmployee, {as:'socialNetworkEmployee', foreignKey: 'socialNetworkId' });
+
     };
 
     return SocialNetwork;

@@ -77,17 +77,6 @@ module.exports = function(sequelize, DataTypes) {
         sitemap: {
             type: DataTypes.BOOLEAN,
             defaultValue: 1
-        },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        updatedAt: {
-            allowNull: false,
-            type: DataTypes.DATE
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,
@@ -106,7 +95,9 @@ module.exports = function(sequelize, DataTypes) {
         ]
     });
     LocaleSeo.associate = function(models) {
-        // Define las asociaciones con otros modelos aquí
+        LocaleSeo.hasOne(models.LocaleSeoRedirect, {as:'localeSeoRedirect', foreignKey: 'localeSeoId' });
+        LocaleSeo.hasOne(models.LocaleSeoSlug, {as:'localeSeoSlug', foreignKey: 'localeSeoId' }),
+        LocaleSeo.hasOne(models.MenuItem, {as:'menuItem', foreignKey: 'localeSeoId' })
     };
 
     return LocaleSeo;

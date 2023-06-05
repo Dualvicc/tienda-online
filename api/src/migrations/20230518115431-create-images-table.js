@@ -58,7 +58,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    });
+    }).then(() => queryInterface.addIndex('images', ['imageConfigurationId']));
   },
 
   down: async (queryInterface, Sequelize) => {

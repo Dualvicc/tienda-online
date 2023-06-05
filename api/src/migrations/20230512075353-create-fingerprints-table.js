@@ -37,7 +37,7 @@ module.exports = {
       deletedAt: {
         type: Sequelize.DATE
       }
-    });
+    }).then(() => queryInterface.addIndex('fingerprints', ['customerId']));
   },
 
   down: async (queryInterface, Sequelize) => {

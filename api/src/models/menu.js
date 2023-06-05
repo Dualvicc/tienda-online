@@ -14,17 +14,6 @@ module.exports = function(sequelize, DataTypes) {
                     msg: 'Por favor, rellena el campo "Nombre".'
                 }
             }
-        },
-        createdAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false
-        },
-        deletedAt: {
-            type: DataTypes.DATE
         }
     }, {
         sequelize,
@@ -43,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
         ]
     });
     Menu.associate = function(models) {
+        Menu.hasMany(models.MenuItem, {as:'menuItem', foreignKey: 'menuId' });
     };
 
     return Menu;

@@ -31,17 +31,6 @@ module.exports = function(sequelize, DataTypes) {
         model: 'Email',
         key: 'id'
       }
-    },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE
-    },
-    deletedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize,
@@ -75,7 +64,6 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   SentEmail.associate = function(models) {
-    // Define las asociaciones con otros modelos aquí
     SentEmail.belongsTo(models.Customer, {as:'customer', foreignKey: 'customerId' });
     SentEmail.belongsTo(models.Email, {as:'email', foreignKey: 'emailId' });
   };

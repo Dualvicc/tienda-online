@@ -63,17 +63,6 @@ module.exports = function(sequelize, DataTypes) {
                   msg: 'Por favor, rellena el campo "Latency Ms".'
               }
           }
-      },
-      createdAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-      },
-      updatedAt: {
-          type: DataTypes.DATE,
-          allowNull: false
-      },
-      deletedAt: {
-          type: DataTypes.DATE
       }
   }, {
       sequelize,
