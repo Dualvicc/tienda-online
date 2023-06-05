@@ -2,26 +2,24 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('products', {
+    await queryInterface.createTable('fingerprints', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      productCategoryId: {
+      customerId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'ProductCategory',
+          model: 'Customers',
           key: 'id'
         }
       },
-      name: {
+      fingerprint: {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      featured: {
-        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,
@@ -35,12 +33,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     })
-    .then(() => queryInterface.addIndex('products', ['productCategoryId'],{
-      name: 'product_productCategoryId_fk'
+    .then(() => queryInterface.addIndex('fingerprints', ['customerId'],{
+      name: 'fingerprint_customerId_fk'
     }))
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('products')
+    await queryInterface.dropTable('fingerprints')
   }
 }

@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'LocaleSeo',
+          model: 'locale_seos',
           key: 'id'
         }
       },

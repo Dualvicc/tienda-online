@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'PaymentMethod',
+          model: 'payment_methods',
           key: 'id'
         }
       },
@@ -21,7 +21,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Customer',
+          model: 'customers',
           key: 'id'
         }
       },
@@ -29,7 +29,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Cart',
+          model: 'carts',
           key: 'id'
         }
       },

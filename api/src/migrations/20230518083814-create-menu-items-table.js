@@ -13,21 +13,21 @@ module.exports = {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: {
-          model: 'Menu',
+          model: 'menus',
           key: 'id'
         }
       },
       localeSeoId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'LocaleSeo',
+          model: 'locale_seos',
           key: 'id'
         }
       },
       localeSlugSeoId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'LocaleSlugSeo',
+          model: 'locale_seo_slugs',
           key: 'id'
         }
       },

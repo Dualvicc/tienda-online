@@ -12,21 +12,21 @@ module.exports = {
       cartId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Cart',
+          model: 'carts',
           key: 'id'
         }
       },
       customerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Customer',
+          model: 'customers',
           key: 'id'
         }
       },
       paymentMethodId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'PaymentMethod',
+          model: 'payment_methods',
           key: 'id'
         }
       },
