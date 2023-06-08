@@ -2,11 +2,24 @@ class Form extends HTMLElement {
 
     constructor() {
         super();
-        this.shadow = this.attachShadow({mode: 'open'});
-        this.render();
+        this.shadow = this.attachShadow({mode: 'open'});  
+        
     }
 
-    render() {
+    static get observedAttributes () { return ['url'] }
+
+    async connectedCallback() {
+
+        document.addEventListener("loadData", async event =>{
+            await this.loadData(event.detail.id);
+        })
+    }
+
+    async attributeChangedCallback (name, oldValue, newValue) {
+        await this.render()
+    }
+
+    async render() {
 
         this.shadow.innerHTML = 
         `
@@ -162,59 +175,53 @@ class Form extends HTMLElement {
                 </div>
             </div>
             <div class="register form tabContent active" data-tab="principal">
-                <div class="row">
-                    <div class="formInput">
-                        <div class="label">Nombre</div>
-                        <div class="input">
-                            <input class="nameInput" type="text"  required>
+                <form>
+                    <div class="row">
+                        <div class="formInput">
+                            <div class="label">Nombre</div>
+                            <div class="input">
+                                <input name="name" class="nameInput" type="text"  required>
+                            </div>
+                        </div>
+                        <div class="formInput">
+                            <div class="label">Email</div>
+                            <div class="input">
+                                <input name="email" class="emailInput" type="text"  required>
+                            </div>
                         </div>
                     </div>
-                    <div class="formInput">
-                        <div class="label">Email</div>
-                        <div class="input">
-                            <input class="emailInput" type="text"  required>
+                    <div class="row">
+                        <div class="formInput">
+                            <div class="label">Contraseña
+                            </div>
+                            <div class="input">
+                                <input name="password" class="passwordInput" type="password" required>
+                            </div>
+                        </div>
+                        <div class="formInput">
+                            <div class="label">Confirme contraseña</div>
+                            <div class="input">
+                                <input class ="confirmPasswordInput" type="password" required>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="formInput">
-                        <div class="label">Contraseña
-                        </div>
-                        <div class="input">
-                            <input class="passwordInput" type="text" required>
-                        </div>
-                    </div>
-                    <div class="formInput">
-                        <div class="label">Confirme contraseña</div>
-                        <div class="input">
-                            <input class ="confirmPasswordInput" type="text" required>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
             <div class="tabContent imageUpload" data-tab="upload">
                 <input type="file" class="">
             </div>
         </div>
         `;
-        const name = this.shadow.querySelector('.nameInput');
-        const email = this.shadow.querySelector('.emailInput');
-        const password = this.shadow.querySelector('.passwordInput');
-        const confirmPassword = this.shadow.querySelector('.confirmPasswordInput');
-        document.addEventListener('editTable', (event=>{
-            name.value = event.detail.name;
-            email.value = event.detail.email;
-        }));
-        const cleanButton = this.shadow.querySelector('.cleanButton');
-        cleanButton.addEventListener('click',() =>{
-            name.value = "";
-            email.value = "";
-            password.value = "";
-            confirmPassword.value = "";
-        });
+
+        this.renderTabs();
+        this.renderSendButton();
+    }
+
+    renderTabs = async () => {
+
         const tabs = this.shadow.querySelectorAll(".tab");
         const tabContents = this.shadow.querySelectorAll(".tabContent");
-    
+
         tabs.forEach(tab => {
             tab.addEventListener("click",()=>{
 
@@ -235,7 +242,69 @@ class Form extends HTMLElement {
                     }
                 })
             })
+        });
+    }
+
+    renderSendButton = async () => {
+
+        const saveButton = this.shadow.querySelector('.saveButton');
+
+        saveButton.addEventListener('click', async event => {
+
+            event.preventDefault();
+
+            const form = this.shadow.querySelector('form');
+            const jsonObject = Object.fromEntries(new FormData(form));
+            const json = JSON.stringify(jsonObject);
+            let url = saveButton.dataset.id ? `http://localhost:8080/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `http://localhost:8080/api${this.getAttribute('url')}`;
+            let method = saveButton.dataset.id ? 'PUT' : 'POST';
+            console.log(json);
+            await fetch(url, {
+                method: method,
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: json
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.dispatchEvent(new CustomEvent('dataUpdate'))
+                    console.log('Datos subidos correctamente');
+                    
+                } else {
+                    
+                    console.log('Error subiendo los datos');
+                    
+                }
+            })
+            .catch(error => {
+                console.error('Error en la petición:', error);
+            });
+
+        });
+    }
+
+    loadData = async id => {
+
+        this.shadow.querySelector(".saveButton").dataset.id = id;
+
+        fetch(`http://localhost:8080/api${this.getAttribute('url')}/${id}`)
+        .then(response => {
+           return response.json()
         })
+        .then(data => {
+
+            let form = this.shadow.querySelector("form");
+
+            Object.entries(data).forEach( ([key, value]) => {
+                if(form.elements[key]){
+                    form.elements[key].value = value
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error en la petición:', error);
+        });
     }
 }
 

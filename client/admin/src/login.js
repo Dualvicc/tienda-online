@@ -78,35 +78,47 @@ class Login extends HTMLElement {
             </form>
         </div>
         `;
-        const email = this.shadow.querySelector('input[name="email"]');
-        const password = this.shadow.querySelector('input[name="password"]');
-        const submitButton = this.shadow.querySelector('input[type="submit"]');
-        submitButton.addEventListener('click', (e) => {
+        const submit = this.shadow.querySelector('input[type=submit]');
+
+        submit.addEventListener('click',(e)=>{
+
             e.preventDefault();
-            console.log("buenas tardes");
-            const formData = new FormData();
-            formData.append('email',email.value);
-            formData.append('password', password.value);
-          
-            fetch('/login', {
-              method: 'POST',
-              body: formData
-            })
-              .then(response => {
-                if (response.ok) {
-                 
-                  console.log('Inicio de sesión exitoso');
-                  
-                } else {
-                 
-                  console.log('Error en el inicio de sesión');
-                  
+
+            const form = this.shadow.querySelector('form');
+
+            const formData = new FormData(form);
+            function formDataToJson(formData) {
+                var json = {};
+              
+                for (var [key, value] of formData.entries()) {
+                  json[key] = value;
                 }
-              })
-              .catch(error => {
+              
+                return JSON.stringify(json);
+              }
+            const json = formDataToJson(formData);
+            fetch('http://localhost:8080/api/admin/users', {
+              method: 'POST',
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: json
+            })
+            .then(response => {
+                if (response.ok) {
+                    
+                    console.log('Inicio de sesión exitoso');
+                    
+                } else {
+                    
+                    console.log('Error en el inicio de sesión');
+                    
+                }
+            })
+            .catch(error => {
                 console.error('Error en la petición:', error);
-              });
-          });
+            });
+        });
 
     }
 }
