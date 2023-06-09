@@ -258,7 +258,9 @@ class Form extends HTMLElement {
             const json = JSON.stringify(jsonObject);
             let url = saveButton.dataset.id ? `http://localhost:8080/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `http://localhost:8080/api${this.getAttribute('url')}`;
             let method = saveButton.dataset.id ? 'PUT' : 'POST';
-            console.log(json);
+            if(json.password == "") {
+                json
+            }
             await fetch(url, {
                 method: method,
                 headers: {
