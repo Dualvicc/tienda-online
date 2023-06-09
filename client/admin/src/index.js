@@ -6,3 +6,5 @@ import './form.js';
 import './content.js';
 import './login.js';
 import './../../front/src/modal.js';
+import './alert.js';
+import './pagination.js';

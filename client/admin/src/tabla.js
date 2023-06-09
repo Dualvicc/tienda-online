@@ -56,7 +56,6 @@ class Tabla extends HTMLElement {
             flex-direction: column;
             gap: 1.5rem;
             width: 100%;
-            
             margin: 0;
         }
         .tablaElement{
@@ -75,6 +74,7 @@ class Tabla extends HTMLElement {
             height: 100%;
             width: 2.5rem;
             transition: 0.5s;
+            cursor: pointer;
         }
         .editButton:hover svg{
             filter: none;
@@ -88,6 +88,7 @@ class Tabla extends HTMLElement {
         .deleteButton{
             height: 100%;
             width: 2.5rem;
+            cursor: pointer;
         }
         .deleteButton:hover svg{
             filter:none;
@@ -129,7 +130,12 @@ class Tabla extends HTMLElement {
         const modalButtons = this.shadowRoot.querySelectorAll('.modalButton');
         modalButtons.forEach(modalButton => {
             modalButton.addEventListener('click',() => {
-               document.dispatchEvent( new CustomEvent('openModal'));
+               document.dispatchEvent( new CustomEvent('openModal'))
+               document.dispatchEvent( new CustomEvent('deleteAlert',  {
+                    detail: {
+                        id: modalButton.dataset.id
+                    }
+                }));
             })
         })
 

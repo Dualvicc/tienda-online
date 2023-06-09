@@ -92,9 +92,13 @@ class Form extends HTMLElement {
             margin-right: 0.8rem;
         }
         .cleanButton{
+            cursor:pointer;
         }
         .cleanButton:hover svg{
             filter: none;
+        }
+        .saveButton{
+            cursor:pointer;
         }
         .saveButton:hover svg{
             filter: none;
@@ -258,9 +262,9 @@ class Form extends HTMLElement {
             const json = JSON.stringify(jsonObject);
             let url = saveButton.dataset.id ? `http://localhost:8080/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `http://localhost:8080/api${this.getAttribute('url')}`;
             let method = saveButton.dataset.id ? 'PUT' : 'POST';
-            if(json.password == "") {
-                json
-            }
+            // if(json.password == "") {
+            //     json
+            // }
             await fetch(url, {
                 method: method,
                 headers: {

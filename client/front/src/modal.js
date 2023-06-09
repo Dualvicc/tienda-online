@@ -8,6 +8,17 @@ class Modal extends HTMLElement {
         this.render(width,height);
     }
 
+    async connectedCallback () {
+        document.addEventListener("openModal",()=>{
+            const modal = this.shadow.querySelector("#modal");
+            modal.classList.toggle("active");
+        });
+        document.addEventListener("closeModal",()=>{
+            const modal = this.shadow.querySelector("#modal");
+            modal.classList.toggle("active");
+        });
+    }
+  
     render(width, height) {
 
         this.shadow.innerHTML = 
@@ -98,6 +109,7 @@ class Modal extends HTMLElement {
             </div>
         </div>
         `;
+
         const modalButtons = this.shadow.querySelectorAll(".modalButton")
         const modal = this.shadow.querySelector("#modal");
        
@@ -106,9 +118,6 @@ class Modal extends HTMLElement {
                 modal.classList.toggle("active"); 
             })
         })
-        document.addEventListener("openModal",()=>{
-            modal.classList.toggle("active");
-        });
     }
 }
 
