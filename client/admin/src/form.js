@@ -18,7 +18,7 @@ class Form extends HTMLElement {
     async attributeChangedCallback (name, oldValue, newValue) {
         await this.render()
     }
-
+    
     async render() {
 
         this.shadow.innerHTML = 
@@ -119,6 +119,11 @@ class Form extends HTMLElement {
         .register.active{
             display: flex;
         }
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
         .row{
             display:flex;
             width: 100%;
@@ -156,6 +161,14 @@ class Form extends HTMLElement {
         }
         .tabContent.active{
             display:flex;
+        }
+        p{
+            color: white;
+        }
+        .errorContainer{
+            display:flex;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         </style>
@@ -209,6 +222,8 @@ class Form extends HTMLElement {
                             </div>
                         </div>
                     </div>
+                    <div class="row errorContainer">
+                    </div>
                 </form>
             </div>
             <div class="tabContent imageUpload" data-tab="upload">
@@ -220,7 +235,7 @@ class Form extends HTMLElement {
         this.renderTabs();
         this.renderSendButton();
     }
-
+   
     renderTabs = async () => {
 
         const tabs = this.shadow.querySelectorAll(".tab");
@@ -248,7 +263,7 @@ class Form extends HTMLElement {
             })
         });
     }
-
+    
     renderSendButton = async () => {
 
         const saveButton = this.shadow.querySelector('.saveButton');
@@ -272,15 +287,14 @@ class Form extends HTMLElement {
                 },
                 body: json
             })
-            .then(response => {
+            .then( async response => {
                 if (response.ok) {
                     document.dispatchEvent(new CustomEvent('dataUpdate'))
                     console.log('Datos subidos correctamente');
                     
                 } else {
-                    
-                    console.log('Error subiendo los datos');
-                    
+                    const respuesta = await response.json()
+                    this.renderErrors(respuesta.message);
                 }
             })
             .catch(error => {
@@ -311,6 +325,19 @@ class Form extends HTMLElement {
         .catch(error => {
             console.error('Error en la petición:', error);
         });
+    }
+    renderErrors = async (errors) => { 
+        const errorContainer = this.shadow.querySelector(".errorContainer");
+        
+        while (errorContainer.firstChild) {
+            errorContainer.removeChild(errorContainer.firstChild);
+        }
+        errors.forEach( error => {
+            const errorMessage = document.createElement("p")
+            errorMessage.textContent = error.message;
+            errorMessage.classList.add("errorMessage");
+            errorContainer.appendChild(errorMessage);
+        })
     }
 }
 

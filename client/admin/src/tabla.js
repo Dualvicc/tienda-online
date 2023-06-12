@@ -9,20 +9,46 @@ class Tabla extends HTMLElement {
     static get observedAttributes () { return ['url'] }
 
     async connectedCallback () {
-        document.addEventListener('dataUpdate', async () => {
-            await this.loadData();
-            await this.render();
+        document.addEventListener('dataUpdate', async (event) => {
+            await this.loadData(event.detail.page = 1);
+            document.dispatchEvent(new CustomEvent('pagination',  {
+                detail: {
+                    page: this.data.meta.currentPage,
+                    totalPages: this.data.meta.pages
+                 
+                }
+            }))
+            this.render();
         })
+        document.addEventListener('changePage', async (event) => {
+            await this.loadData(event.detail.page);
+            document.dispatchEvent(new CustomEvent('pagination',  {
+                detail: {
+                    page: this.data.meta.currentPage,
+                    totalPages: this.data.meta.pages
+                 
+                }
+            }))
+            this.render();
+        })
+
     }
 
     async attributeChangedCallback (name, oldValue, newValue) {
         await this.loadData()
-        await this.render()
+        document.dispatchEvent(new CustomEvent('pagination',  {
+            detail: {
+                page: this.data.meta.currentPage,
+                totalPages: this.data.meta.pages
+             
+            }
+        }))
+        this.render()
     }
 
-    async loadData () {
+    async loadData (page = 1) {
 
-        const url = `http://localhost:8080/api${this.getAttribute('url')}`;
+        const url = `http://localhost:8080/api${this.getAttribute('url')}?page=${page}`;
 
         await fetch(url)
         .then(response => response.json())
@@ -117,9 +143,9 @@ class Tabla extends HTMLElement {
             
         </div>
         `;
-
         this.data.rows.forEach(data => {
             this.renderTable(data);
+            
         })
 
         this.renderTableButtons();
