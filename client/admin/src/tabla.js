@@ -4,13 +4,14 @@ class Tabla extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
         this.data = [];
+        this.keys = [];
     }
     
     static get observedAttributes () { return ['url'] }
 
     async connectedCallback () {
         document.addEventListener('dataUpdate', async (event) => {
-            await this.loadData(event.detail.page = 1);
+            await this.loadData(event.detail.page);
             document.dispatchEvent(new CustomEvent('pagination',  {
                 detail: {
                     page: this.data.meta.currentPage,
@@ -18,7 +19,14 @@ class Tabla extends HTMLElement {
                  
                 }
             }))
+            if (this.keys.length > 0) {
+                
+            }
+            
             this.render();
+        })
+        document.addEventListener('filterData', async (event) => {
+            
         })
         document.addEventListener('changePage', async (event) => {
             await this.loadData(event.detail.page);
@@ -54,6 +62,7 @@ class Tabla extends HTMLElement {
         .then(response => response.json())
         .then(data => {
             this.data = data;
+           
         })
         .catch(error => {
           console.error("Error al obtener los datos:", error);
@@ -143,14 +152,24 @@ class Tabla extends HTMLElement {
             
         </div>
         `;
+        
         this.data.rows.forEach(data => {
             this.renderTable(data);
-            
+            let keysSet = new Set();
+            Object.keys(data).forEach(key => {
+                keysSet.add(key);
+            });
+            this.keys = Array.from(keysSet);
         })
 
-        this.renderTableButtons();
-    }
+        document.dispatchEvent(new CustomEvent('dataFilters', {
+            detail: this.keys 
+        }))
 
+        this.renderTableButtons();
+        
+    }
+    
     renderTableButtons() {
 
         const modalButtons = this.shadowRoot.querySelectorAll('.modalButton');

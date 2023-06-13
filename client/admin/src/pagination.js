@@ -44,7 +44,7 @@ class Pagination extends HTMLElement {
             height: 2rem;
             margin: 0;
             position: absolute;
-            bottom: 10%;
+            bottom: 6%;
             
         }
         .element{
