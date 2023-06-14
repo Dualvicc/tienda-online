@@ -79,7 +79,6 @@ class Login extends HTMLElement {
         </div>
         `;
         const submit = this.shadow.querySelector('input[type=submit]');
-
         submit.addEventListener('click',(e)=>{
 
             e.preventDefault();
@@ -87,39 +86,38 @@ class Login extends HTMLElement {
             const form = this.shadow.querySelector('form');
 
             const formData = new FormData(form);
-            function formDataToJson(formData) {
-                var json = {};
-              
-                for (var [key, value] of formData.entries()) {
-                  json[key] = value;
-                }
-              
+
+            const formDataToJson = (formData) => {
+                const json = Object.fromEntries([...formData]);
                 return JSON.stringify(json);
-              }
+            };
+
             const json = formDataToJson(formData);
-            fetch('http://localhost:8080/api/admin/users', {
-              method: 'POST',
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: json
-            })
-            .then(response => {
+            const url = 'http://localhost:8080/api/auth/users/signin';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                  "Content-Type": "application/json"
+                },
+                body: json
+            }).then(response => {
                 if (response.ok) {
-                    
-                    console.log('Inicio de sesión exitoso');
-                    
+                  console.log('Inicio de sesión exitoso');
+                  return response.json();
                 } else {
-                    
-                    console.log('Error en el inicio de sesión');
-                    
+                  console.log('Error en el inicio de sesión');
                 }
-            })
-            .catch(error => {
+            }).then(data => {
+                sessionStorage.setItem("bearerToken", `${data.accessToken}`);
+            }).catch(error => {
                 console.error('Error en la petición:', error);
             });
+            if(sessionStorage.getItem("bearerToken")) {
+              window.location.href = './admin.html'
+            }
+              
         });
-
     }
 }
 
