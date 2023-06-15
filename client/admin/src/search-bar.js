@@ -82,9 +82,11 @@ class SearchBar extends HTMLElement {
         const filterButton = this.shadow.querySelector('.filter');
         filterButton.addEventListener('click', () => {
             filterButton.classList.toggle('active');
-            
+            filterButton.classList.contains("active") ?
+            this.renderFilters() 
+            : (this.filterData() , this.unrenderFilters());
         })
-        filterButton.classList.contains("active")  ? this.renderFilters() : (this.filterData() && this.unrenderFilters())
+        
     }
     renderFilters() {
         const form = this.shadow.querySelector('form');
@@ -109,14 +111,16 @@ class SearchBar extends HTMLElement {
     }
     async filterData(){
         const form = this.shadow.querySelector('form');
+        console.log(form)
         const jsonObject = Object.fromEntries(new FormData(form));
         const params = new URLSearchParams()
 
         for(const key in jsonObject){
             params.append(key, jsonObject[key]);
+            console.log(params)
         }
         let url =  `http://localhost:8080/api${this.getAttribute('url')}` + `?${params.toString()}` ;
-
+        console.log(url);
         await fetch(url, {
         })
         .then( async response => {
@@ -126,7 +130,6 @@ class SearchBar extends HTMLElement {
                         
                     }
                 }))
-                console.log('Datos recogidos correctamente');
                 
             } else {
                 console.log("cagaste")

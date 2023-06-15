@@ -290,7 +290,6 @@ class Form extends HTMLElement {
             .then( async response => {
                 if (response.ok) {
                     document.dispatchEvent(new CustomEvent('dataUpdate'))
-                    console.log('Datos subidos correctamente');
                     
                 } else {
                     const respuesta = await response.json()

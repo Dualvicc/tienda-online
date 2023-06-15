@@ -62,7 +62,6 @@ class Tabla extends HTMLElement {
         .then(response => response.json())
         .then(data => {
             this.data = data;
-            console.log(this.data);
         })
         .catch(error => {
           console.error("Error al obtener los datos:", error);
@@ -166,7 +165,6 @@ class Tabla extends HTMLElement {
             this.keys = Array.from(keysSet);
             this.renderTable(data);
         })
-        console.log(this.keys);
 
         document.dispatchEvent(new CustomEvent('dataFilters', {
             detail: this.keys 
