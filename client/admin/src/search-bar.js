@@ -95,6 +95,7 @@ class SearchBar extends HTMLElement {
           const filterInput = document.createElement('input');
           filterInput.type = 'text';
           filterInput.placeholder = `filter by ${key}`;
+          filterInput.name = key;
       
           const label = document.createElement('label');
           label.innerText = key.toUpperCase();
@@ -111,7 +112,7 @@ class SearchBar extends HTMLElement {
     }
     async filterData(){
         const form = this.shadow.querySelector('form');
-        console.log(form)
+        console.log(form);
         const jsonObject = Object.fromEntries(new FormData(form));
         const params = new URLSearchParams()
 
