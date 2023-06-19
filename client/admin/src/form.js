@@ -18,6 +18,7 @@ class Form extends HTMLElement {
     async attributeChangedCallback (name, oldValue, newValue) {
         await this.render()
     }
+
     
     async render() {
 
@@ -170,6 +171,26 @@ class Form extends HTMLElement {
             flex-direction: column;
             gap: 0.5rem;
         }
+        .gallery {
+            width: 100px;
+            height: 100px;
+            background-color: #f2f2f2;
+            border: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+          }
+          
+          .plus {
+            font-size: 40px;
+            color: #555;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
 
         </style>
         <div class="area">
@@ -227,15 +248,27 @@ class Form extends HTMLElement {
                 </form>
             </div>
             <div class="tabContent imageUpload" data-tab="upload">
-                <input type="file" class="">
+                <div class="gallery">
+                    <div class="plus">+</div>
+                    <input type="file" id="filePicker" style="display: none;">
+                </div>
             </div>
         </div>
         `;
 
         this.renderTabs();
         this.renderSendButton();
+        this.renderGalery();
     }
-   
+    renderGalery = async () => {
+        const gallery = this.shadow.querySelector('.gallery');
+
+        gallery.addEventListener('click', () => {
+            document.dispatchEvent(new CustomEvent('openModal'));
+            console.log("Buenas tardes")
+        });
+    };
+    
     renderTabs = async () => {
 
         const tabs = this.shadow.querySelectorAll(".tab");
@@ -338,6 +371,7 @@ class Form extends HTMLElement {
             errorContainer.appendChild(errorMessage);
         })
     }
+
 }
 
 customElements.define('form-component',Form);

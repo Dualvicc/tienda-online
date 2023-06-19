@@ -26,7 +26,8 @@ class Tabla extends HTMLElement {
             this.render();
         })
         document.addEventListener('filterData', async (event) => {
-            
+            this.data= event.detail.data
+            this.render();
         })
         document.addEventListener('changePage', async (event) => {
             await this.loadData(event.detail.page);

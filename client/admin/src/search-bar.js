@@ -114,27 +114,28 @@ class SearchBar extends HTMLElement {
         const form = this.shadow.querySelector('form');
         console.log(form);
         const jsonObject = Object.fromEntries(new FormData(form));
+
         const params = new URLSearchParams()
 
         for(const key in jsonObject){
-            params.append(key, jsonObject[key]);
-            console.log(params)
+            jsonObject[key] === '' ? delete jsonObject[key] : params.append(key, jsonObject[key]);
         }
         let url =  `http://localhost:8080/api${this.getAttribute('url')}` + `?${params.toString()}` ;
-        console.log(url);
-        await fetch(url, {
-        })
-        .then( async response => {
+        
+        await fetch(url)
+        .then(response => {
             if (response.ok) {
-                document.dispatchEvent(new CustomEvent('filterData', {
-                    detail: {
-                        
-                    }
-                }))
-                
+                return response.json();
             } else {
-                console.log("cagaste")
+                throw new Error('Error en la respuesta del servidor');
             }
+        })
+        .then(data => {
+            document.dispatchEvent(new CustomEvent('filterData', { 
+                detail: { 
+                    data: data 
+                } 
+            }));
         })
         .catch(error => {
             console.error('Error en la petición:', error);
