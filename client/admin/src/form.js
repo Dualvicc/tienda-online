@@ -264,8 +264,7 @@ class Form extends HTMLElement {
         const gallery = this.shadow.querySelector('.gallery');
 
         gallery.addEventListener('click', () => {
-            document.dispatchEvent(new CustomEvent('openModal'));
-            console.log("Buenas tardes")
+            document.dispatchEvent(new CustomEvent('openGallery'));
         });
     };
     

@@ -5,20 +5,21 @@ class Modal extends HTMLElement {
         this.shadow = this.attachShadow({mode: 'open'});
         const width = this.attributes.getNamedItem('width').value;
         const height = this.attributes.getNamedItem('height').value;
+        this.use = '';
         this.render(width,height);
     }
 
     async connectedCallback () {
-        document.addEventListener("openModal",()=>{
-            const modal = this.shadow.querySelector("#modal");
+        document.addEventListener("openModal",(event)=>{
+            const modal = this.shadow.querySelector(".modal");
             modal.classList.toggle("active");
         });
         document.addEventListener("closeModal",()=>{
-            const modal = this.shadow.querySelector("#modal");
+            const modal = this.shadow.querySelector(".modal");
             modal.classList.toggle("active");
         });
     }
-  
+
     render(width, height) {
 
         this.shadow.innerHTML = 

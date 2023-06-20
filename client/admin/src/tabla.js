@@ -180,7 +180,11 @@ class Tabla extends HTMLElement {
         const modalButtons = this.shadowRoot.querySelectorAll('.modalButton');
         modalButtons.forEach(modalButton => {
             modalButton.addEventListener('click',() => {
-               document.dispatchEvent( new CustomEvent('openModal'))
+               document.dispatchEvent( new CustomEvent('openModal', {
+                    detail: {
+                        use : "delete"
+                    }
+               }))
                document.dispatchEvent( new CustomEvent('deleteAlert',  {
                     detail: {
                         id: modalButton.dataset.id
