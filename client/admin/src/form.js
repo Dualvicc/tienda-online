@@ -1,3 +1,4 @@
+import { API_URL } from '../config/config.js'
 class Form extends HTMLElement {
 
     constructor() {
@@ -307,7 +308,7 @@ class Form extends HTMLElement {
             const form = this.shadow.querySelector('form');
             const jsonObject = Object.fromEntries(new FormData(form));
             const json = JSON.stringify(jsonObject);
-            let url = saveButton.dataset.id ? `http://localhost:8080/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `http://localhost:8080/api${this.getAttribute('url')}`;
+            let url = saveButton.dataset.id ? `${API_URL}/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `${API_URL}/api${this.getAttribute('url')}`;
             let method = saveButton.dataset.id ? 'PUT' : 'POST';
             // if(json.password == "") {
             //     json
@@ -339,7 +340,7 @@ class Form extends HTMLElement {
 
         this.shadow.querySelector(".saveButton").dataset.id = id;
 
-        fetch(`http://localhost:8080/api${this.getAttribute('url')}/${id}`)
+        fetch(`${API_URL}/api${this.getAttribute('url')}/${id}`)
         .then(response => {
            return response.json()
         })
