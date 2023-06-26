@@ -58,11 +58,20 @@ class Gallery extends HTMLElement {
       const data = await fetch('http://localhost:8080/api/admin/images', {
         method: 'POST',
         body: formData,
-      });
+        headers: {
+          Authorization: 'Bearer ' + sessionStorage.getItem('accessToken')         
+        }
+      })
   
-      // Hacer algo con la respuesta del servidor si es necesario
+      .then(response => response.json())
+            .then(data => {
+            console.log(data);
+            })
+            .catch(error => {
+            console.log(error);
+            });
     }
-  
+    
     render() {
       this.shadow.innerHTML =
         `

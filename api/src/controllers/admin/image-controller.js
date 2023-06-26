@@ -1,19 +1,18 @@
-const db = require("../../models");
-const Image = db.Image;
-const Op = db.Sequelize.Op;
+const db = require('../../models')
+const ImageService = require('../../services/image-service')
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
+  try {
+    const result = await new ImageService().uploadImage(req.files)
 
-    Image.create(req.body).then(data => {
-
-        res.status(200).send(data);
-
-    }).catch(err => {
-        res.status(500).send({
-            message: err.errors || "Algún error ha surgido al insertar el dato."
-        });
-    });
-};
+    res.status(200).send(result)
+  } catch (error) {
+    res.status(500).send({
+      message: error.message || 'Algún error ha surgido al insertar el dato.',
+      errors: error.errors
+    })
+  }
+}
 
 exports.findAll = (req, res) => {
 

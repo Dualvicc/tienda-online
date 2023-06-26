@@ -1,3 +1,4 @@
+import { API_URL } from '../config/config.js'
 class SearchBar extends HTMLElement {
 
     constructor() {
@@ -120,7 +121,7 @@ class SearchBar extends HTMLElement {
         for(const key in jsonObject){
             jsonObject[key] === '' ? delete jsonObject[key] : params.append(key, jsonObject[key]);
         }
-        let url =  `http://localhost:8080/api${this.getAttribute('url')}` + `?${params.toString()}` ;
+        let url =  `${API_URL}/api${this.getAttribute('url')}` + `?${params.toString()}` ;
         
         await fetch(url)
         .then(response => {

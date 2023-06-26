@@ -1,3 +1,4 @@
+import { API_URL } from '../config/config.js'
 class Tabla extends HTMLElement {
 
     constructor() {
@@ -57,7 +58,7 @@ class Tabla extends HTMLElement {
 
     async loadData (page = 1) {
 
-        const url = `http://localhost:8080/api${this.getAttribute('url')}?page=${page}`;
+        const url = `${API_URL}/api${this.getAttribute('url')}?page=${page}`;
 
         await fetch(url)
         .then(response => response.json())

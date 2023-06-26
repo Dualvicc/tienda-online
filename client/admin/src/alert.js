@@ -1,5 +1,6 @@
+import { API_URL } from '../config/config.js'
 class DeleteAlert extends HTMLElement {
-
+    
     constructor() {
         super();
         this.shadow = this.attachShadow({mode: 'open'});
@@ -121,7 +122,7 @@ class DeleteAlert extends HTMLElement {
 
                 if(e.target.value === 'accept' ) {
 
-                    let url = `http://localhost:8080/api${this.getAttribute('url')}/${this.id}`
+                    let url = `${API_URL}/api${this.getAttribute('url')}/${this.id}`
 
                     fetch(url, {
                         method: 'DELETE'

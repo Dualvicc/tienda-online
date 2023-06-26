@@ -1,3 +1,4 @@
+import { API_URL } from '../config/config.js'
 class Login extends HTMLElement {
 
     constructor() {
@@ -93,7 +94,7 @@ class Login extends HTMLElement {
             };
 
             const json = formDataToJson(formData);
-            const url = 'http://localhost:8080/api/auth/users/signin';
+            const url = `${API_URL}/api/auth/users/signin`;
 
             fetch(url, {
                 method: 'POST',
