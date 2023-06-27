@@ -64,12 +64,19 @@ class Gallery extends HTMLElement {
       })
   
       .then(response => response.json())
-            .then(data => {
-            console.log(data);
-            })
-            .catch(error => {
-            console.log(error);
-            });
+      .then(data => {
+      console.log(data);
+      this.showData(data);
+      })
+      .catch(error => {
+      console.log(error);
+      });
+    }
+    showData(data){
+      const tabElement = this.shadow.querySelector('.image-option[data-option="select-option"]');
+      tabElement.click();
+      console.log("Como estamos")
+
     }
     
     render() {

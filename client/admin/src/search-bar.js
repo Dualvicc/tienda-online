@@ -113,7 +113,6 @@ class SearchBar extends HTMLElement {
     }
     async filterData(){
         const form = this.shadow.querySelector('form');
-        console.log(form);
         const jsonObject = Object.fromEntries(new FormData(form));
 
         const params = new URLSearchParams()
