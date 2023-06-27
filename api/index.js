@@ -3,6 +3,8 @@ const cors = require("cors");
 const fs = require('fs'); 
 const app = express();
 const multer = require('multer');
+const dotenv = require('dotenv');
+const process = require('process');
 
 var corsOptions = {
     origin: [process.env.BASE_URL, 'http://localhost:8081', 'http://127.0.0.1:5500', 'http://127.0.0.1:5501']
