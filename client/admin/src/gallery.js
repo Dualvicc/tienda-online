@@ -1,9 +1,14 @@
+import { API_URL } from '../config/config.js'
+
+
 class Gallery extends HTMLElement {
   constructor() {
     super();
     this.shadow = this.attachShadow({ mode: 'open' });
     this.fileOption = "upload-option";
     this.images = [];
+    this.name = "";
+    this.imageName = "";
   }
 
   connectedCallback() {
@@ -95,11 +100,28 @@ class Gallery extends HTMLElement {
 
     const imageGallery = this.shadow.querySelector('.image-gallery');
     imageGallery.innerHTML = '';
-
     this.images.forEach(image => {
-      const div = document.createElement('div');
-      div.innerHTML = `<img src="/api/src/storage/images/gallery/thumbnail/${image}.webp" alt="Image" />`;
-      imageGallery.appendChild(div);
+      const imageItem = document.createElement('div');
+      imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}.webp" alt="Image" title="Image" />`;
+      imageItem.classList.add("image-item");
+      imageGallery.appendChild(imageItem);
+
+      imageItem.addEventListener("click", () => {
+        const imageItems = this.shadow.querySelectorAll(".image-item");
+
+        imageItems.forEach(imageItem => {
+          imageItem.classList.remove("active");
+        });
+        // const nameInput = this.shadow.querySelector('input[name="image"]');
+        // const titleInput = this.shadow.querySelector('input[name="title"]');
+        // const altInput = this.shadow.querySelector('textarea[name="alt"]'); 
+
+        imageItem.classList.add('active');
+        
+        // nameInput.value = imageItem.querySelector('img').src || '';
+        // titleInput.value = imageItem.querySelector('img').title || '';
+        // altInput.value = imageItem.querySelector('img').alt || '';
+      });
     });
   }
 
@@ -135,8 +157,27 @@ class Gallery extends HTMLElement {
                   </form>
               </div>
             </div>
-            <div class="image-selection" data-option="select-option">
-              <div class="image-gallery">Aqui va la galeria</div>
+            <div class="image-selection gallery" data-option="select-option">
+              <div class="image-gallery"></div>
+            </div>
+            <div class="image-column" data-option="select-option">
+              <div class="image-info-container">
+                <div class="image-info">
+                  <label for="image">Nombre de la Imagen</label>
+                  <input name="image" type="text" value="" ></input>
+                </div>
+                <div class="image-info">
+                  <label for="alt">Descripción de la Imagen</label>
+                  <textarea name="alt" class="image-description-input" placeholder="Descripción" value=""></textarea>
+                </div>
+                <div class="image-info">
+                  <label for="title">Título de la Imagen</label>
+                  <input name="title" type="text" placeholder="title" value=""></input>
+                </div>
+              </div>
+              <div class="select-button modalButton">
+                Seleccionar
+              </div>
             </div>
           </div>
         </div>
@@ -268,6 +309,7 @@ class Gallery extends HTMLElement {
         }
         .image-selection.active{
           display:flex;
+          gap: 1rem;
         }
         .image-form {
           display: flex;
@@ -297,27 +339,82 @@ class Gallery extends HTMLElement {
           background-color: rgba(109,183,243,255);
           cursor: pointer;
         }
-        input {
+        input[type="file"] {
           opacity: 0;
           cursor: pointer;
         }
+        .gallery {
+          width: 70%;
+        }
+        .image-column {
+          width: 25%;
+          height: 78%;
+          position: absolute;
+          right: 2rem;
+          top: 15%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          background-color: #F3F3F3;
+          border: 1px solid #C2C2C2;
+          border-radius: 10px;     
+        }
         .image-gallery {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+          grid-template-rows: repeat(auto-fill, minmax(135px, 1fr));
           grid-gap: 1rem;
+          width: 100%;
+          height: 100%;
+          padding: 1rem;
         }
         .image-item {
-          display: flex;
+          display: block;
           justify-content: center;
           align-items: center;
           background-color: #F3F3F3;
           border: 1px solid #C2C2C2;
           border-radius: 10px;
-          padding: 1rem;
+          padding: 0.5rem;
+        }
+        .image-item.active {
+          transform: scale(1.1);
+          border: 4px solid hsl(207, 85%, 69%);
         }
         .image-item img {
           max-width: 100%;
           max-height: 100%;
+        }
+        .image-info-container {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          padding: 0 0.5rem;
+          gap: 2rem;
+        }
+        textarea {
+          max-width: 100%;
+          min-height: 4rem;
+        }
+        .image-info {
+          display: flex;
+          flex-direction: column;
+        }
+        .select-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(207, 85%, 69%);
+          width: 55%;
+          height: 10%;
+          padding: 5%;
+          text-align: center;
+          color: white;
+          cursor: pointer;
+          border-radius: 5px;
+          font-size: 1.5rem;
+
         }
       </style>
       `;
