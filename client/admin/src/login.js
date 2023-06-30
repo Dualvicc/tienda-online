@@ -110,13 +110,14 @@ class Login extends HTMLElement {
                   console.log('Error en el inicio de sesión');
                 }
             }).then(data => {
-                sessionStorage.setItem("bearerToken", `${data.accessToken}`);
+                sessionStorage.setItem("bearerToken", `${data.accessToken}`)
+                if(sessionStorage.getItem("bearerToken")) {
+                window.location.href = './admin.html'
+                }
             }).catch(error => {
                 console.error('Error en la petición:', error);
             });
-            if(sessionStorage.getItem("bearerToken")) {
-              window.location.href = './admin.html'
-            }
+            
               
         });
     }

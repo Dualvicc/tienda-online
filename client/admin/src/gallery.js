@@ -13,7 +13,8 @@ class Gallery extends HTMLElement {
 
   connectedCallback() {
     this.images = localStorage.getItem("images")? JSON.parse(localStorage.getItem("images")) : [];
-    document.addEventListener("openGallery", () => {
+    document.addEventListener("openGallery", (event) => {
+      this.name = event.detail.name;
       const modal = this.shadow.getElementById('modal');
       modal.classList.toggle("active");
     });
@@ -102,7 +103,7 @@ class Gallery extends HTMLElement {
     imageGallery.innerHTML = '';
     this.images.forEach(image => {
       const imageItem = document.createElement('div');
-      imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}.webp" alt="Image" title="Image" />`;
+      imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}.webp" alt=${image} title="Image" />`;
       imageItem.classList.add("image-item");
       imageGallery.appendChild(imageItem);
 
@@ -112,17 +113,38 @@ class Gallery extends HTMLElement {
         imageItems.forEach(imageItem => {
           imageItem.classList.remove("active");
         });
-        // const nameInput = this.shadow.querySelector('input[name="image"]');
-        // const titleInput = this.shadow.querySelector('input[name="title"]');
-        // const altInput = this.shadow.querySelector('textarea[name="alt"]'); 
+        const nameInput = this.shadow.querySelector('.image-name-input');
+        const titleInput = this.shadow.querySelector('.image-title-input');
+        const altInput = this.shadow.querySelector('.image-description-input'); 
 
         imageItem.classList.add('active');
-        
-        // nameInput.value = imageItem.querySelector('img').src || '';
-        // titleInput.value = imageItem.querySelector('img').title || '';
-        // altInput.value = imageItem.querySelector('img').alt || '';
+
+        nameInput.value = imageItem.querySelector('img').alt;
+        titleInput.value = imageItem.querySelector('img').title || '';
+        altInput.value = imageItem.querySelector('img').alt || '';
+
+
+        const sendButton = this.shadow.querySelector('.send-button');
+        sendButton.addEventListener('click', () => {
+          this.sendInfo();
+        })
       });
     });
+  }
+  sendInfo(){
+    
+    const form = this.shadow.querySelector('.image-column').querySelector('form');
+    const jsonObject = Object.fromEntries(new FormData(form));
+
+    document.dispatchEvent(new CustomEvent('imageSelected', {
+      detail: {
+        name: this.name,
+        imageName: jsonObject.image,
+        alt: jsonObject.alt,
+        title: jsonObject.title
+      }
+    }));
+    
   }
 
   render() {
@@ -159,26 +181,30 @@ class Gallery extends HTMLElement {
             </div>
             <div class="image-selection gallery" data-option="select-option">
               <div class="image-gallery"></div>
-            </div>
-            <div class="image-column" data-option="select-option">
-              <div class="image-info-container">
-                <div class="image-info">
-                  <label for="image">Nombre de la Imagen</label>
-                  <input name="image" type="text" value="" ></input>
-                </div>
-                <div class="image-info">
-                  <label for="alt">Descripción de la Imagen</label>
-                  <textarea name="alt" class="image-description-input" placeholder="Descripción" value=""></textarea>
-                </div>
-                <div class="image-info">
-                  <label for="title">Título de la Imagen</label>
-                  <input name="title" type="text" placeholder="title" value=""></input>
+              <div class="image-column" data-option="select-option">
+                <form>
+                  <div class="image-info-container">
+                    
+                    <div class="image-info">
+                      <label for="image">Nombre de la Imagen</label>
+                      <input class="image-name-input" name="image" type="text" value="" readonly ></input>
+                    </div>
+                    <div class="image-info">
+                      <label for="alt">Descripción de la Imagen</label>
+                      <textarea name="alt" class="image-description-input" placeholder="Descripción" value=""></textarea>
+                    </div>
+                    <div class="image-info">
+                      <label for="title">Título de la Imagen</label>
+                      <input class="image-title-input" name="title" type="text" placeholder="title" value=""></input>
+                    </div>
+                  </div>
+                </form>
+                <div class="send-button modalButton">
+                  Seleccionar
                 </div>
               </div>
-              <div class="select-button modalButton">
-                Seleccionar
-              </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -390,18 +416,25 @@ class Gallery extends HTMLElement {
           display: flex;
           flex-direction: column;
           width: 100%;
-          padding: 0 0.5rem;
+          padding: 0 1rem;
           gap: 2rem;
+        }
+        form{
+          width: 100%;
         }
         textarea {
           max-width: 100%;
           min-height: 4rem;
         }
+        label{
+          font-weight: 600;
+        }
         .image-info {
           display: flex;
           flex-direction: column;
+          width: 100%;
         }
-        .select-button {
+        .send-button {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -441,16 +474,16 @@ class Gallery extends HTMLElement {
       const imageGallery = this.shadow.querySelector(".image-gallery");
       imageGallery.innerHTML = ""; // Clear existing images
 
-      this.images.forEach(image => {
-        const imageItem = document.createElement("div");
-        imageItem.classList.add("image-item");
+      // this.images.forEach(image => {
+      //   const imageItem = document.createElement("div");
+      //   imageItem.classList.add("image-item");
 
-        const img = document.createElement("img");
-        img.src = image.url;
+      //   const img = document.createElement("img");
+      //   img.src = image.url;
 
-        imageItem.appendChild(img);
-        imageGallery.appendChild(imageItem);
-      });
+      //   imageItem.appendChild(img);
+      //   imageGallery.appendChild(imageItem);
+      // });
     }
   }
 

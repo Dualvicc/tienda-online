@@ -9,3 +9,4 @@ import './../../front/src/modal.js';
 import './alert.js';
 import './pagination.js';
 import './gallery.js';
+import './image-selector.js';

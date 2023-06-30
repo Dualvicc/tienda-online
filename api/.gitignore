@@ -1,3 +1,5 @@
 /node_modules
 .env
 /src/config/config.json
+/src/storage/images/gallery/original
+/src/storage/images/gallery/thumbnail

@@ -3,8 +3,7 @@ class Form extends HTMLElement {
 
     constructor() {
         super();
-        this.shadow = this.attachShadow({mode: 'open'});  
-        
+        this.shadow = this.attachShadow({mode: 'open'});   
     }
 
     static get observedAttributes () { return ['url'] }
@@ -14,12 +13,12 @@ class Form extends HTMLElement {
         document.addEventListener("loadData", async event =>{
             await this.loadData(event.detail.id);
         })
+
     }
 
     async attributeChangedCallback (name, oldValue, newValue) {
         await this.render()
     }
-
     
     async render() {
 
@@ -172,26 +171,6 @@ class Form extends HTMLElement {
             flex-direction: column;
             gap: 0.5rem;
         }
-        .gallery {
-            width: 100px;
-            height: 100px;
-            background-color: #f2f2f2;
-            border: 2px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-          }
-          
-          .plus {
-            font-size: 40px;
-            color: #555;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-          }
 
         </style>
         <div class="area">
@@ -249,26 +228,15 @@ class Form extends HTMLElement {
                 </form>
             </div>
             <div class="tabContent imageUpload" data-tab="upload">
-                <div class="gallery">
-                    <div class="plus">+</div>
-                    <input type="file" id="filePicker" style="display: none;">
-                </div>
+                <image-selector-component name="avatar"></image-selector-component>
             </div>
         </div>
         `;
 
         this.renderTabs();
         this.renderSendButton();
-        this.renderGalery();
     }
-    renderGalery = async () => {
-        const gallery = this.shadow.querySelector('.gallery');
-
-        gallery.addEventListener('click', () => {
-            document.dispatchEvent(new CustomEvent('openGallery'));
-        });
-    };
-    
+     
     renderTabs = async () => {
 
         const tabs = this.shadow.querySelectorAll(".tab");
