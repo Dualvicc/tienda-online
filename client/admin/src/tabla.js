@@ -12,7 +12,9 @@ class Tabla extends HTMLElement {
 
     async connectedCallback () {
         document.addEventListener('dataUpdate', async (event) => {
+
             await this.loadData(event.detail.page);
+        
             document.dispatchEvent(new CustomEvent('pagination',  {
                 detail: {
                     page: this.data.meta.currentPage,
@@ -148,18 +150,10 @@ class Tabla extends HTMLElement {
             gap: 0.5rem;
             overflow: auto; 
             padding: 0.5rem; 
-        }/
-
+        }
         .elementContentItem {
             display: flex;
             gap: 0.5em;
-            color: white;
-        }
-        h4{
-            color: white;
-
-        }
-        p{
             color: white;
         }
         </style>

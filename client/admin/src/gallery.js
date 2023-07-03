@@ -119,7 +119,7 @@ class Gallery extends HTMLElement {
 
         imageItem.classList.add('active');
 
-        nameInput.value = imageItem.querySelector('img').alt;
+        nameInput.value = imageItem.querySelector('img').src;
         titleInput.value = imageItem.querySelector('img').title || '';
         altInput.value = imageItem.querySelector('img').alt || '';
 
@@ -144,7 +144,6 @@ class Gallery extends HTMLElement {
         title: jsonObject.title
       }
     }));
-    
   }
 
   render() {

@@ -4,6 +4,7 @@ class Form extends HTMLElement {
     constructor() {
         super();
         this.shadow = this.attachShadow({mode: 'open'});   
+        this.images = [];
     }
 
     static get observedAttributes () { return ['url'] }
@@ -13,7 +14,18 @@ class Form extends HTMLElement {
         document.addEventListener("loadData", async event =>{
             await this.loadData(event.detail.id);
         })
+        document.addEventListener("imageSelected", async event =>{
+            this.images.forEach(image => {
+                if(image.name == event.detail.name){
+                    image = event.detail;
+                }
+            });
 
+            
+            this.images.push(event.detail);
+
+            
+        })
     }
 
     async attributeChangedCallback (name, oldValue, newValue) {
@@ -275,7 +287,14 @@ class Form extends HTMLElement {
 
             const form = this.shadow.querySelector('form');
             const jsonObject = Object.fromEntries(new FormData(form));
+            
+
+            if(this.images){
+                jsonObject.images = this.images;
+            }
+
             const json = JSON.stringify(jsonObject);
+
             let url = saveButton.dataset.id ? `${API_URL}/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `${API_URL}/api${this.getAttribute('url')}`;
             let method = saveButton.dataset.id ? 'PUT' : 'POST';
             // if(json.password == "") {
@@ -290,8 +309,12 @@ class Form extends HTMLElement {
             })
             .then( async response => {
                 if (response.ok) {
-                    document.dispatchEvent(new CustomEvent('dataUpdate'))
-                    
+                    document.dispatchEvent(new CustomEvent('dataUpdate', {
+                        detail: {
+                            page : 1
+                        }
+                    }))
+                    console.log(json);
                 } else {
                     const respuesta = await response.json()
                     this.renderErrors(respuesta.message);

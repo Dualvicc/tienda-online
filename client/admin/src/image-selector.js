@@ -45,10 +45,9 @@ class ImageSelector extends HTMLElement {
             font-weight: bold;
         }
         .gallery {
-            width: 100px;
-            height: 100px;
+            width: 135px;
+            height: 135px;
             background-color: #f2f2f2;
-            border: 2px solid #ccc;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,15 +62,20 @@ class ImageSelector extends HTMLElement {
         left: 50%;
         transform: translate(-50%, -50%);
         }
+        .image {
+            width: 100%;
+            height: 100%;
+        }
         img {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         </style>
-            <div class="gallery" >
+            <div class="gallery" name= "avatar" >
                 ${this.image!="" ?  
-                    `<div class="plus"> <img src= "${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" /> </div>`
+                    `<div class="image"> <img src= "${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" /> </div>`
                     :
                     `<div class="plus">+</div>`}
                 
@@ -83,8 +87,10 @@ class ImageSelector extends HTMLElement {
     }
     renderGallery = async () => {
         const gallery = this.shadow.querySelector('.gallery');
+        
 
         gallery.addEventListener('click', () => {
+            console.log(gallery.getAttribute('name'))
             document.dispatchEvent(new CustomEvent('openGallery' , {
                 detail: {
                     name : gallery.getAttribute('name')

@@ -128,7 +128,11 @@ class DeleteAlert extends HTMLElement {
                         method: 'DELETE'
                     }).then(response => {
                         if (response.ok) {
-                            document.dispatchEvent(new CustomEvent('dataUpdate'));
+                            document.dispatchEvent(new CustomEvent('dataUpdate', {
+                                detail: {
+                                    page: 1
+                                }
+                            }));
                             console.log('Datos eliminados correctamente');
                         } else {
                             console.log('Error eliminando los datos');

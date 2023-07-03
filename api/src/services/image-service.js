@@ -42,7 +42,11 @@ module.exports = class ImageService {
 
 
   resizeImages = async (entity, entityId, images) => {
-
+    const imageConfiguration = await ImageConfiguration.findOne({ where: { entityId: entityId } });
+    console.log(imageConfiguration);
+    images.forEach(image => {
+      image.imageName
+    })
   }
 
   deleteImages = async filename => {
