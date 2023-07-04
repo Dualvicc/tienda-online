@@ -1,5 +1,6 @@
 const db = require('../../models')
 const ImageService = require('../../services/image-service')
+const Image = db.Image;
 
 exports.create = async (req, res) => {
   try {
@@ -14,38 +15,51 @@ exports.create = async (req, res) => {
   }
 }
 
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
 
-    let page = req.query.page || 1;
-    let limit = parseInt(req.query.size) || 10;
-    let offset = (page - 1) * limit;
+    try {
 
-    let whereStatement = {};
-    let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
+        const result = await new ImageService().getThumbnails(8, 1)
+        res.status(200).send(result)
 
-    Image.findAndCountAll({
-        where: condition, 
-        attributes: ['id', 'imageConfigurationId', 'entityId', 'entity', 'name', 'originalFilename', 'resizedFilename', 'title', 'alt', 'languageAlias', 'mediaQuery', 'latencyMs'],
-        limit: limit,
-        offset: offset,
-        order: [['createdAt', 'DESC']]
-    })
-    .then(result => {
+    } catch (error) {
 
-        result.meta = {
-            total: result.count,
-            pages: Math.ceil(result.count / limit),
-            currentPage: page
-        };
-
-        res.status(200).send(result);
-
-    }).catch(err => {
         res.status(500).send({
-            message: err.errors || "Algún error ha surgido al recuperar los datos."
-        });
-    });
-};
+          message: error.message || 'Algún error ha surgido al traerse los datos.',
+          errors: error.errors
+        })
+    }
+}
+
+    // let page = req.query.page || 1;
+    // let limit = parseInt(req.query.size) || 10;
+    // let offset = (page - 1) * limit;
+
+    // let whereStatement = {};
+    // let condition = Object.keys(whereStatement).length > 0 ? {[Op.and]: [whereStatement]} : {};
+
+    // Image.findAndCountAll({
+    //     where: condition, 
+    //     attributes: ['id', 'imageConfigurationId', 'entityId', 'entity', 'name', 'originalFilename', 'resizedFilename', 'title', 'alt', 'languageAlias', 'mediaQuery', 'latencyMs'],
+    //     limit: limit,
+    //     offset: offset,
+    //     order: [['createdAt', 'DESC']]
+    // })
+    // .then(result => {
+
+    //     result.meta = {
+    //         total: result.count,
+    //         pages: Math.ceil(result.count / limit),
+    //         currentPage: page
+    //     };
+
+    //     res.status(200).send(result);
+
+    // }).catch(err => {
+    //     res.status(500).send({
+    //         message: err.errors || "Algún error ha surgido al recuperar los datos."
+    //     });
+    // });
 
 exports.findOne = (req, res) => {
     const filename = req.params.filename

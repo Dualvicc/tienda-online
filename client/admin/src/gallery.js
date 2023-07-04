@@ -12,7 +12,7 @@ class Gallery extends HTMLElement {
   }
 
   connectedCallback() {
-    this.images = localStorage.getItem("images")? JSON.parse(localStorage.getItem("images")) : [];
+
     document.addEventListener("openGallery", (event) => {
       this.name = event.detail.name;
       const modal = this.shadow.getElementById('modal');
@@ -46,6 +46,9 @@ class Gallery extends HTMLElement {
               tabContent.classList.add("active");
             }
           });
+        }
+        if(selectedOption === "select-option"){
+          this.showGallery();
         }
 
         imageOption.classList.add("active");
@@ -87,23 +90,38 @@ class Gallery extends HTMLElement {
       images.forEach(image => {
         this.images.push(image);
       });
-      localStorage.setItem("images", JSON.stringify(this.images));
-      this.showGallery();
+      
+      const tabElement = this.shadow.querySelector('.image-option[data-option="select-option"]');
+      tabElement.click();
     })
     .catch(error => {
       console.log(error);
     });
   }
 
-  showGallery() {
-    const tabElement = this.shadow.querySelector('.image-option[data-option="select-option"]');
-    tabElement.click();
+  async showGallery() {
 
+    await fetch(`${API_URL}/api/admin/images`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error en la respuesta de la API');
+      }
+    })
+    .then(data => {
+      this.images = data;
+    })
+    .catch(error => {
+      console.error('Error en la solicitud Fetch:', error);
+    });
+    
+        
     const imageGallery = this.shadow.querySelector('.image-gallery');
     imageGallery.innerHTML = '';
     this.images.forEach(image => {
       const imageItem = document.createElement('div');
-      imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}.webp" alt=${image} title="Image" />`;
+      imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}" alt=${image} title="Image" />`;
       imageItem.classList.add("image-item");
       imageGallery.appendChild(imageItem);
 

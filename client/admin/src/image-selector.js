@@ -90,7 +90,6 @@ class ImageSelector extends HTMLElement {
         
 
         gallery.addEventListener('click', () => {
-            console.log(gallery.getAttribute('name'))
             document.dispatchEvent(new CustomEvent('openGallery' , {
                 detail: {
                     name : gallery.getAttribute('name')

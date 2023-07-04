@@ -3,3 +3,4 @@
 /src/config/config.json
 /src/storage/images/gallery/original
 /src/storage/images/gallery/thumbnail
+/src/storage/images/gallery/resized

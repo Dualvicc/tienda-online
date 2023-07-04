@@ -314,7 +314,7 @@ class Form extends HTMLElement {
                             page : 1
                         }
                     }))
-                    console.log(json);
+
                 } else {
                     const respuesta = await response.json()
                     this.renderErrors(respuesta.message);

@@ -4,8 +4,10 @@ const sharp = require('sharp');
 const db = require('../models');
 const ImageConfiguration = db.ImageConfiguration;
 const Image = db.Image;
+const currentDate = new Date().toLocaleString().replace(/[/,:\s]/g, '-').replace(/-{2,}/g, '-');
 
 module.exports = class ImageService {
+  
   uploadImage = async (images) => {
 
     const thumbnails = [];
@@ -13,7 +15,7 @@ module.exports = class ImageService {
     for (const file of images.file) {
 
       const filename = file.filename;
-      const currentDate = new Date().toLocaleString().replace(/[/,:\s]/g, '-').replace(/-{2,}/g, '-');
+      
       const tmpFilePath = path.join(__dirname, `../storage/tmp/${filename}`);
       const parsedFilename = `${currentDate}-${filename.replace(/[\s_]/g, '-')}`;
       const originalFilePath = path.join(
@@ -42,18 +44,65 @@ module.exports = class ImageService {
 
 
   resizeImages = async (entity, entityId, images) => {
-    const imageConfiguration = await ImageConfiguration.findOne({ where: { entityId: entityId } });
-    console.log(imageConfiguration);
-    images.forEach(image => {
-      image.imageName
-    })
-  }
+    const resizedFilePath = path.join(__dirname, '../storage/images/gallery/resized');
+    
+    for (const image of images) {
+      const startTime = new Date().getTime();
+      const originalFileName = `${path.parse(image.imageName).name}.webp`;
+      const imageConfigurations = await ImageConfiguration.findAll({
+        where: { 
+          entity: entity,
+          name: image.name
+        }
+      });
+  
+      const originalFilePath = path.join(__dirname, `../storage/images/gallery/original/${originalFileName}`);
+  
+      for (const imageConfiguration of imageConfigurations) {
+        const resizedFileName = `${path.parse(image.imageName).name}-${imageConfiguration.dataValues.widthPx}x${imageConfiguration.dataValues.height}.webp`;
+    
+        try {
+          await fs.access(originalFilePath);
+          await sharp(originalFilePath).resize(imageConfiguration.dataValues.widthPx, imageConfiguration.dataValues.heightPx, { fit: 'contain' }).toFile(`${resizedFilePath}/${resizedFileName}`);
+          const endTime = new Date().getTime();
+          const latencyMs = endTime - startTime;
+    
+          const body = {
+            imageConfigurationId: imageConfiguration.dataValues.id,
+            entityId: entityId,
+            entity: entity,
+            name: image.name,
+            originalFileName:  originalFileName,
+            resizedFileName: resizedFileName,
+            title: image.title,
+            alt: image.alt,
+            languageAlias: image.languageAlias || 'es',
+            mediaQuery: imageConfiguration.dataValues.mediaQuery,
+            latencyMs: latencyMs
+          };
+    
+          await Image.create(body);
+        } catch (error) {
+          console.error('Ocurrió un error al procesar el archivo:', error);
+        }
+      }
+    }
+  };
+  
 
   deleteImages = async filename => {
 
   }
 
   getThumbnails = async (limit, offset) => {
+
+    const thumbnailsFilePath = path.join(__dirname, '../storage/images/gallery/thumbnail');
+    const thumbnails = await fs.readdir(thumbnailsFilePath);
+    // const startIndex = offset * limit;
+    // const endIndex = startIndex + limit;
+
+    return thumbnails
+    
 
   }
 }
