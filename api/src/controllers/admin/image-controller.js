@@ -16,10 +16,11 @@ exports.create = async (req, res) => {
 }
 
 exports.findAll = async (req, res) => {
+    let page = req.query.page || 1;
 
     try {
 
-        const result = await new ImageService().getThumbnails(8, 1)
+        const result = await new ImageService().getThumbnails(15, page)
         res.status(200).send(result)
 
     } catch (error) {
@@ -31,7 +32,7 @@ exports.findAll = async (req, res) => {
     }
 }
 
-    // let page = req.query.page || 1;
+    
     // let limit = parseInt(req.query.size) || 10;
     // let offset = (page - 1) * limit;
 

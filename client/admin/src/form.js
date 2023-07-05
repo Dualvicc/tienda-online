@@ -11,18 +11,29 @@ class Form extends HTMLElement {
 
     async connectedCallback() {
 
-        document.addEventListener("loadData", async event =>{
+        document.addEventListener("deleteImage", async event => {
+            this.images.forEach((image, index) => {
+                if(image.name == event.detail.name){
+                    this.images.splice(index, 1);
+                }
+            });
+            console.log(this.images)
+        });
+        document.addEventListener("loadData", async event => {
             await this.loadData(event.detail.id);
         })
         document.addEventListener("imageSelected", async event =>{
-            this.images.forEach(image => {
-                if(image.name == event.detail.name){
-                    image = event.detail;
-                }
-            });
 
+            if(this.images.length > 0){
+                this.images.forEach(image => {
+                    if(image.name == event.detail.name){
+                        image = event.detail;
+                    }
+                });
+            }
             
             this.images.push(event.detail);
+            console.log(this.images)
 
             
         })

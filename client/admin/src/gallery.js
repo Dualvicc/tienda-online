@@ -119,6 +119,7 @@ class Gallery extends HTMLElement {
         
     const imageGallery = this.shadow.querySelector('.image-gallery');
     imageGallery.innerHTML = '';
+
     this.images.forEach(image => {
       const imageItem = document.createElement('div');
       imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}" alt=${image} title="Image" />`;
@@ -131,6 +132,7 @@ class Gallery extends HTMLElement {
         imageItems.forEach(imageItem => {
           imageItem.classList.remove("active");
         });
+
         const nameInput = this.shadow.querySelector('.image-name-input');
         const titleInput = this.shadow.querySelector('.image-title-input');
         const altInput = this.shadow.querySelector('.image-description-input'); 
@@ -143,11 +145,15 @@ class Gallery extends HTMLElement {
 
 
         const sendButton = this.shadow.querySelector('.send-button');
+
         sendButton.addEventListener('click', () => {
           this.sendInfo();
         })
       });
     });
+  }
+  getThumbnail = async () => {
+
   }
   sendInfo(){
     

@@ -44,7 +44,7 @@ class ImageSelector extends HTMLElement {
             color: white;
             font-weight: bold;
         }
-        .gallery {
+        .imageSelector {
             width: 135px;
             height: 135px;
             background-color: #f2f2f2;
@@ -53,6 +53,10 @@ class ImageSelector extends HTMLElement {
             align-items: center;
             cursor: pointer;
             position: relative;
+        }
+        .gallery {
+            width: 100%;
+            height: 100%;
         }
         .plus {
         font-size: 40px;
@@ -66,6 +70,30 @@ class ImageSelector extends HTMLElement {
             width: 100%;
             height: 100%;
         }
+        .delete {
+            position: absolute;
+            justify-content: center;
+            display: flex;
+            top: -10%;
+            right: -10%;
+            font-size: 30px;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+            align-items: center;
+            width: 30%;
+            height: 30%;
+            background-color: hsl(207, 85%, 69%);
+
+        }
+        .delete:hover {
+            scale : 1.2;
+        }
+        svg {
+            width: 80%;
+            height: 80%;
+            filter: invert(1) sepia(1) saturate(7) hue-rotate(175deg);
+        }
         img {
             width: 100%;
             height: 100%;
@@ -73,20 +101,52 @@ class ImageSelector extends HTMLElement {
         }
         
         </style>
-            <div class="gallery" name= "avatar" >
+            <div class="imageSelector" name="avatar" >
                 ${this.image!="" ?  
-                    `<div class="image"> <img src= "${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" /> </div>`
+                    `<div class="image">
+                        <img src= "${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" />
+                    </div>
+                    <div class="delete">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"></path>
+                        </svg>
+                    </div>`
                     :
-                    `<div class="plus">+</div>`}
+                    `<div class="gallery" name="avatar" >
+                        <div class="plus">+</div>
+                    </div>`}
                 
                 <input type="file" id="filePicker" style="display: none;">
             </div>
+            
         `;
 
         this.renderGallery();
+
+        if(this.image != ""){
+            const deleteButton = this.shadow.querySelector('.delete');
+            deleteButton.addEventListener('click', () => {
+                document.dispatchEvent(new CustomEvent('deleteImage', {
+                    detail: {
+                        name : this.name
+                    }
+                }));
+                this.image = "";
+                this.render();
+            });
+        }
+
+        
+
     }
     renderGallery = async () => {
-        const gallery = this.shadow.querySelector('.gallery');
+        let gallery = this.shadow.querySelector('.gallery');
+
+        this.image == "" ?
+
+        gallery = this.shadow.querySelector('.gallery')
+        :
+        gallery = this.shadow.querySelector('.image')
         
 
         gallery.addEventListener('click', () => {
