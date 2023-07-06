@@ -9,12 +9,14 @@ class Gallery extends HTMLElement {
     this.images = [];
     this.name = "";
     this.imageName = "";
+    this.selectedImage = "";
   }
 
   connectedCallback() {
 
     document.addEventListener("openGallery", (event) => {
       this.name = event.detail.name;
+      this.selectedImage = event.detail.image;
       const modal = this.shadow.getElementById('modal');
       modal.classList.toggle("active");
     });

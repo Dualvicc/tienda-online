@@ -63,11 +63,13 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
 
     User.findByPk(id,{
+        attributes: { exclude: ['password'] },
         include: [
             {   
                 model: db.Image,
                 as: 'images',
-                where:{ mediaquery: 'lg'}
+                where:{ mediaquery: 'lg'},
+                required: false
             }
             
         ],

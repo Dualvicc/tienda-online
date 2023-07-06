@@ -164,19 +164,21 @@ class ImageSelector extends HTMLElement {
     renderGallery = async () => {
         let gallery = this.shadow.querySelector('.gallery');
 
-        this.image == "" ?
-
-        gallery = this.shadow.querySelector('.gallery')
-        :
-        gallery = this.shadow.querySelector('.image')
-        
+        if (this.image === "") {
+            gallery = this.shadow.querySelector('.gallery');
+        } else {
+            gallery = this.shadow.querySelector('.image');
+        }
 
         gallery.addEventListener('click', () => {
-            document.dispatchEvent(new CustomEvent('openGallery' , {
-                detail: {
-                    name : gallery.getAttribute('name')
-                }
-            }));
+            const eventDetail = {
+                name: gallery.getAttribute('name')
+            };
+    
+            if (this.image !== "") {
+                eventDetail.image = this.image;
+            }
+            document.dispatchEvent(new CustomEvent('openGallery' , {detail: eventDetail}));
         });
     };
   

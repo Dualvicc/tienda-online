@@ -346,15 +346,18 @@ class Form extends HTMLElement {
                 if(form.elements[key]){
                     form.elements[key].value = value;
                 }
-                if(key === "images"){
 
-                    document.dispatchEvent(new CustomEvent('getUserImages', {
-                        detail: {
-                            images: value,
-                        }
-                    }));
-                }
+                
+                
             });
+
+            const images = data.images || [];
+
+            document.dispatchEvent(new CustomEvent('getUserImages', {
+                detail: {
+                    images: images,
+                }
+            }));
 
         })
         .catch(error => {
