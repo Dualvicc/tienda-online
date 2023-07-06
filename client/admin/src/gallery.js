@@ -18,9 +18,7 @@ class Gallery extends HTMLElement {
       const modal = this.shadow.getElementById('modal');
       modal.classList.toggle("active");
     });
-    
-    this.render();
-    this.showGallery();
+
   }
 
   static get observedAttributes() { return ['url']; }
@@ -33,7 +31,7 @@ class Gallery extends HTMLElement {
     const imageOptions = this.shadow.querySelectorAll(".image-option");
 
     imageOptions.forEach(imageOption => {
-      imageOption.addEventListener("click", () => {
+      imageOption.addEventListener("click", async () => {
         const selectedOption = imageOption.dataset.option;
         const tabContent = this.shadow.querySelectorAll(".image-selection");
         this.fileOption = selectedOption;
@@ -48,7 +46,10 @@ class Gallery extends HTMLElement {
           });
         }
         if(selectedOption === "select-option"){
-          this.showGallery();
+          this.images = [];
+          await this.getThumbnail();
+          await this.renderImages();
+          this.handleClick();
         }
 
         imageOption.classList.add("active");
@@ -99,8 +100,7 @@ class Gallery extends HTMLElement {
     });
   }
 
-  async showGallery() {
-
+  getThumbnail = async () => {
     await fetch(`${API_URL}/api/admin/images`)
     .then(response => {
       if (response.ok) {
@@ -115,51 +115,70 @@ class Gallery extends HTMLElement {
     .catch(error => {
       console.error('Error en la solicitud Fetch:', error);
     });
+  }
+
+
+  renderImages = async () => {
     
+ 
         
     const imageGallery = this.shadow.querySelector('.image-gallery');
-    imageGallery.innerHTML = '';
+    imageGallery.innerHTML = "";
 
     this.images.forEach(image => {
+
       const imageItem = document.createElement('div');
+
       imageItem.innerHTML = `<img src="${API_URL}/api/admin/images/${image}" alt=${image} title="Image" />`;
+
       imageItem.classList.add("image-item");
+
       imageGallery.appendChild(imageItem);
 
-      imageItem.addEventListener("click", () => {
-        const imageItems = this.shadow.querySelectorAll(".image-item");
+    });
+
+  }
+
+  handleClick = () => {
+
+    const nameInput = this.shadow.querySelector('.image-name-input');
+    const titleInput = this.shadow.querySelector('.image-title-input');
+    const altInput = this.shadow.querySelector('.image-alt-input');
+
+    const imageItems = this.shadow.querySelectorAll(".image-item");
+
+    imageItems.forEach((item) => {
+    
+      item.addEventListener("click", () => {
 
         imageItems.forEach(imageItem => {
+
           imageItem.classList.remove("active");
+
         });
 
-        const nameInput = this.shadow.querySelector('.image-name-input');
-        const titleInput = this.shadow.querySelector('.image-title-input');
-        const altInput = this.shadow.querySelector('.image-description-input'); 
+        item.classList.add("active");
 
-        imageItem.classList.add('active');
+        nameInput.value = item.querySelector('img').alt || '';
+        titleInput.value = item.querySelector('img').title || '';
+        altInput.value = item.querySelector('img').alt || '';
 
-        nameInput.value = imageItem.querySelector('img').src;
-        titleInput.value = imageItem.querySelector('img').title || '';
-        altInput.value = imageItem.querySelector('img').alt || '';
-
-
-        const sendButton = this.shadow.querySelector('.send-button');
-
-        sendButton.addEventListener('click', () => {
-          this.sendInfo();
-        })
       });
-    });
-  }
-  getThumbnail = async () => {
 
-  }
-  sendInfo(){
+    });
+
+    const sendButton = this.shadow.querySelector('.send-button');
+    sendButton.addEventListener('click', () => {
+      this.sendInfo();
+      this.images = [];
+    });
+  };
+
+  sendInfo = () => {
     
     const form = this.shadow.querySelector('.image-column').querySelector('form');
     const jsonObject = Object.fromEntries(new FormData(form));
-
+    
     document.dispatchEvent(new CustomEvent('imageSelected', {
       detail: {
         name: this.name,
@@ -214,7 +233,7 @@ class Gallery extends HTMLElement {
                     </div>
                     <div class="image-info">
                       <label for="alt">Descripción de la Imagen</label>
-                      <textarea name="alt" class="image-description-input" placeholder="Descripción" value=""></textarea>
+                      <textarea name="alt" class="image-alt-input" placeholder="Descripción" value=""></textarea>
                     </div>
                     <div class="image-info">
                       <label for="title">Título de la Imagen</label>
@@ -494,19 +513,6 @@ class Gallery extends HTMLElement {
         e.preventDefault();
       });
 
-      const imageGallery = this.shadow.querySelector(".image-gallery");
-      imageGallery.innerHTML = ""; // Clear existing images
-
-      // this.images.forEach(image => {
-      //   const imageItem = document.createElement("div");
-      //   imageItem.classList.add("image-item");
-
-      //   const img = document.createElement("img");
-      //   img.src = image.url;
-
-      //   imageItem.appendChild(img);
-      //   imageGallery.appendChild(imageItem);
-      // });
     }
   }
 

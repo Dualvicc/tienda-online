@@ -17,26 +17,20 @@ class Form extends HTMLElement {
                     this.images.splice(index, 1);
                 }
             });
-            console.log(this.images)
         });
         document.addEventListener("loadData", async event => {
             await this.loadData(event.detail.id);
         })
-        document.addEventListener("imageSelected", async event =>{
-
-            if(this.images.length > 0){
-                this.images.forEach(image => {
-                    if(image.name == event.detail.name){
-                        image = event.detail;
-                    }
-                });
+        document.addEventListener("imageSelected", async event => {
+            const existingImageIndex = this.images.findIndex(image => image.name === event.detail.name);
+          
+            if (existingImageIndex !== -1) {
+              this.images[existingImageIndex] = event.detail;
+            } else {
+              this.images.push(event.detail);
             }
-            
-            this.images.push(event.detail);
-            console.log(this.images)
-
-            
-        })
+          
+          });
     }
 
     async attributeChangedCallback (name, oldValue, newValue) {
@@ -308,9 +302,7 @@ class Form extends HTMLElement {
 
             let url = saveButton.dataset.id ? `${API_URL}/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `${API_URL}/api${this.getAttribute('url')}`;
             let method = saveButton.dataset.id ? 'PUT' : 'POST';
-            // if(json.password == "") {
-            //     json
-            // }
+
             await fetch(url, {
                 method: method,
                 headers: {
@@ -347,14 +339,23 @@ class Form extends HTMLElement {
            return response.json()
         })
         .then(data => {
-
+    
             let form = this.shadow.querySelector("form");
 
             Object.entries(data).forEach( ([key, value]) => {
                 if(form.elements[key]){
-                    form.elements[key].value = value
+                    form.elements[key].value = value;
+                }
+                if(key === "images"){
+
+                    document.dispatchEvent(new CustomEvent('getUserImages', {
+                        detail: {
+                            images: value,
+                        }
+                    }));
                 }
             });
+
         })
         .catch(error => {
             console.error('Error en la petición:', error);

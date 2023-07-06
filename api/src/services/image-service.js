@@ -59,7 +59,7 @@ module.exports = class ImageService {
       const originalFilePath = path.join(__dirname, `../storage/images/gallery/original/${originalFileName}`);
   
       for (const imageConfiguration of imageConfigurations) {
-        const resizedFileName = `${path.parse(image.imageName).name}-${imageConfiguration.dataValues.widthPx}x${imageConfiguration.dataValues.height}.webp`;
+        const resizedFileName = `${path.parse(image.imageName).name}-${imageConfiguration.dataValues.widthPx}x${imageConfiguration.dataValues.heightPx}.webp`;
     
         try {
           await fs.access(originalFilePath);
@@ -72,8 +72,8 @@ module.exports = class ImageService {
             entityId: entityId,
             entity: entity,
             name: image.name,
-            originalFileName:  originalFileName,
-            resizedFileName: resizedFileName,
+            originalFilename:  originalFileName,
+            resizedFilename: resizedFileName,
             title: image.title,
             alt: image.alt,
             languageAlias: image.languageAlias || 'es',

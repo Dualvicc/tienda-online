@@ -5,18 +5,40 @@ class ImageSelector extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});  
         this.image= "";
+        this.data = [];
         this.name = this.getAttribute('name');
     }
 
     static get observedAttributes () { return ['name'] }
 
     async connectedCallback() {
+        
+        document.addEventListener("loadData", async event =>{
+
+        });
 
         document.addEventListener("imageSelected", async event =>{
             this.image = event.detail
             await this.render();
 
         })
+        document.addEventListener("getUserImages", async event =>{
+
+            this.data = event.detail.images
+            console.log(this.data)
+            this.data.forEach(async element => {
+                this.name = element.name;
+                this.image = {
+                    name: element.name,
+                    imageName: element.originalFilename,
+                    alt: element.alt,
+                    title: element.title
+
+                }
+                await this.render();
+            });
+
+        });
     }
 
     async attributeChangedCallback (name, oldValue, newValue) {
@@ -104,7 +126,7 @@ class ImageSelector extends HTMLElement {
             <div class="imageSelector" name="avatar" >
                 ${this.image!="" ?  
                     `<div class="image">
-                        <img src= "${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" />
+                        <img src= "${API_URL}/api/admin/images/${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" />
                     </div>
                     <div class="delete">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
