@@ -7,16 +7,20 @@ class Gallery extends HTMLElement {
     this.shadow = this.attachShadow({ mode: 'open' });
     this.fileOption = "upload-option";
     this.images = [];
-    this.name = "";
-    this.imageName = "";
-    this.selectedImage = "";
+    this.imageData = {};
   }
 
   connectedCallback() {
 
     document.addEventListener("openGallery", (event) => {
-      this.name = event.detail.name;
-      this.selectedImage = event.detail.image;
+
+      this.render();
+
+      if (event.detail.image) {
+        this.imageData = event.detail.image;
+      }
+      this.imageData.name = event.detail.name;
+      
       const modal = this.shadow.getElementById('modal');
       modal.classList.toggle("active");
     });
@@ -135,6 +139,10 @@ class Gallery extends HTMLElement {
 
       imageItem.classList.add("image-item");
 
+      if(this.imageData.filename === image){
+        imageItem.classList.add("active");
+      }
+
       imageGallery.appendChild(imageItem);
 
     });
@@ -146,6 +154,12 @@ class Gallery extends HTMLElement {
     const nameInput = this.shadow.querySelector('.image-name-input');
     const titleInput = this.shadow.querySelector('.image-title-input');
     const altInput = this.shadow.querySelector('.image-alt-input');
+
+    if (this.imageData != "") {
+      nameInput.value = this.imageData.filename;
+      titleInput.value = this.imageData.title;
+      altInput.value = this.imageData.alt;
+    }
 
     const imageItems = this.shadow.querySelectorAll(".image-item");
 
@@ -183,15 +197,15 @@ class Gallery extends HTMLElement {
     
     document.dispatchEvent(new CustomEvent('imageSelected', {
       detail: {
-        name: this.name,
-        imageName: jsonObject.image,
+        name: this.imageData.name,
+        filename: jsonObject.image,
         alt: jsonObject.alt,
         title: jsonObject.title
       }
     }));
   }
 
-  render() {
+  async render() {
     this.shadow.innerHTML =
       `
       <div class="modal" id="modal">
@@ -212,7 +226,7 @@ class Gallery extends HTMLElement {
               </ul>
             </div>
 
-            <div class="image-selection active" data-option="upload-option">
+            <div class="image-selection ${this.fileOption === 'upload-option' ? 'active' : ''}" data-option="upload-option">
               <div class="image-input">
                   <form class="image-form" id="image-form" enctype="multipart/form-data">
 
@@ -223,7 +237,7 @@ class Gallery extends HTMLElement {
                   </form>
               </div>
             </div>
-            <div class="image-selection gallery" data-option="select-option">
+            <div class="image-selection gallery ${this.fileOption === 'select-option' ? 'active' : ''}" data-option="select-option">
               <div class="image-gallery"></div>
               <div class="image-column" data-option="select-option">
                 <form>
@@ -497,6 +511,9 @@ class Gallery extends HTMLElement {
       `;
   
       this.selectImageOption();
+      await this.getThumbnail();
+      await this.renderImages();
+      this.handleClick();
   
       const modalButtons = this.shadow.querySelectorAll(".modalButton");
       const modal = this.shadow.querySelector("#modal");

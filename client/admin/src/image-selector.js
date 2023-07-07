@@ -5,7 +5,6 @@ class ImageSelector extends HTMLElement {
         super();
         this.shadow = this.attachShadow({mode: 'open'});  
         this.image= "";
-        this.data = [];
         this.name = this.getAttribute('name');
     }
 
@@ -23,21 +22,23 @@ class ImageSelector extends HTMLElement {
 
         })
         document.addEventListener("getUserImages", async event =>{
+            if(event.detail.images.length>0){
+                event.detail.images.forEach(async element => {
+                    if(element.name == this.name){
+                        this.image = {
+                            filename: element.originalFilename,
+                            alt: element.alt,
+                            title: element.title
+                        }
+                    }
+                });
 
-            this.data = event.detail.images
-            console.log(this.data)
-            this.data.forEach(async element => {
-                this.name = element.name;
-                this.image = {
-                    name: element.name,
-                    imageName: element.originalFilename,
-                    alt: element.alt,
-                    title: element.title
+            }else{
 
-                }
-                await this.render();
-            });
-
+                this.image = "";
+            }       
+            
+            await this.render();
         });
     }
 
@@ -126,7 +127,7 @@ class ImageSelector extends HTMLElement {
             <div class="imageSelector" name="avatar" >
                 ${this.image!="" ?  
                     `<div class="image">
-                        <img src= "${API_URL}/api/admin/images/${this.image.imageName}" alt="${this.image.alt}" title="${this.image.title}" />
+                        <img src= "${API_URL}/api/admin/images/${this.image.filename}" alt="${this.image.alt}" title="${this.image.title}" />
                     </div>
                     <div class="delete">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -172,13 +173,14 @@ class ImageSelector extends HTMLElement {
 
         gallery.addEventListener('click', () => {
             const eventDetail = {
-                name: gallery.getAttribute('name')
+                name: this.name
             };
     
-            if (this.image !== "") {
+            if (this.image != "") {
                 eventDetail.image = this.image;
             }
             document.dispatchEvent(new CustomEvent('openGallery' , {detail: eventDetail}));
+            
         });
     };
   
