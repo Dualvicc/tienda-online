@@ -294,10 +294,10 @@ class Form extends HTMLElement {
             const jsonObject = Object.fromEntries(new FormData(form));
             
 
-            if(this.images){
+            if(this.images.length > 0){
                 jsonObject.images = this.images;
             }
-
+            console.log(jsonObject);
             const json = JSON.stringify(jsonObject);
 
             let url = saveButton.dataset.id ? `${API_URL}/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `${API_URL}/api${this.getAttribute('url')}`;

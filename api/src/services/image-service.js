@@ -48,7 +48,7 @@ module.exports = class ImageService {
     
     for (const image of images) {
       const startTime = new Date().getTime();
-      const originalFileName = `${path.parse(image.imageName).name}.webp`;
+      const originalFileName = `${path.parse(image.filename).name}.webp`;
       const imageConfigurations = await ImageConfiguration.findAll({
         where: { 
           entity: entity,
@@ -59,7 +59,7 @@ module.exports = class ImageService {
       const originalFilePath = path.join(__dirname, `../storage/images/gallery/original/${originalFileName}`);
   
       for (const imageConfiguration of imageConfigurations) {
-        const resizedFileName = `${path.parse(image.imageName).name}-${imageConfiguration.dataValues.widthPx}x${imageConfiguration.dataValues.heightPx}.webp`;
+        const resizedFileName = `${path.parse(image.filename).name}-${imageConfiguration.dataValues.widthPx}x${imageConfiguration.dataValues.heightPx}.webp`;
     
         try {
           await fs.access(originalFilePath);

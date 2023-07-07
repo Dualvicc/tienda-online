@@ -119,7 +119,14 @@ exports.delete = (req, res) => {
     const id = req.params.id;
 
     User.destroy({
-        where: { id: id }
+        where: { id: id },
+        include: [
+            {   
+                model: db.Image,
+                as: 'images',
+                required: false
+            }  
+        ],
     }).then(num => {
         if (num == 1) {
             res.status(200).send({
