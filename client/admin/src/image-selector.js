@@ -16,6 +16,11 @@ class ImageSelector extends HTMLElement {
 
         });
 
+        document.addEventListener("clearInfo", async event =>{
+            this.image="";
+            await this.render();
+        });
+
         document.addEventListener("imageSelected", async event =>{
             this.image = event.detail
             await this.render();

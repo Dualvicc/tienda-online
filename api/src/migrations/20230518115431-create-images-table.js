@@ -18,7 +18,8 @@ module.exports = {
         }
       },
       entityId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       entity: {
         type: Sequelize.STRING,

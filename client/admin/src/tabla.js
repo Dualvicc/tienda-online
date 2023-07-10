@@ -242,7 +242,7 @@ class Tabla extends HTMLElement {
         const elementContent = document.createElement('div');
         elementContent.classList.add('elementContent');
       
-        // Función recursiva para explorar el objeto y mostrar las claves y valores de tipo "string"
+        
         const renderProperties = (obj) => {
           for (const key in obj) {
             if (obj.hasOwnProperty(key)) {
@@ -262,13 +262,13 @@ class Tabla extends HTMLElement {
                 elementContentItem.appendChild(valueContent);
                 elementContent.appendChild(elementContentItem);
               } else if (typeof value === 'object') {
-                renderProperties(value); // Llamada recursiva para explorar propiedades anidadas de tipo objeto
+                renderProperties(value); 
               }
             }
           }
         };
       
-        renderProperties(data); // Iniciar el proceso de renderizado
+        renderProperties(data); 
       
         elementHeader.appendChild(editButton);
         elementHeader.appendChild(deleteButton);

@@ -252,6 +252,7 @@ class Form extends HTMLElement {
 
         this.renderTabs();
         this.renderSendButton();
+        this.renderCleanButton();
     }
      
     renderTabs = async () => {
@@ -281,6 +282,22 @@ class Form extends HTMLElement {
             })
         });
     }
+
+    renderCleanButton = async () => {
+
+        const cleanButton = this.shadow.querySelector('.cleanButton');
+        cleanButton.addEventListener('click', async event => {
+
+            event.preventDefault();
+
+            const form = this.shadow.querySelector('form');
+            const saveButton = this.shadow.querySelector('.saveButton');
+            form.reset();
+            saveButton.dataset.id = "";
+            document.dispatchEvent(new CustomEvent('clearInfo')); 
+            
+        });
+    }
     
     renderSendButton = async () => {
 
@@ -297,7 +314,7 @@ class Form extends HTMLElement {
             if(this.images.length > 0){
                 jsonObject.images = this.images;
             }
-            console.log(jsonObject);
+            
             const json = JSON.stringify(jsonObject);
 
             let url = saveButton.dataset.id ? `${API_URL}/api${this.getAttribute('url')}/${saveButton.dataset.id}` : `${API_URL}/api${this.getAttribute('url')}`;
@@ -317,6 +334,9 @@ class Form extends HTMLElement {
                             page : 1
                         }
                     }))
+                    const cleanButton = this.shadow.querySelector('.cleanButton');
+                    cleanButton.click();
+
 
                 } else {
                     const respuesta = await response.json()

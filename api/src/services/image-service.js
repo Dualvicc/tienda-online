@@ -4,6 +4,7 @@ const sharp = require('sharp');
 const db = require('../models');
 const ImageConfiguration = db.ImageConfiguration;
 const Image = db.Image;
+
 const currentDate = new Date().toLocaleString().replace(/[/,:\s]/g, '-').replace(/-{2,}/g, '-');
 
 module.exports = class ImageService {
@@ -89,9 +90,48 @@ module.exports = class ImageService {
     }
   };
   
+  deleteImage = async (filename, confirmation) => {
+    
+    if(!confirmation){
 
-  deleteImages = async filename => {
+      db.Image.findAll({where: {originalFilename: filename}})
+      .then(async (images) => {
 
+        if(images.length > 0){
+
+          return {
+            message : 'Algun usuario está utilizando esa imagen. Seguro que desea eliminarla?',
+            success: false,
+        }
+
+        }else{
+
+          confirmation = true;
+        }        
+      });
+
+    }
+    
+    if(confirmation){
+      const thumbnailsFilePath = path.join(__dirname, '../storage/images/gallery/thumbnail');
+      const thumbnails = await fs.readdir(thumbnailsFilePath);
+
+      for (const thumbnail of thumbnails) {
+        if (thumbnail === filename) {
+          await fs.unlink(path.join(thumbnailsFilePath, thumbnail));
+        }
+      }
+
+      db.Image.destroy({
+        where: {
+          originalFilename: filename
+        }
+      })
+    
+    return {success: true}; 
+
+    }
+    
   }
 
   getThumbnails = async (limit, offset) => {

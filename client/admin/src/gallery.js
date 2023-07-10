@@ -106,6 +106,27 @@ class Gallery extends HTMLElement {
     });
   }
 
+  deleteImage = async (confirmation) => {
+    console.log(confirmation);
+    await fetch(`${API_URL}/api/admin/images/${this.imageData.filename}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer'+ sessionStorage.getItem('accessToken')         
+      },
+      body : confirmation
+    }).then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Error en la respuesta de la API');
+      }
+    })
+    .catch(error => {
+      console.error('Error en la solicitud Fetch:', error);
+    });
+   
+  }
+
   getThumbnail = async () => {
     await fetch(`${API_URL}/api/admin/images`)
     .then(response => {
@@ -172,8 +193,10 @@ class Gallery extends HTMLElement {
           imageItem.classList.remove("active");
 
         });
+        this.imageData.filename = item.querySelector('img').alt
 
         item.classList.add("active");
+
 
         nameInput.value = item.querySelector('img').alt || '';
         titleInput.value = item.querySelector('img').title || '';
@@ -257,8 +280,15 @@ class Gallery extends HTMLElement {
                     </div>
                   </div>
                 </form>
-                <div class="send-button modalButton">
-                  Seleccionar
+                <div class="button-container">
+                  <div class="send-button modalButton">
+                    Seleccionar
+                  </div>
+                  <div class="delete-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
@@ -492,13 +522,36 @@ class Gallery extends HTMLElement {
           flex-direction: column;
           width: 100%;
         }
+        .button-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+          height: 100%;
+        }
+        svg{
+          width: 3rem;
+          filter: invert(1) sepia(1) saturate(7) hue-rotate(175deg);
+        }
+        .delete-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: hsl(226, 64%, 66%);
+          width: 20%;
+          height: 20%;
+          padding: 5%;
+          cursor: pointer;
+          border-radius: 5px;
+        }
         .send-button {
           display: flex;
           justify-content: center;
           align-items: center;
           background-color: hsl(207, 85%, 69%);
           width: 55%;
-          height: 10%;
+          height: 20%;
           padding: 5%;
           text-align: center;
           color: white;
@@ -518,12 +571,31 @@ class Gallery extends HTMLElement {
       const modalButtons = this.shadow.querySelectorAll(".modalButton");
       const modal = this.shadow.querySelector("#modal");
       const fileInput = this.shadow.querySelector(".file-input");
+      const deleteButton = this.shadow.querySelector('.delete-button');
+
+      deleteButton.addEventListener("click", async () => {
+
+        if(this.imageData.filename){
+
+          const confirmation = this.shadow.querySelector('.delete-confirmation') || false;
+          const result = await this.deleteImage(confirmation)
+
+          if(result.success){
+            await this.getThumbnail();
+            await this.renderImages();
+
+          }else{
+            console.log(result.message);
+          }
+        }
+      })
   
       modalButtons.forEach(modalButton => {
         modalButton.addEventListener("click", () => {
           modal.classList.toggle("active");
         });
       });
+
   
       fileInput.addEventListener("change", this.handleFileUpload);
   
