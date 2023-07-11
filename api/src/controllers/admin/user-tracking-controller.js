@@ -3,7 +3,7 @@ const UserTracking = db.UserTracking;
 const Op = db.Sequelize.Op;
 const TrackingService = require('../../services/tracking-service')
 
-exports.create = (req, res) => {
+exports.create = async(req, res) => {
 
     UserTracking.create(req.body).then(data => {
 
@@ -14,9 +14,11 @@ exports.create = (req, res) => {
             message: err.errors || "Algún error ha surgido al insertar el dato."
         });
     });
+    await new TrackingService().apiTracking(req, res);
+
 };
 
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
 
     let page = req.query.page || 1;
     let limit = parseInt(req.query.size) || 10;
@@ -46,9 +48,11 @@ exports.findAll = (req, res) => {
             message: err.errors || "Algún error ha surgido al recuperar los datos."
         });
     });
+    await new TrackingService().apiTracking(req, res);
+
 };
 
-exports.findOne = (req, res) => {
+exports.findOne = async (req, res) => {
 
     const id = req.params.id;
 
@@ -67,6 +71,8 @@ exports.findOne = (req, res) => {
             message: "Algún error ha surgido al recuperar la id=" + id
         });
     });
+    await new TrackingService().apiTracking(req, res);
+
 };
 
 exports.update = (req, res) => {

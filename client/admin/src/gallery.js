@@ -107,13 +107,12 @@ class Gallery extends HTMLElement {
   }
 
   deleteImage = async (confirmation) => {
-    console.log(confirmation);
+  
     await fetch(`${API_URL}/api/admin/images/${this.imageData.filename}`, {
       method: 'DELETE',
       headers: {
-        Authorization: 'Bearer'+ sessionStorage.getItem('accessToken')         
-      },
-      body : confirmation
+        Authorization: 'Bearer'+ sessionStorage.getItem('bearerToken')         
+      }
     }).then(response => {
       if (response.ok) {
         return response.json();
@@ -577,7 +576,7 @@ class Gallery extends HTMLElement {
 
         if(this.imageData.filename){
 
-          const confirmation = this.shadow.querySelector('.delete-confirmation') || false;
+          const confirmation = this.shadow.querySelector('.delete-confirmation') ?? false;
           const result = await this.deleteImage(confirmation)
 
           if(result.success){
