@@ -3,25 +3,33 @@ const User = db.User;
 const Image = db.Image;
 const Op = db.Sequelize.Op;
 const ImageService = require('../../services/image-service')
+const TrackingService = require('../../services/tracking-service')
 
-exports.create = (req, res) => {
-    
-    User.create(req.body).then(data => {
+exports.create = async (req, res) => {
+
+    User.create(req.body).then(async data => {
         if(req.body.images){
-            const result = new ImageService().resizeImages('user', data.id, req.body.images);
+            await new ImageService().resizeImages('user', data.id, req.body.images);
         }
         
-        res.status(200).send(data);
 
-    }).catch(err => {
-        res.status(500).send({
+        res.status(200)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send(data);
+
+    }).catch(async err => {
+        res.status(500)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send({
             message: err.errors || "Algún error ha surgido al insertar el dato."
         });
     });
 };
 
-exports.findAll = (req, res) => {
-
+exports.findAll = async(req, res) => {
+    
     let page = req.query.page || 1;
     let limit = parseInt(req.query.size) || 4;
     let offset = (page - 1) * limit;
@@ -42,7 +50,7 @@ exports.findAll = (req, res) => {
         offset: offset,
         order: [['createdAt', 'DESC']]
     })
-    .then(result => {
+    .then(async result => {
 
         result.meta = {
             total: result.count,
@@ -50,17 +58,23 @@ exports.findAll = (req, res) => {
             currentPage: page
         };
 
-        res.status(200).send(result);
+        res.status(200)
+        await new TrackingService().apiTracking(req, res);
 
-    }).catch(err => {
-        res.status(500).send({
+        res.send(result);
+
+    }).catch(async err => {
+        res.status(500)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send({
             message: err.errors || "Algún error ha surgido al recuperar los datos."
         });
     });
 };
 
-exports.findOne = (req, res) => {
-
+exports.findOne = async (req, res) => {
+    
     const id = req.params.id;
 
     User.findByPk(id,{
@@ -75,47 +89,65 @@ exports.findOne = (req, res) => {
             
         ],
 
-    }).then(data => {
+    }).then(async data => {
 
         if (data) {
-            res.status(200).send(data);
+            res.status(200)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send(data);
         } else {
-            res.status(404).send({
+            res.status(404)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send({
                 message: `No se puede encontrar el elemento con la id=${id}.`
             });
         }
 
-    }).catch(err => {
-        res.status(500).send({
+    }).catch(async err => {
+        res.status(500)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send({
             message: "Algún error ha surgido al recuperar la id=" + id
         });
     });
 };
 
-exports.update = (req, res) => {
-
+exports.update = async(req, res) => {
     const id = req.params.id;
 
     User.update(req.body, {
         where: { id: id }
-    }).then(num => {
+    }).then(async num => {
         if (num == 1) {
-            res.status(200).send({
+            res.status(200)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send({
                 message: "El elemento ha sido actualizado correctamente."
             });
         } else {
-            res.status(404).send({
+            res.status(404)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send({
                 message: `No se puede actualizar el elemento con la id=${id}. Tal vez no se ha encontrado el elemento o el cuerpo de la petición está vacío.`
             });
         }
-    }).catch(err => {
-        res.status(500).send({
+    }).catch(async err => {
+        res.status(500)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send({
             message: "Algún error ha surgido al actualiazar la id=" + id
         });
     });
+
 };
 
-exports.delete = (req, res) => {
+exports.delete = async(req, res) => {
     const id = req.params.id;
 
     db.sequelize.transaction((t) => {
@@ -134,20 +166,30 @@ exports.delete = (req, res) => {
             }
         });
     })
-    .then(() => {
-        res.status(200).send({
+    .then(async () => {
+        res.status(200)
+        await new TrackingService().apiTracking(req, res);
+
+        res.send({
             message: "El elemento ha sido borrado correctamente"
         });
     })
-    .catch(err => {
+    .catch(async err => {
         if (err.message) {
-            res.status(404).send({
+            res.status(404)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send({
                 message: err.message
             });
         } else {
-            res.status(500).send({
+            res.status(500)
+            await new TrackingService().apiTracking(req, res);
+
+            res.send({
                 message: "Algún error ha surgido al borrar la id=" + id
             });
         }
     });
+
 };

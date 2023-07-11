@@ -125,7 +125,11 @@ class DeleteAlert extends HTMLElement {
                     let url = `${API_URL}/api${this.getAttribute('url')}/${this.id}`
 
                     fetch(url, {
-                        method: 'DELETE'
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + sessionStorage.getItem('bearerToken')         
+                        },
                     }).then(response => {
                         if (response.ok) {
                             document.dispatchEvent(new CustomEvent('dataUpdate', {

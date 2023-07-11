@@ -61,8 +61,13 @@ class Tabla extends HTMLElement {
     async loadData (page = 1) {
 
         const url = `${API_URL}/api${this.getAttribute('url')}?page=${page}`;
-
-        await fetch(url)
+        
+        await fetch(url,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('bearerToken')         
+            },
+        })
         .then(response => response.json())
         .then(data => {
             this.data = data;

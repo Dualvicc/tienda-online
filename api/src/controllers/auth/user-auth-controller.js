@@ -4,16 +4,21 @@ const dotenv = require('dotenv').config()
 const process = require('process')
 const db = require('../../models')
 const User = db.User
+const TrackingService = require('../../services/tracking-service')
 
-exports.signin = (req, res) => {
+
+exports.signin = async (req, res) => {
   User.findOne({
     where: {
       email: req.body.email
     }
   })
-    .then(user => {
+    .then(async user => {
       if (!user) {
-        return res.status(404).send({ message: 'Usuario o contraseña incorrecta' })
+        res.status(404)
+        await new TrackingService().apiTracking(req, res);
+        return res.send({ message: 'Usuario o contraseña incorrecta' })
+
       }
 
       const passwordIsValid = bcrypt.compareSync(
@@ -22,7 +27,9 @@ exports.signin = (req, res) => {
       )
 
       if (!passwordIsValid) {
-        return res.status(404).send({
+        res.status(404)
+        await new TrackingService().apiTracking(req, res);
+        return res.send({
           accessToken: null,
           message: 'Usuario o contraseña incorrecta'
         })
@@ -32,15 +39,22 @@ exports.signin = (req, res) => {
         expiresIn: 86400
       })
 
-      res.status(200).send({
+      res.status(200)
+      await new TrackingService().apiTracking(req, res);
+
+      return res.send({
         id: user.id,
         name: user.name,
         email: user.email,
         accessToken: token
       })
     })
-    .catch(err => {
+    .catch(async err => {
       console.log(err)
-      res.status(500).send({ message: err.message })
+      res.status(500)
+      await new TrackingService().apiTracking(req, res);
+
+      res.send({ message: err.message })
     })
+
 }

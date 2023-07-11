@@ -80,6 +80,7 @@ module.exports = function (sequelize, DataTypes) {
 
   User.associate = function (models) {
     User.hasMany(models.Image, { foreignKey: 'entityId', onDelete: 'CASCADE' , scope:{ entity: 'user'} , as: 'images' })
+    User.hasMany(models.UserTracking, { foreignKey: 'userId', as: 'userTrackings'})
   }
 
   return User

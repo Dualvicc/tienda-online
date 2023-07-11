@@ -323,7 +323,8 @@ class Form extends HTMLElement {
             await fetch(url, {
                 method: method,
                 headers: {
-                    "Content-Type": "application/json"
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('bearerToken')         
                 },
                 body: json
             })
@@ -354,7 +355,12 @@ class Form extends HTMLElement {
 
         this.shadow.querySelector(".saveButton").dataset.id = id;
 
-        fetch(`${API_URL}/api${this.getAttribute('url')}/${id}`)
+        fetch(`${API_URL}/api${this.getAttribute('url')}/${id}`, {
+            headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('bearerToken')         
+            },
+        })
         .then(response => {
            return response.json()
         })
