@@ -101,8 +101,9 @@ exports.update = (req, res) => {
 exports.delete = async (req, res) => {
 
     const filename = req.params.filename;
-    const confirmation = req.body.confirmation;
-    console.log(confirmation);
+    const confirmation = req.query.confirmation === 'true';
+    console.log(confirmation)
+    
 
     try {
         const result = await new ImageService().deleteImage(filename, confirmation)

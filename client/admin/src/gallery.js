@@ -107,8 +107,9 @@ class Gallery extends HTMLElement {
   }
 
   deleteImage = async (confirmation) => {
-  
-    await fetch(`${API_URL}/api/admin/images/${this.imageData.filename}`, {
+
+    
+    await fetch(`${API_URL}/api/admin/images/${this.imageData.filename}?confirmation=${confirmation}`, {
       method: 'DELETE',
       headers: {
         Authorization: 'Bearer'+ sessionStorage.getItem('bearerToken')         

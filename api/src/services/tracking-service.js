@@ -12,8 +12,6 @@ module.exports = class TrackingService {
             method: req.method,
             response: res.statusCode
         }
-        console.log(body);
-
         try {
             await UserTracking.create(body);
 
