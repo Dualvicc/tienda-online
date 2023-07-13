@@ -101,9 +101,7 @@ exports.update = (req, res) => {
 exports.delete = async (req, res) => {
 
     const filename = req.params.filename;
-    const confirmation = req.query.confirmation === 'true';
-    console.log(confirmation)
-    
+    const confirmation = req.query.confirmation === 'true';    
 
     try {
         const result = await new ImageService().deleteImage(filename, confirmation)
@@ -114,7 +112,7 @@ exports.delete = async (req, res) => {
         })
       } catch (error) {
         res.status(500).send({
-          message: error.message || 'Algún error ha surgido al insertar el dato.',
+          message: error.message || 'Algún error ha surgido al eliminar el dato.',
           errors: error.errors
         })
       }
