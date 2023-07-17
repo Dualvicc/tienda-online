@@ -9,32 +9,10 @@ const process = require('process');
 app.use(express.json({limit: "10mb", extended: true}));
 app.use(express.urlencoded({limit: "10mb", extended: true, parameterLimit: 50000}));
 
-// app.use((req, res, next) => {
 
-  
-//   const ip = req.ip; 
-//   const resource = req.originalUrl; 
-//   const method = req.method;
- 
-  
-
-//   const originalSend = res.send;
-//   res.send = function (body) {
-//     const userId = res.userId ; 
-//     const response = res.statusCode
-
-//     console.log(userId, ip, resource, method, response);
-
-//     originalSend.call(this, body);
-//   };
-
-//   next(); 
-
-// });
 var corsOptions = {
-    origin: [process.env.BASE_URL, 'http://localhost:8081', 'http://127.0.0.1:5500', 'http://127.0.0.1:5501']
+    origin: [process.env.BASE_URL, 'http://localhost:8080', 'http://127.0.0.1:5500', 'http://127.0.0.1:5501']
 };
-
 app.use(cors(corsOptions));
 
 
